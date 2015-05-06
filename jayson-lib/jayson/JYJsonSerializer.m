@@ -9,6 +9,7 @@
 #import "JYJsonSerializer.h"
 #import "JYJsonConverter.h"
 #import "JYStringJsonConverter.h"
+#import "JYNumberJsonConverter.h"
 
 @implementation JYJsonSerializer
 
@@ -22,7 +23,8 @@
 
 - (NSArray<JYJsonConverter> *)defaultConverters {
     return (NSArray<JYJsonConverter> *)@[
-             [JYStringJsonConverter new]
+             [JYStringJsonConverter new],
+             [JYNumberJsonConverter new]
              ];
 }
 
