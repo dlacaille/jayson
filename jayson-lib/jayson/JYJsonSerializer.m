@@ -13,7 +13,7 @@
 
 - (instancetype)init {
     if (self = [super init]) {
-        
+        self.jsonConverters = [self defaultConverters];
         return self;
     }
     return nil;
