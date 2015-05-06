@@ -72,8 +72,8 @@
 		F2105BDC1AFA9A8D005EA2E9 = {
 			isa = PBXGroup;
 			children = (
-				F2105BE71AFA9A8D005EA2E9 /* jayson */,
-				F2105BF41AFA9A90005EA2E9 /* jaysonTests */,
+				F2105BE71AFA9A8D005EA2E9 /* Jayson */,
+				F2105BF41AFA9A90005EA2E9 /* JaysonTests */,
 				F2105BE61AFA9A8D005EA2E9 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -87,7 +87,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		F2105BE71AFA9A8D005EA2E9 /* jayson */ = {
+		F2105BE71AFA9A8D005EA2E9 /* Jayson */ = {
 			isa = PBXGroup;
 			children = (
 				F2D6298C1AFAA930008A7027 /* Json Converters */,
@@ -97,15 +97,15 @@
 				F2D629891AFAA2EC008A7027 /* JYJsonSerializer.h */,
 				F2D6298A1AFAA2EC008A7027 /* JYJsonSerializer.m */,
 			);
-			path = jayson;
+			path = Jayson;
 			sourceTree = "<group>";
 		};
-		F2105BF41AFA9A90005EA2E9 /* jaysonTests */ = {
+		F2105BF41AFA9A90005EA2E9 /* JaysonTests */ = {
 			isa = PBXGroup;
 			children = (
 				F2105BF51AFA9A90005EA2E9 /* Supporting Files */,
 			);
-			path = jaysonTests;
+			path = JaysonTests;
 			sourceTree = "<group>";
 		};
 		F2105BF51AFA9A90005EA2E9 /* Supporting Files */ = {
