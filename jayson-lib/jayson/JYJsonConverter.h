@@ -30,6 +30,6 @@
  * @param objectClass Class to verify.
  * @return True if the class can be converted.
  */
-- (BOOL)canConvert:(Class *)objectClass;
+- (BOOL)canConvert:(Class)objectClass;
 
 @end

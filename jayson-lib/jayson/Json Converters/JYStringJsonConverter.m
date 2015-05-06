@@ -18,7 +18,7 @@
     return string;
 }
 
-- (BOOL)canConvert:(Class *)objectClass {
+- (BOOL)canConvert:(Class)objectClass {
     return objectClass == [NSString class];
 }
 

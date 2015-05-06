@@ -9,11 +9,6 @@
 #import "JYJsonSerializer.h"
 #import "JYJsonConverter.h"
 #import "JYStringJsonConverter.h"
-#import "JYBoolJsonConverter.h"
-#import "JYDoubleJsonConverter.h"
-#import "JYFloatJsonConverter.h"
-#import "JYLongJsonConverter.h"
-#import "JYIntJsonConverter.h"
 
 @implementation JYJsonSerializer
 
@@ -26,13 +21,8 @@
 }
 
 - (NSArray<JYJsonConverter> *)defaultConverters {
-    return @[
-             [JYStringJsonConverter new],
-             [JYBoolJsonConverter new],
-             [JYIntJsonConverter new],
-             [JYLongJsonConverter new],
-             [JYFloatJsonConverter new],
-             [JYDoubleJsonConverter new]
+    return (NSArray<JYJsonConverter> *)@[
+             [JYStringJsonConverter new]
              ];
 }
 
@@ -45,7 +35,7 @@
     return nil;
 }
 
-- (id)deserializeObject:(NSString *)json withClass:(Class *)objectClass {
+- (id)deserializeObject:(NSString *)json withClass:(Class)objectClass {
     for (NSObject<JYJsonConverter> *jsonConverter in self.jsonConverters)
     {
         if ([jsonConverter canConvert:objectClass])

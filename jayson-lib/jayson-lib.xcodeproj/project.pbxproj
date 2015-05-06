@@ -12,11 +12,6 @@
 		F2105BF11AFA9A90005EA2E9 /* libJayson.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F2105BE51AFA9A8D005EA2E9 /* libJayson.a */; };
 		F2D6298B1AFAA2EC008A7027 /* JYJsonSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D6298A1AFAA2EC008A7027 /* JYJsonSerializer.m */; };
 		F2D6298F1AFAAB13008A7027 /* JYStringJsonConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D6298E1AFAAB13008A7027 /* JYStringJsonConverter.m */; };
-		F2D629921AFAB872008A7027 /* JYBoolJsonConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D629911AFAB872008A7027 /* JYBoolJsonConverter.m */; };
-		F2D629951AFAB95B008A7027 /* JYIntJsonConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D629941AFAB95B008A7027 /* JYIntJsonConverter.m */; };
-		F2D629981AFABA66008A7027 /* JYLongJsonConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D629971AFABA66008A7027 /* JYLongJsonConverter.m */; };
-		F2D6299B1AFABB08008A7027 /* JYFloatJsonConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D6299A1AFABB08008A7027 /* JYFloatJsonConverter.m */; };
-		F2D6299E1AFABB40008A7027 /* JYDoubleJsonConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D6299D1AFABB40008A7027 /* JYDoubleJsonConverter.m */; };
 		F2D629A31AFABC14008A7027 /* PrimitivesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D629A21AFABC14008A7027 /* PrimitivesTests.m */; };
 /* End PBXBuildFile section */
 
@@ -47,23 +42,13 @@
 		F2105BE51AFA9A8D005EA2E9 /* libJayson.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libJayson.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2105BE81AFA9A8D005EA2E9 /* JYJayson.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYJayson.h; sourceTree = "<group>"; };
 		F2105BEA1AFA9A8E005EA2E9 /* JYJayson.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYJayson.m; sourceTree = "<group>"; };
-		F2105BF01AFA9A90005EA2E9 /* jaysonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = jaysonTests.xctest; path = JaysonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F2105BF01AFA9A90005EA2E9 /* JaysonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JaysonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2105BF61AFA9A90005EA2E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F2D629861AFAA168008A7027 /* JYJsonConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYJsonConverter.h; sourceTree = "<group>"; };
 		F2D629891AFAA2EC008A7027 /* JYJsonSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYJsonSerializer.h; sourceTree = "<group>"; };
 		F2D6298A1AFAA2EC008A7027 /* JYJsonSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYJsonSerializer.m; sourceTree = "<group>"; };
 		F2D6298D1AFAAB13008A7027 /* JYStringJsonConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYStringJsonConverter.h; sourceTree = "<group>"; };
 		F2D6298E1AFAAB13008A7027 /* JYStringJsonConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYStringJsonConverter.m; sourceTree = "<group>"; };
-		F2D629901AFAB872008A7027 /* JYBoolJsonConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYBoolJsonConverter.h; sourceTree = "<group>"; };
-		F2D629911AFAB872008A7027 /* JYBoolJsonConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYBoolJsonConverter.m; sourceTree = "<group>"; };
-		F2D629931AFAB95B008A7027 /* JYIntJsonConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYIntJsonConverter.h; sourceTree = "<group>"; };
-		F2D629941AFAB95B008A7027 /* JYIntJsonConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYIntJsonConverter.m; sourceTree = "<group>"; };
-		F2D629961AFABA66008A7027 /* JYLongJsonConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYLongJsonConverter.h; sourceTree = "<group>"; };
-		F2D629971AFABA66008A7027 /* JYLongJsonConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYLongJsonConverter.m; sourceTree = "<group>"; };
-		F2D629991AFABB08008A7027 /* JYFloatJsonConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYFloatJsonConverter.h; sourceTree = "<group>"; };
-		F2D6299A1AFABB08008A7027 /* JYFloatJsonConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYFloatJsonConverter.m; sourceTree = "<group>"; };
-		F2D6299C1AFABB40008A7027 /* JYDoubleJsonConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYDoubleJsonConverter.h; sourceTree = "<group>"; };
-		F2D6299D1AFABB40008A7027 /* JYDoubleJsonConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYDoubleJsonConverter.m; sourceTree = "<group>"; };
 		F2D629A21AFABC14008A7027 /* PrimitivesTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrimitivesTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -99,7 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				F2105BE51AFA9A8D005EA2E9 /* libJayson.a */,
-				F2105BF01AFA9A90005EA2E9 /* jaysonTests.xctest */,
+				F2105BF01AFA9A90005EA2E9 /* JaysonTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -139,16 +124,6 @@
 			children = (
 				F2D6298D1AFAAB13008A7027 /* JYStringJsonConverter.h */,
 				F2D6298E1AFAAB13008A7027 /* JYStringJsonConverter.m */,
-				F2D629901AFAB872008A7027 /* JYBoolJsonConverter.h */,
-				F2D629911AFAB872008A7027 /* JYBoolJsonConverter.m */,
-				F2D629931AFAB95B008A7027 /* JYIntJsonConverter.h */,
-				F2D629941AFAB95B008A7027 /* JYIntJsonConverter.m */,
-				F2D629961AFABA66008A7027 /* JYLongJsonConverter.h */,
-				F2D629971AFABA66008A7027 /* JYLongJsonConverter.m */,
-				F2D629991AFABB08008A7027 /* JYFloatJsonConverter.h */,
-				F2D6299A1AFABB08008A7027 /* JYFloatJsonConverter.m */,
-				F2D6299C1AFABB40008A7027 /* JYDoubleJsonConverter.h */,
-				F2D6299D1AFABB40008A7027 /* JYDoubleJsonConverter.m */,
 			);
 			path = "Json Converters";
 			sourceTree = "<group>";
@@ -188,7 +163,7 @@
 			);
 			name = JaysonTests;
 			productName = jaysonTests;
-			productReference = F2105BF01AFA9A90005EA2E9 /* jaysonTests.xctest */;
+			productReference = F2105BF01AFA9A90005EA2E9 /* JaysonTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -243,13 +218,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F2D6298B1AFAA2EC008A7027 /* JYJsonSerializer.m in Sources */,
-				F2D629921AFAB872008A7027 /* JYBoolJsonConverter.m in Sources */,
-				F2D6299E1AFABB40008A7027 /* JYDoubleJsonConverter.m in Sources */,
 				F2105BEB1AFA9A8E005EA2E9 /* JYJayson.m in Sources */,
-				F2D6299B1AFABB08008A7027 /* JYFloatJsonConverter.m in Sources */,
-				F2D629951AFAB95B008A7027 /* JYIntJsonConverter.m in Sources */,
 				F2D6298F1AFAAB13008A7027 /* JYStringJsonConverter.m in Sources */,
-				F2D629981AFABA66008A7027 /* JYLongJsonConverter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
