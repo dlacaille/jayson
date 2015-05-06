@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A7798FDC1AFAC5D600E14064 /* JYNumberJsonConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = A7798FDB1AFAC5D600E14064 /* JYNumberJsonConverter.m */; };
 		F2105BE91AFA9A8D005EA2E9 /* JYJayson.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = F2105BE81AFA9A8D005EA2E9 /* JYJayson.h */; };
 		F2105BEB1AFA9A8E005EA2E9 /* JYJayson.m in Sources */ = {isa = PBXBuildFile; fileRef = F2105BEA1AFA9A8E005EA2E9 /* JYJayson.m */; };
 		F2105BF11AFA9A90005EA2E9 /* libJayson.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F2105BE51AFA9A8D005EA2E9 /* libJayson.a */; };
@@ -39,6 +40,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A7798FDA1AFAC5D600E14064 /* JYNumberJsonConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JYNumberJsonConverter.h; path = "jayson/Json Converters/JYNumberJsonConverter.h"; sourceTree = SOURCE_ROOT; };
+		A7798FDB1AFAC5D600E14064 /* JYNumberJsonConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JYNumberJsonConverter.m; path = "jayson/Json Converters/JYNumberJsonConverter.m"; sourceTree = SOURCE_ROOT; };
 		F2105BE51AFA9A8D005EA2E9 /* libJayson.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libJayson.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2105BE81AFA9A8D005EA2E9 /* JYJayson.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYJayson.h; sourceTree = "<group>"; };
 		F2105BEA1AFA9A8E005EA2E9 /* JYJayson.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYJayson.m; sourceTree = "<group>"; };
@@ -124,6 +127,8 @@
 			children = (
 				F2D6298D1AFAAB13008A7027 /* JYStringJsonConverter.h */,
 				F2D6298E1AFAAB13008A7027 /* JYStringJsonConverter.m */,
+				A7798FDA1AFAC5D600E14064 /* JYNumberJsonConverter.h */,
+				A7798FDB1AFAC5D600E14064 /* JYNumberJsonConverter.m */,
 			);
 			path = "Json Converters";
 			sourceTree = "<group>";
@@ -217,6 +222,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7798FDC1AFAC5D600E14064 /* JYNumberJsonConverter.m in Sources */,
 				F2D6298B1AFAA2EC008A7027 /* JYJsonSerializer.m in Sources */,
 				F2105BEB1AFA9A8E005EA2E9 /* JYJayson.m in Sources */,
 				F2D6298F1AFAAB13008A7027 /* JYStringJsonConverter.m in Sources */,
