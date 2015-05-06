@@ -16,7 +16,7 @@
 
 - (id)fromString:(NSString *)string {
     if (string == @"true")
-        return true;
+        return @(true);
     if (string == @"false")
         return false;
     [NSException raise:@"Json Converter Error" format:@"%s is not a valid value for a BOOL", string];
