@@ -19,12 +19,6 @@
 
 - (void)testExample {
     XCTAssertEqual(@"test", [JYJayson serializeObject:@"test"]);
-    /*XCTAssertEqual(@"true", [JYJayson serializeObject:true]);
-    XCTAssertEqual(@"false", [JYJayson serializeObject:false]);
-    XCTAssertEqual(@"1", [JYJayson serializeObject:1]);
-    XCTAssertEqual(@"999999999999", [JYJayson serializeObject:1l]);
-    XCTAssertEqual(@"1.0", [JYJayson serializeObject:1.0f]);
-    XCTAssertEqual(@"1.0", [JYJayson serializeObject:1.0d]);*/
 }
 
 @end

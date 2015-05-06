@@ -19,7 +19,7 @@
 }
 
 - (BOOL)canConvert:(Class)objectClass {
-    return objectClass == [NSString class];
+    return [objectClass isSubclassOfClass:[NSString class]];
 }
 
 @end

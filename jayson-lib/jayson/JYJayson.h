@@ -23,6 +23,6 @@
  * @param objectClass Class of the object to return.
  * @return The deserialized object of "objectClass" type.
  */
-+ (id)deserializeObject:(NSString *)json withClass:(Class *)objectClass;
++ (id)deserializeObject:(NSString *)json withClass:(Class)objectClass;
 
 @end

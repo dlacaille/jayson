@@ -23,7 +23,7 @@ static JYJsonSerializer *serializer;
     return [serializer serializeObject:obj];
 }
 
-+ (id)deserializeObject:(NSString *)json withClass:(Class *)objectClass {
++ (id)deserializeObject:(NSString *)json withClass:(Class)objectClass {
     return [serializer deserializeObject:json withClass:objectClass];
 }
 
