@@ -20,11 +20,11 @@ static JYJsonSerializer *serializer;
 }
 
 + (NSString *)serializeObject:(id)obj {
-    [serializer serializeObject:obj];
+    return [serializer serializeObject:obj];
 }
 
 + (id)deserializeObject:(NSString *)json withClass:(Class *)objectClass {
-    [serializer serializeObject:obj];
+    return [serializer deserializeObject:json withClass:objectClass];
 }
 
 @end

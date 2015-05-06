@@ -7,6 +7,7 @@
 //
 
 #import "JYJsonSerializer.h"
+#import "JYJsonConverter.h"
 #import "JYStringJsonConverter.h"
 
 @implementation JYJsonSerializer
@@ -23,6 +24,14 @@
     return @[
             [JYStringJsonConverter new]
              ];
+}
+
+- (NSString *)serializeObject:(id)obj {
+    for (NSObject<JYJsonConverter> *jsonConverter in self.jsonConverters)
+    {
+        if ([jsonConverter canConvert:[obj class]])
+            return [jsonConverter toString:obj];
+    }
 }
 
 @end
