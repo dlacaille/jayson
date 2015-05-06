@@ -11,6 +11,7 @@
 		F2105BEB1AFA9A8E005EA2E9 /* JYJayson.m in Sources */ = {isa = PBXBuildFile; fileRef = F2105BEA1AFA9A8E005EA2E9 /* JYJayson.m */; };
 		F2105BF11AFA9A90005EA2E9 /* libjayson.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F2105BE51AFA9A8D005EA2E9 /* libjayson.a */; };
 		F2D6298B1AFAA2EC008A7027 /* JYJsonSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D6298A1AFAA2EC008A7027 /* JYJsonSerializer.m */; };
+		F2D6298F1AFAAB13008A7027 /* JYStringJsonConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D6298E1AFAAB13008A7027 /* JYStringJsonConverter.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,8 @@
 		F2D629861AFAA168008A7027 /* JYJsonConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYJsonConverter.h; sourceTree = "<group>"; };
 		F2D629891AFAA2EC008A7027 /* JYJsonSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYJsonSerializer.h; sourceTree = "<group>"; };
 		F2D6298A1AFAA2EC008A7027 /* JYJsonSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYJsonSerializer.m; sourceTree = "<group>"; };
+		F2D6298D1AFAAB13008A7027 /* JYStringJsonConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYStringJsonConverter.h; sourceTree = "<group>"; };
+		F2D6298E1AFAAB13008A7027 /* JYStringJsonConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYStringJsonConverter.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +119,8 @@
 		F2D6298C1AFAA930008A7027 /* Json Converters */ = {
 			isa = PBXGroup;
 			children = (
+				F2D6298D1AFAAB13008A7027 /* JYStringJsonConverter.h */,
+				F2D6298E1AFAAB13008A7027 /* JYStringJsonConverter.m */,
 			);
 			path = "Json Converters";
 			sourceTree = "<group>";
@@ -211,6 +216,7 @@
 			files = (
 				F2D6298B1AFAA2EC008A7027 /* JYJsonSerializer.m in Sources */,
 				F2105BEB1AFA9A8E005EA2E9 /* JYJayson.m in Sources */,
+				F2D6298F1AFAAB13008A7027 /* JYStringJsonConverter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
