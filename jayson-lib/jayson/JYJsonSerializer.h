@@ -11,6 +11,9 @@
 
 @interface JYJsonSerializer : NSObject
 
+/**
+ * Array of converters to be used when serializing or deserializing an object.
+ */
 @property (nonatomic, strong) NSArray<JYJsonConverter> *jsonConverters;
 
 @end
