@@ -10,6 +10,10 @@
 #import "JYJsonConverter.h"
 #import "JYStringJsonConverter.h"
 #import "JYBoolJsonConverter.h"
+#import "JYDoubleJsonConverter.h"
+#import "JYFloatJsonConverter.h"
+#import "JYLongJsonConverter.h"
+#import "JYIntJsonConverter.h"
 
 @implementation JYJsonSerializer
 
