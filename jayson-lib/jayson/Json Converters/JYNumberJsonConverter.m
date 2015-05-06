@@ -16,7 +16,7 @@
 
 - (id)fromString:(NSString *)string {
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
-    formatter.numberStyle = NSNumberFormatterDecimalStyle;
+    formatter.numberStyle = NSNumberFormatterNoStyle;
     return [formatter numberFromString:string];
 }
 
