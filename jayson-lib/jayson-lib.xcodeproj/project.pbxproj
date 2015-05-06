@@ -10,6 +10,7 @@
 		F2105BE91AFA9A8D005EA2E9 /* JYJayson.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = F2105BE81AFA9A8D005EA2E9 /* JYJayson.h */; };
 		F2105BEB1AFA9A8E005EA2E9 /* JYJayson.m in Sources */ = {isa = PBXBuildFile; fileRef = F2105BEA1AFA9A8E005EA2E9 /* JYJayson.m */; };
 		F2105BF11AFA9A90005EA2E9 /* libjayson.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F2105BE51AFA9A8D005EA2E9 /* libjayson.a */; };
+		F2D6298B1AFAA2EC008A7027 /* JYJsonSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D6298A1AFAA2EC008A7027 /* JYJsonSerializer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +42,9 @@
 		F2105BEA1AFA9A8E005EA2E9 /* JYJayson.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYJayson.m; sourceTree = "<group>"; };
 		F2105BF01AFA9A90005EA2E9 /* jaysonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = jaysonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2105BF61AFA9A90005EA2E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F2D629861AFAA168008A7027 /* JYJsonConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYJsonConverter.h; sourceTree = "<group>"; };
+		F2D629891AFAA2EC008A7027 /* JYJsonSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYJsonSerializer.h; sourceTree = "<group>"; };
+		F2D6298A1AFAA2EC008A7027 /* JYJsonSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYJsonSerializer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +89,9 @@
 			children = (
 				F2105BE81AFA9A8D005EA2E9 /* JYJayson.h */,
 				F2105BEA1AFA9A8E005EA2E9 /* JYJayson.m */,
+				F2D629861AFAA168008A7027 /* JYJsonConverter.h */,
+				F2D629891AFAA2EC008A7027 /* JYJsonSerializer.h */,
+				F2D6298A1AFAA2EC008A7027 /* JYJsonSerializer.m */,
 			);
 			path = jayson;
 			sourceTree = "<group>";
@@ -194,6 +201,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2D6298B1AFAA2EC008A7027 /* JYJsonSerializer.m in Sources */,
 				F2105BEB1AFA9A8E005EA2E9 /* JYJayson.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
