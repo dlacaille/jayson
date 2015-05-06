@@ -10,4 +10,18 @@
 
 @implementation JYJsonSerializer
 
+- (instancetype)init {
+    if (self = [super init]) {
+        
+        return self;
+    }
+    return nil;
+}
+
+- (NSArray<JYJsonConverter> *)defaultConverters {
+    return @[
+             
+             ];
+}
+
 @end

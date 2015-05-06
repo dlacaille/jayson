@@ -87,6 +87,7 @@
 		F2105BE71AFA9A8D005EA2E9 /* jayson */ = {
 			isa = PBXGroup;
 			children = (
+				F2D6298C1AFAA930008A7027 /* Json Converters */,
 				F2105BE81AFA9A8D005EA2E9 /* JYJayson.h */,
 				F2105BEA1AFA9A8E005EA2E9 /* JYJayson.m */,
 				F2D629861AFAA168008A7027 /* JYJsonConverter.h */,
@@ -110,6 +111,13 @@
 				F2105BF61AFA9A90005EA2E9 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F2D6298C1AFAA930008A7027 /* Json Converters */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Json Converters";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

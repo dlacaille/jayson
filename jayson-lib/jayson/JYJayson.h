@@ -14,7 +14,7 @@
  * Serializes an object to JSON.
  * @return A serialized string representing the object.
  */
-- (NSString *)serializeObject:(id)obj;
++ (NSString *)serializeObject:(id)obj;
 
 /**
  * Deserializes a JSON string into an object.
@@ -23,6 +23,6 @@
  * @param objectClass Class of the object to return.
  * @return The deserialized object of "objectClass" type.
  */
-- (id)deserializeObject:(NSString *)json withClass:(Class *)objectClass;
++ (id)deserializeObject:(NSString *)json withClass:(Class *)objectClass;
 
 @end
