@@ -149,6 +149,7 @@
 		F2105BDD1AFA9A8D005EA2E9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = JY;
 				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = ldom66;
 				TargetAttributes = {
