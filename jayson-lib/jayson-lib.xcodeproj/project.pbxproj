@@ -1,0 +1,379 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F2105BE91AFA9A8D005EA2E9 /* JYJayson.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = F2105BE81AFA9A8D005EA2E9 /* JYJayson.h */; };
+		F2105BEB1AFA9A8E005EA2E9 /* JYJayson.m in Sources */ = {isa = PBXBuildFile; fileRef = F2105BEA1AFA9A8E005EA2E9 /* JYJayson.m */; };
+		F2105BF11AFA9A90005EA2E9 /* libjayson.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F2105BE51AFA9A8D005EA2E9 /* libjayson.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F2105BF21AFA9A90005EA2E9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F2105BDD1AFA9A8D005EA2E9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F2105BE41AFA9A8D005EA2E9;
+			remoteInfo = jayson;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F2105BE31AFA9A8D005EA2E9 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				F2105BE91AFA9A8D005EA2E9 /* JYJayson.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		F2105BE51AFA9A8D005EA2E9 /* libjayson.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libjayson.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		F2105BE81AFA9A8D005EA2E9 /* JYJayson.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYJayson.h; sourceTree = "<group>"; };
+		F2105BEA1AFA9A8E005EA2E9 /* JYJayson.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYJayson.m; sourceTree = "<group>"; };
+		F2105BF01AFA9A90005EA2E9 /* jaysonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = jaysonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F2105BF61AFA9A90005EA2E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F2105BE21AFA9A8D005EA2E9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F2105BED1AFA9A90005EA2E9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F2105BF11AFA9A90005EA2E9 /* libjayson.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F2105BDC1AFA9A8D005EA2E9 = {
+			isa = PBXGroup;
+			children = (
+				F2105BE71AFA9A8D005EA2E9 /* jayson */,
+				F2105BF41AFA9A90005EA2E9 /* jaysonTests */,
+				F2105BE61AFA9A8D005EA2E9 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F2105BE61AFA9A8D005EA2E9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F2105BE51AFA9A8D005EA2E9 /* libjayson.a */,
+				F2105BF01AFA9A90005EA2E9 /* jaysonTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F2105BE71AFA9A8D005EA2E9 /* jayson */ = {
+			isa = PBXGroup;
+			children = (
+				F2105BE81AFA9A8D005EA2E9 /* JYJayson.h */,
+				F2105BEA1AFA9A8E005EA2E9 /* JYJayson.m */,
+			);
+			path = jayson;
+			sourceTree = "<group>";
+		};
+		F2105BF41AFA9A90005EA2E9 /* jaysonTests */ = {
+			isa = PBXGroup;
+			children = (
+				F2105BF51AFA9A90005EA2E9 /* Supporting Files */,
+			);
+			path = jaysonTests;
+			sourceTree = "<group>";
+		};
+		F2105BF51AFA9A90005EA2E9 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F2105BF61AFA9A90005EA2E9 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F2105BE41AFA9A8D005EA2E9 /* jayson */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F2105BF91AFA9A90005EA2E9 /* Build configuration list for PBXNativeTarget "jayson" */;
+			buildPhases = (
+				F2105BE11AFA9A8D005EA2E9 /* Sources */,
+				F2105BE21AFA9A8D005EA2E9 /* Frameworks */,
+				F2105BE31AFA9A8D005EA2E9 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = jayson;
+			productName = jayson;
+			productReference = F2105BE51AFA9A8D005EA2E9 /* libjayson.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		F2105BEF1AFA9A90005EA2E9 /* jaysonTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F2105BFC1AFA9A90005EA2E9 /* Build configuration list for PBXNativeTarget "jaysonTests" */;
+			buildPhases = (
+				F2105BEC1AFA9A90005EA2E9 /* Sources */,
+				F2105BED1AFA9A90005EA2E9 /* Frameworks */,
+				F2105BEE1AFA9A90005EA2E9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F2105BF31AFA9A90005EA2E9 /* PBXTargetDependency */,
+			);
+			name = jaysonTests;
+			productName = jaysonTests;
+			productReference = F2105BF01AFA9A90005EA2E9 /* jaysonTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F2105BDD1AFA9A8D005EA2E9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0630;
+				ORGANIZATIONNAME = ldom66;
+				TargetAttributes = {
+					F2105BE41AFA9A8D005EA2E9 = {
+						CreatedOnToolsVersion = 6.3;
+					};
+					F2105BEF1AFA9A90005EA2E9 = {
+						CreatedOnToolsVersion = 6.3;
+					};
+				};
+			};
+			buildConfigurationList = F2105BE01AFA9A8D005EA2E9 /* Build configuration list for PBXProject "jayson-lib" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = F2105BDC1AFA9A8D005EA2E9;
+			productRefGroup = F2105BE61AFA9A8D005EA2E9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F2105BE41AFA9A8D005EA2E9 /* jayson */,
+				F2105BEF1AFA9A90005EA2E9 /* jaysonTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F2105BEE1AFA9A90005EA2E9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F2105BE11AFA9A8D005EA2E9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F2105BEB1AFA9A8E005EA2E9 /* JYJayson.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F2105BEC1AFA9A90005EA2E9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F2105BF31AFA9A90005EA2E9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F2105BE41AFA9A8D005EA2E9 /* jayson */;
+			targetProxy = F2105BF21AFA9A90005EA2E9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		F2105BF71AFA9A90005EA2E9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		F2105BF81AFA9A90005EA2E9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F2105BFA1AFA9A90005EA2E9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		F2105BFB1AFA9A90005EA2E9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		F2105BFD1AFA9A90005EA2E9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = jaysonTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F2105BFE1AFA9A90005EA2E9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = jaysonTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F2105BE01AFA9A8D005EA2E9 /* Build configuration list for PBXProject "jayson-lib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F2105BF71AFA9A90005EA2E9 /* Debug */,
+				F2105BF81AFA9A90005EA2E9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F2105BF91AFA9A90005EA2E9 /* Build configuration list for PBXNativeTarget "jayson" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F2105BFA1AFA9A90005EA2E9 /* Debug */,
+				F2105BFB1AFA9A90005EA2E9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F2105BFC1AFA9A90005EA2E9 /* Build configuration list for PBXNativeTarget "jaysonTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F2105BFD1AFA9A90005EA2E9 /* Debug */,
+				F2105BFE1AFA9A90005EA2E9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F2105BDD1AFA9A8D005EA2E9 /* Project object */;
+}
