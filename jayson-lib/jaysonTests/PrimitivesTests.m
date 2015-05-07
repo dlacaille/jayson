@@ -46,14 +46,13 @@
     /* NSDICTIONARY */
     XCTAssertEqualObjects(@"[\"test2\":\"test\",\"test\":1]", [JYJayson serializeObject:(@{@"test":@1,@"test2":@"test"})]);
     
-    /* TEST DATA */
+    /* NSDATA */
 
-    NSData *data = UIImageJPEGRepresentation([UIImage imageNamed:@"github.jpeg"],1);
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:[UIColor greenColor]];
     NSString *encoded = [data base64EncodedString];
+    
     XCTAssertEqualObjects(encoded, [JYJayson serializeObject:data]);
     
-    data = UIImageJPEGRepresentation([UIImage imageNamed:@"github.jpeg"],1);
-    encoded = [data base64EncodedString];
     XCTAssertEqualObjects(data, [JYJayson deserializeObject:encoded withClass:[NSData class]]);
     
 }
