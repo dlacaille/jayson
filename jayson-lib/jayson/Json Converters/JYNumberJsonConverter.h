@@ -11,4 +11,6 @@
 
 @interface JYNumberJsonConverter : NSObject<JYJsonConverter>
 
+@property (nonatomic, strong) JYJsonSerializer *jsonSerializer;
+
 @end

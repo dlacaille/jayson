@@ -10,16 +10,30 @@
 
 @implementation JYStringJsonConverter
 
+- (instancetype)initWithSerializer:(JYJsonSerializer *)serializer {
+    if (self = [super init]) {
+        self.jsonSerializer = serializer;
+        return self;
+    }
+    return nil;
+}
+
 - (NSString *)toString:(id)obj {
-    return (NSString *)obj;
+    return [NSString stringWithFormat:@"\"%@\"", obj];
 }
 
 - (id)fromString:(NSString *)string {
-    return string;
+    if (![self canConvertJson:string])
+        [NSException raise:@"Json Converter Error" format:@"value %@ is invalid for string", string];
+    return [string substringWithRange:NSMakeRange(1, [string length] - 2)];
 }
 
 - (BOOL)canConvert:(Class)objectClass {
     return [objectClass isSubclassOfClass:[NSString class]];
+}
+
+- (BOOL)canConvertJson:(NSString *)string {
+    return [string length] > 1 && [string hasPrefix:@"\""] && [string hasSuffix:@"\""];
 }
 
 @end

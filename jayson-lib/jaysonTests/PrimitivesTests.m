@@ -19,18 +19,29 @@
 
 
 - (void)testExample {
-    XCTAssertEqualObjects(@"test", [JYJayson serializeObject:@"test"]);
+    /* NSSTRING */
+    XCTAssertEqualObjects(@"\"test\"", [JYJayson serializeObject:@"test"]);
+    XCTAssertEqualObjects(@"test", [JYJayson deserializeObject:@"\"test\"" withClass:[NSString class]]);
+    XCTAssertEqualObjects(@"\"\"", [JYJayson serializeObject:@""]);
+    XCTAssertEqualObjects(@"", [JYJayson deserializeObject:@"\"\"" withClass:[NSString class]]);
+    XCTAssertThrows([JYJayson deserializeObject:@"\"" withClass:[NSString class]]);
+    XCTAssertThrows([JYJayson deserializeObject:@"test" withClass:[NSString class]]);
+    XCTAssertThrows([JYJayson deserializeObject:@"\"test" withClass:[NSString class]]);
     
-    
-    /* TEST NUMBER */
+    /* NSNUMBER */
     XCTAssertEqualObjects(@"12.12", [JYJayson serializeObject:[NSNumber numberWithDouble:12.12]]);
     XCTAssertEqualObjects(@"0.45", [JYJayson serializeObject:[NSNumber numberWithFloat:0.45f]]);
     XCTAssertEqualObjects(@"1", [JYJayson serializeObject:[NSNumber numberWithBool:true]]);
     XCTAssertEqualObjects(@"12", [JYJayson serializeObject:[NSNumber numberWithInt:12]]);
     XCTAssertEqualObjects(@"500", [JYJayson serializeObject:[NSNumber numberWithLong:500]]);
     XCTAssertEqualObjects(@"1", [JYJayson serializeObject:@(1)]);
+    XCTAssertEqualObjects(@(12), [JYJayson deserializeObject:@"12" withClass:[NSNumber class]]);    
     
-    XCTAssertEqualObjects(@(12), [JYJayson deserializeObject:@"12" withClass:[NSNumber class]]);
+    /* NSARRAY */
+    XCTAssertEqualObjects(@"[1,2,3,4,5]", [JYJayson serializeObject:(@[@1,@2,@3,@4,@5])]);
+    XCTAssertEqualObjects(@"[\"test\",\"test2\",\"test3\"]", [JYJayson serializeObject:(@[@"test",@"test2",@"test3"])]);
+    XCTAssertEqualObjects((@[@"test",@"test2",@"test3"]), [JYJayson deserializeObject:@"[\"test\",\"test2\",\"test3\"]" withClass:[NSArray class]]);
+    XCTAssertEqualObjects((@[@1,@2,@3,@4,@5]), [JYJayson deserializeObject:@"[1,2,3,4,5]" withClass:[NSArray class]]);
     
     /* TEST DATA */
 

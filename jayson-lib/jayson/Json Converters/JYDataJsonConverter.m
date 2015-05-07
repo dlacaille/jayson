@@ -10,6 +10,15 @@
 #import "NSData+Base64.h"
 
 @implementation JYDataJsonConverter
+
+- (instancetype)initWithSerializer:(JYJsonSerializer *)serializer {
+    if (self = [super init]) {
+        self.jsonSerializer = serializer;
+        return self;
+    }
+    return nil;
+}
+
 - (NSString *)toString:(id)obj {
     return [((NSData *)obj) base64EncodedString];
 }
@@ -21,4 +30,10 @@
 - (BOOL)canConvert:(Class)objectClass {
     return [objectClass isSubclassOfClass:[NSData class]];
 }
+
+- (BOOL)canConvertJson:(NSString *)string {
+    // This converter should not be used for any base64 string when deserializing.
+    return false;
+}
+
 @end

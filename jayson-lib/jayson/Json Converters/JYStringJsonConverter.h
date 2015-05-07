@@ -11,4 +11,6 @@
 
 @interface JYStringJsonConverter : NSObject<JYJsonConverter>
 
+@property (nonatomic, strong) JYJsonSerializer *jsonSerializer;
+
 @end

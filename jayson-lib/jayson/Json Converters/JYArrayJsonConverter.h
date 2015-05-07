@@ -1,8 +1,8 @@
 //
-//  JYDataJsonConverter.h
+//  JYArrayJsonConverter.h
 //  jayson-lib
 //
-//  Created by Hugo Crochetière on 2015-05-07.
+//  Created by Dominic Lacaille on 2015-05-07.
 //  Copyright (c) 2015 ldom66. All rights reserved.
 //
 
@@ -10,7 +10,7 @@
 #import "JYJsonConverter.h"
 #import "JYJsonSerializer.h"
 
-@interface JYDataJsonConverter : NSObject<JYJsonConverter>
+@interface JYArrayJsonConverter : NSObject<JYJsonConverter>
 
 @property (nonatomic, strong) JYJsonSerializer *jsonSerializer;
 

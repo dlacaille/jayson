@@ -10,8 +10,18 @@
 
 @implementation JYNumberJsonConverter
 
+NSString *const regex = @"^-?(0|[1-9]\\d*)(\\.\\d+)?([eE][+-]?\\d+)?$";
+
+- (instancetype)initWithSerializer:(JYJsonSerializer *)serializer {
+    if (self = [super init]) {
+        self.jsonSerializer = serializer;
+        return self;
+    }
+    return nil;
+}
+
 - (NSString *)toString:(id)obj {
-    return ((NSNumber *)obj).stringValue;
+    return [(NSNumber *)obj stringValue];
 }
 
 - (id)fromString:(NSString *)string {
@@ -22,6 +32,11 @@
 
 - (BOOL)canConvert:(Class)objectClass {
     return [objectClass isSubclassOfClass:[NSNumber class]];
+}
+
+- (BOOL)canConvertJson:(NSString *)string {
+    NSPredicate *match = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+    return [match evaluateWithObject:string];
 }
 
 @end
