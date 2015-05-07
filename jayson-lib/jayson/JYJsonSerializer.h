@@ -7,14 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "JYJsonConverter.h"
 
 @interface JYJsonSerializer : NSObject
 
 /**
  * Array of converters to be used when serializing or deserializing an object.
  */
-@property (nonatomic, strong) NSArray<JYJsonConverter> *jsonConverters;
+@property (nonatomic, strong) NSArray *jsonConverters;
 
 /**
  * Serializes an object to JSON.
@@ -30,5 +29,13 @@
  * @return The deserialized object of "objectClass" type.
  */
 - (id)deserializeObject:(NSString *)json withClass:(Class)objectClass;
+
+/**
+ * Deserializes a JSON string into an object.
+ *
+ * @param json JSON string to deserialize.
+ * @return The deserialized object of "objectClass" type.
+ */
+- (id)deserializeObject:(NSString *)json;
 
 @end
