@@ -12,6 +12,7 @@
 #import "JYNumberJsonConverter.h"
 #import "JYDataJsonConverter.h"
 #import "JYArrayJsonConverter.h"
+#import "JYDictionaryJsonConverter.h"
 
 @implementation JYJsonSerializer
 
@@ -28,7 +29,8 @@
              [[JYStringJsonConverter alloc] initWithSerializer:self],
              [[JYNumberJsonConverter alloc] initWithSerializer:self],
              [[JYDataJsonConverter alloc] initWithSerializer:self],
-             [[JYArrayJsonConverter alloc] initWithSerializer:self]
+             [[JYArrayJsonConverter alloc] initWithSerializer:self],
+             [[JYDictionaryJsonConverter alloc] initWithSerializer:self]
              ];
 }
 

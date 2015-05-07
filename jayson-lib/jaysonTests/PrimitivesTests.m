@@ -43,6 +43,9 @@
     XCTAssertEqualObjects((@[@"test",@"test2",@"test3"]), [JYJayson deserializeObject:@"[\"test\",\"test2\",\"test3\"]" withClass:[NSArray class]]);
     XCTAssertEqualObjects((@[@1,@2,@3,@4,@5]), [JYJayson deserializeObject:@"[1,2,3,4,5]" withClass:[NSArray class]]);
     
+    /* NSDICTIONARY */
+    XCTAssertEqualObjects(@"[\"test2\":\"test\",\"test\":1]", [JYJayson serializeObject:(@{@"test":@1,@"test2":@"test"})]);
+    
     /* TEST DATA */
 
     NSData *data = UIImageJPEGRepresentation([UIImage imageNamed:@"github.jpeg"],1);
