@@ -28,6 +28,9 @@
     XCTAssertEqualObjects(@"12", [JYJayson serializeObject:[NSNumber numberWithInt:12]]);
     XCTAssertEqualObjects(@"500", [JYJayson serializeObject:[NSNumber numberWithLong:500]]);
     XCTAssertEqualObjects(@"1", [JYJayson serializeObject:@(1)]);
+    
+    XCTAssertEqualObjects(@(12), [JYJayson deserializeObject:@"12" withClass:[NSNumber class]]);
+    
 }
 
 @end
