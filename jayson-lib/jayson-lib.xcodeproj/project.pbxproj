@@ -11,6 +11,7 @@
 		A7AF26611AFBC65200EF7F60 /* JYDataJsonConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = A7AF26601AFBC65200EF7F60 /* JYDataJsonConverter.m */; };
 		A7AF26681AFBD8B300EF7F60 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = A7AF26671AFBD8B300EF7F60 /* NSData+Base64.m */; };
 		A7AF26691AFBD8B300EF7F60 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = A7AF26671AFBD8B300EF7F60 /* NSData+Base64.m */; };
+		A7AF266B1AFBDB2E00EF7F60 /* github.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = A7AF266A1AFBDB2E00EF7F60 /* github.jpeg */; };
 		F2105BE91AFA9A8D005EA2E9 /* JYJayson.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = F2105BE81AFA9A8D005EA2E9 /* JYJayson.h */; };
 		F2105BEB1AFA9A8E005EA2E9 /* JYJayson.m in Sources */ = {isa = PBXBuildFile; fileRef = F2105BEA1AFA9A8E005EA2E9 /* JYJayson.m */; };
 		F2105BF11AFA9A90005EA2E9 /* libJayson.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F2105BE51AFA9A8D005EA2E9 /* libJayson.a */; };
@@ -50,6 +51,7 @@
 		A7AF26601AFBC65200EF7F60 /* JYDataJsonConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JYDataJsonConverter.m; path = "jayson/Json Converters/JYDataJsonConverter.m"; sourceTree = SOURCE_ROOT; };
 		A7AF26661AFBD8B300EF7F60 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
 		A7AF26671AFBD8B300EF7F60 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
+		A7AF266A1AFBDB2E00EF7F60 /* github.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = github.jpeg; sourceTree = "<group>"; };
 		F2105BE51AFA9A8D005EA2E9 /* libJayson.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libJayson.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2105BE81AFA9A8D005EA2E9 /* JYJayson.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYJayson.h; sourceTree = "<group>"; };
 		F2105BEA1AFA9A8E005EA2E9 /* JYJayson.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYJayson.m; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 		F2105BF41AFA9A90005EA2E9 /* JaysonTests */ = {
 			isa = PBXGroup;
 			children = (
+				A7AF266A1AFBDB2E00EF7F60 /* github.jpeg */,
 				F2105BF51AFA9A90005EA2E9 /* Supporting Files */,
 				F2D629A21AFABC14008A7027 /* PrimitivesTests.m */,
 			);
@@ -236,6 +239,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7AF266B1AFBDB2E00EF7F60 /* github.jpeg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

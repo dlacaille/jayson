@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 #import "JYJayson.h"
+#import "NSData+Base64.h"
 
 @interface PrimitivesTests : XCTestCase
 
@@ -41,6 +42,16 @@
     XCTAssertEqualObjects(@"[\"test\",\"test2\",\"test3\"]", [JYJayson serializeObject:(@[@"test",@"test2",@"test3"])]);
     XCTAssertEqualObjects((@[@"test",@"test2",@"test3"]), [JYJayson deserializeObject:@"[\"test\",\"test2\",\"test3\"]" withClass:[NSArray class]]);
     XCTAssertEqualObjects((@[@1,@2,@3,@4,@5]), [JYJayson deserializeObject:@"[1,2,3,4,5]" withClass:[NSArray class]]);
+    
+    /* TEST DATA */
+
+    NSData *data = UIImageJPEGRepresentation([UIImage imageNamed:@"github.jpeg"],1);
+    NSString *encoded = [data base64EncodedString];
+    XCTAssertEqualObjects(encoded, [JYJayson serializeObject:data]);
+    
+    data = UIImageJPEGRepresentation([UIImage imageNamed:@"github.jpeg"],1);
+    encoded = [data base64EncodedString];
+    XCTAssertEqualObjects(data, [JYJayson deserializeObject:encoded withClass:[NSData class]]);
     
 }
 

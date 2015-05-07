@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>122BA9A6-A904-4DFF-83A2-1005807C60B9</string>
 	<key>IDESourceControlProjectName</key>
-	<string>jayson-lib</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>8D2ED9B75D4B6C56072DF7BAF7A0213B81FB3BB8</key>
 		<string>https://github.com/ldom66/jayson.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>jayson-lib/jayson-lib.xcodeproj</string>
+	<string>jayson-lib/jayson-lib.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>8D2ED9B75D4B6C56072DF7BAF7A0213B81FB3BB8</key>
