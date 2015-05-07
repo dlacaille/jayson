@@ -10,6 +10,7 @@
 
 @implementation JYArrayJsonConverter
 
+// These characters are whitespaces that we should ignore.
 char const IgnoredChars[] = {' ', '\r', '\n', '\t'};
 
 - (instancetype)initWithSerializer:(JYJsonSerializer *)serializer {
@@ -43,30 +44,36 @@ char const IgnoredChars[] = {' ', '\r', '\n', '\t'};
     for (int i=1; i<[string length] - 1; i++)
     {
         char c = [string characterAtIndex:i];
-        if (!escaped && c == '\"')
-        {
+        // If we find an unescaped " we reverse inString. We should not escape " if we are not in a string.
+        if ((!inString || !escaped) && c == '\"')
             inString = !inString;
-        }
+        // Reset escaped state.
         if (escaped)
             escaped = NO;
+        // Escape characters with \ before them (eg: \" or \n)
         if (inString && c == '\\')
             escaped = YES;
+        // If we are not in a string, we should escape whitespaces.
         if (!inString)
         {
-            // Skip ignored chars.
             for (int j=0; j<sizeof IgnoredChars; j++)
                 if (IgnoredChars[j] == c)
                     continue;
         }
+        // If we are not in a string and we find a comma we deserialize the string and add it to the array.
         if (!inString && c == ',')
         {
             [array addObject:[self.jsonSerializer deserializeObject:[NSString stringWithString:builder]]];
             builder = [NSMutableString new];
+            // We should not add the comma to the next object.
             continue;
         }
+        // We add the current character to the string.
         [builder appendFormat:@"%c", c];
     }
+    // In the end we are left with a string and no comma. We should add the deserialized string to the array.
     [array addObject:[self.jsonSerializer deserializeObject:[NSString stringWithString:builder]]];
+    // Return the completed array.
     return array;
 }
 
