@@ -45,6 +45,7 @@ char const IgnoredChars[] = {' ', '\r', '\n', '\t'};
     NSMutableString *builder = [NSMutableString new];    
     for (int i=1; i<[string length] - 1; i++)
     {
+        // TODO: parse strings with \n
         char c = [string characterAtIndex:i];
         // If we find an unescaped " we reverse inString. We should not escape " if we are not in a string.
         if ((!inString || !escaped) && c == '\"')

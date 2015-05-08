@@ -24,7 +24,10 @@
     
     /* NSSTRING */
     XCTAssertEqualObjects(@"\"test\"", [JYJayson serializeObject:@"test"]);
+    XCTAssertEqualObjects(@"\"test\"", [JYJayson serializeObject:@"test"]);
+    XCTAssertEqualObjects(@"\"test\"", [JYJayson serializeObject:@"test"]);
     XCTAssertEqualObjects(@"test", [JYJayson deserializeObject:@"\"test\"" withClass:[NSString class]]);
+    XCTAssertEqualObjects(@"te\r\nst", [JYJayson deserializeObject:@"\"te\\r\\nst\"" withClass:[NSString class]]);
     XCTAssertEqualObjects(@"\"\"", [JYJayson serializeObject:@""]);
     XCTAssertEqualObjects(@"", [JYJayson deserializeObject:@"\"\"" withClass:[NSString class]]);
     XCTAssertThrows([JYJayson deserializeObject:@"\"" withClass:[NSString class]]);
@@ -46,13 +49,12 @@
     XCTAssertEqualObjects(@"[\"test\",\"test2\",\"test3\"]", [JYJayson serializeObject:(@[@"test",@"test2",@"test3"])]);
     XCTAssertEqualObjects((@[@"test",@"test2",@"test3"]), [JYJayson deserializeObject:@"[\"test\",\"test2\",\"test3\"]" withClass:[NSArray class]]);
     XCTAssertEqualObjects((@[@1,@2,@3,@4,@5]), [JYJayson deserializeObject:@"[1,2,3,4,5]" withClass:[NSArray class]]);
-    XCTAssertEqualObjects((@[@[@1,@2],@2,@[@3,@4],@4,@5]), [JYJayson deserializeObject:@"[[1,2],2,[3,4],4,5]" withClass:[NSArray class]]);
+    XCTAssertEqualObjects((@[@[@1,@"2"],@"[2]",@[@3,@4],@4,@5]), [JYJayson deserializeObject:@"[[1,\"2\"],\"[2]\",[3,4],4,5]" withClass:[NSArray class]]);
     
     /* NSDICTIONARY */
     XCTAssertEqualObjects(@"[\"test2\":\"test\",\"test\":1]", [JYJayson serializeObject:(@{@"test":@1,@"test2":@"test"})]);
     
     /* NSDATA */
-
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:[UIColor greenColor]];
     NSString *encoded = [data base64EncodedString];
     XCTAssertEqualObjects(encoded, [JYJayson serializeObject:data]);

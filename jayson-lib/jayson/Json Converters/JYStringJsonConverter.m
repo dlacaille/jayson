@@ -23,6 +23,8 @@
 }
 
 - (id)fromString:(NSString *)string {
+    // "te\nst"
+    // TODO: Parse escaped characters
     if (![self canConvertJson:string])
         [NSException raise:@"Json Converter Error" format:@"value %@ is invalid for string", string];
     return [string substringWithRange:NSMakeRange(1, [string length] - 2)];
