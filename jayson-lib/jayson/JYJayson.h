@@ -25,4 +25,12 @@
  */
 + (id)deserializeObject:(NSString *)json withClass:(Class)objectClass;
 
+/**
+ * Deserializes a JSON string into an object.
+ *
+ * @param json JSON string to deserialize.
+ * @return The deserialized object of "objectClass" type.
+ */
++ (id)deserializeObject:(NSString *)json;
+
 @end

@@ -8,6 +8,7 @@
 
 #import "JYJsonSerializer.h"
 #import "JYJsonConverter.h"
+#import "JYNullJsonConverter.h"
 #import "JYStringJsonConverter.h"
 #import "JYNumberJsonConverter.h"
 #import "JYDataJsonConverter.h"
@@ -26,6 +27,7 @@
 
 - (NSArray<JYJsonConverter> *)defaultConverters {
     return (NSArray<JYJsonConverter> *)@[
+             [[JYNullJsonConverter alloc] initWithSerializer:self],
              [[JYStringJsonConverter alloc] initWithSerializer:self],
              [[JYNumberJsonConverter alloc] initWithSerializer:self],
              [[JYDataJsonConverter alloc] initWithSerializer:self],

@@ -18,6 +18,10 @@
 @implementation PrimitivesTests
 
 - (void)testExample {
+    /* NSNULL */
+    XCTAssertEqualObjects(@"null", [JYJayson serializeObject:[NSNull null]]);
+    XCTAssertEqualObjects([NSNull null], [JYJayson deserializeObject:@"null"]);
+    
     /* NSSTRING */
     XCTAssertEqualObjects(@"\"test\"", [JYJayson serializeObject:@"test"]);
     XCTAssertEqualObjects(@"test", [JYJayson deserializeObject:@"\"test\"" withClass:[NSString class]]);
@@ -42,6 +46,7 @@
     XCTAssertEqualObjects(@"[\"test\",\"test2\",\"test3\"]", [JYJayson serializeObject:(@[@"test",@"test2",@"test3"])]);
     XCTAssertEqualObjects((@[@"test",@"test2",@"test3"]), [JYJayson deserializeObject:@"[\"test\",\"test2\",\"test3\"]" withClass:[NSArray class]]);
     XCTAssertEqualObjects((@[@1,@2,@3,@4,@5]), [JYJayson deserializeObject:@"[1,2,3,4,5]" withClass:[NSArray class]]);
+    XCTAssertEqualObjects((@[@[@1,@2],@2,@[@3,@4],@4,@5]), [JYJayson deserializeObject:@"[[1,2],2,[3,4],4,5]" withClass:[NSArray class]]);
     
     /* NSDICTIONARY */
     XCTAssertEqualObjects(@"[\"test2\":\"test\",\"test\":1]", [JYJayson serializeObject:(@{@"test":@1,@"test2":@"test"})]);
@@ -50,9 +55,7 @@
 
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:[UIColor greenColor]];
     NSString *encoded = [data base64EncodedString];
-    
     XCTAssertEqualObjects(encoded, [JYJayson serializeObject:data]);
-    
     XCTAssertEqualObjects(data, [JYJayson deserializeObject:encoded withClass:[NSData class]]);
     
 }

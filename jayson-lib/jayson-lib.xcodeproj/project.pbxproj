@@ -19,6 +19,7 @@
 		F2D629A31AFABC14008A7027 /* PrimitivesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D629A21AFABC14008A7027 /* PrimitivesTests.m */; };
 		F2EFCCF11AFBBAD0007A3205 /* JYArrayJsonConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = F2EFCCF01AFBBAD0007A3205 /* JYArrayJsonConverter.m */; };
 		F2EFCCF41AFBF03D007A3205 /* JYDictionaryJsonConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = F2EFCCF31AFBF03D007A3205 /* JYDictionaryJsonConverter.m */; };
+		F2EFCCF71AFC1874007A3205 /* JYNullJsonConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = F2EFCCF61AFC1874007A3205 /* JYNullJsonConverter.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,8 @@
 		F2EFCCF01AFBBAD0007A3205 /* JYArrayJsonConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYArrayJsonConverter.m; sourceTree = "<group>"; };
 		F2EFCCF21AFBF03D007A3205 /* JYDictionaryJsonConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYDictionaryJsonConverter.h; sourceTree = "<group>"; };
 		F2EFCCF31AFBF03D007A3205 /* JYDictionaryJsonConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYDictionaryJsonConverter.m; sourceTree = "<group>"; };
+		F2EFCCF51AFC1874007A3205 /* JYNullJsonConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYNullJsonConverter.h; sourceTree = "<group>"; };
+		F2EFCCF61AFC1874007A3205 /* JYNullJsonConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYNullJsonConverter.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +151,8 @@
 		F2D6298C1AFAA930008A7027 /* Json Converters */ = {
 			isa = PBXGroup;
 			children = (
+				F2EFCCF51AFC1874007A3205 /* JYNullJsonConverter.h */,
+				F2EFCCF61AFC1874007A3205 /* JYNullJsonConverter.m */,
 				F2D6298D1AFAAB13008A7027 /* JYStringJsonConverter.h */,
 				F2D6298E1AFAAB13008A7027 /* JYStringJsonConverter.m */,
 				A7798FDA1AFAC5D600E14064 /* JYNumberJsonConverter.h */,
@@ -259,6 +264,7 @@
 				A7AF26681AFBD8B300EF7F60 /* NSData+Base64.m in Sources */,
 				A7AF26611AFBC65200EF7F60 /* JYDataJsonConverter.m in Sources */,
 				F2D6298F1AFAAB13008A7027 /* JYStringJsonConverter.m in Sources */,
+				F2EFCCF71AFC1874007A3205 /* JYNullJsonConverter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

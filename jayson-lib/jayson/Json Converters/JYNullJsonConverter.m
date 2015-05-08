@@ -1,15 +1,14 @@
 //
-//  JYDataJsonConverter.m
+//  JYNullJsonConverter.m
 //  jayson-lib
 //
-//  Created by Hugo Crochetière on 2015-05-07.
+//  Created by Dominic Lacaille on 2015-05-07.
 //  Copyright (c) 2015 ldom66. All rights reserved.
 //
 
-#import "JYDataJsonConverter.h"
-#import "NSData+Base64.h"
+#import "JYNullJsonConverter.h"
 
-@implementation JYDataJsonConverter
+@implementation JYNullJsonConverter
 
 - (instancetype)initWithSerializer:(JYJsonSerializer *)serializer {
     if (self = [super init]) {
@@ -20,20 +19,21 @@
 }
 
 - (NSString *)toString:(id)obj {
-    return [((NSData *)obj) base64EncodedString];
+    return @"null";
 }
 
 - (id)fromString:(NSString *)string {
-    return  [NSData dataFromBase64String:string];
+    if (![self canConvertJson:string])
+        [NSException raise:@"Json Converter Error" format:@"value %@ is invalid for null", string];
+    return [NSNull null];
 }
 
 - (BOOL)canConvert:(Class)objectClass {
-    return [objectClass isSubclassOfClass:[NSData class]];
+    return [objectClass isSubclassOfClass:[NSNull class]];
 }
 
 - (BOOL)canConvertJson:(NSString *)string {
-    // This converter should not be used for deserializing when the Class is unknown.
-    return false;
+    return [string isEqual: @"null"];
 }
 
 @end
