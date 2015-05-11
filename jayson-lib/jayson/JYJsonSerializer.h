@@ -16,7 +16,7 @@
 @property (nonatomic, strong) NSArray *jsonConverters;
 
 /**
- * Format used by the date converter.
+ * Format used by the date converter. Default value is ISO8601 yyyy-MM-dd'T'HH:mm:ssZZZZZ
  */
 @property (nonatomic, strong) NSString *dateFormat;
 
