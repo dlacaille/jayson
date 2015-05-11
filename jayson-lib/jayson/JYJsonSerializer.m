@@ -11,6 +11,7 @@
 #import "JYNullJsonConverter.h"
 #import "JYStringJsonConverter.h"
 #import "JYNumberJsonConverter.h"
+#import "JYDateJsonConverter.h"
 #import "JYDataJsonConverter.h"
 #import "JYArrayJsonConverter.h"
 #import "JYDictionaryJsonConverter.h"
@@ -20,6 +21,7 @@
 - (instancetype)init {
     if (self = [super init]) {
         self.jsonConverters = [self defaultConverters];
+        self.dateFormat = @"yyyy-MM-dd'T'HH:mm:ssZZZZZ";
         return self;
     }
     return nil;
@@ -30,6 +32,7 @@
              [[JYNullJsonConverter alloc] initWithSerializer:self],
              [[JYStringJsonConverter alloc] initWithSerializer:self],
              [[JYNumberJsonConverter alloc] initWithSerializer:self],
+             [[JYDateJsonConverter alloc] initWithSerializer:self],
              [[JYDataJsonConverter alloc] initWithSerializer:self],
              [[JYArrayJsonConverter alloc] initWithSerializer:self],
              [[JYDictionaryJsonConverter alloc] initWithSerializer:self]

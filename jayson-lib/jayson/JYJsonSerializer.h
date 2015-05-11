@@ -16,6 +16,11 @@
 @property (nonatomic, strong) NSArray *jsonConverters;
 
 /**
+ * Format used by the date converter.
+ */
+@property (nonatomic, strong) NSString *dateFormat;
+
+/**
  * Serializes an object to JSON.
  * @return A serialized string representing the object.
  */
