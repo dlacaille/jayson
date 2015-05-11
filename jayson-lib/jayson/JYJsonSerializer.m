@@ -63,4 +63,14 @@
     return nil;
 }
 
+- (id)deserializeObjectFromData:(NSData *)data {
+    NSString *json = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    return [self deserializeObject:json];
+}
+
+- (id)deserializeObjectFromData:(NSData *)data withClass:(Class)objectClass {
+    NSString *json = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    return [self deserializeObject:json withClass:objectClass];
+}
+
 @end

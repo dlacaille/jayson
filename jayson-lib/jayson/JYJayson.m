@@ -31,4 +31,12 @@ static JYJsonSerializer *serializer;
     return [serializer deserializeObject:json];
 }
 
++ (id)deserializeObjectFromData:(NSData *)data {
+    return [serializer deserializeObjectFromData:data];
+}
+
++ (id)deserializeObjectFromData:(NSData *)data withClass:(Class)objectClass {
+    return [serializer deserializeObjectFromData:data withClass:objectClass];
+}
+
 @end
