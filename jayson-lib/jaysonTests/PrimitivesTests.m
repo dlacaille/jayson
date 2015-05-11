@@ -65,8 +65,9 @@
     /* NSDATA */
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:[UIColor greenColor]];
     NSString *encoded = [data base64EncodedString];
-    XCTAssertEqualObjects(encoded, [JYJayson serializeObject:data]);
-    XCTAssertEqualObjects(data, [JYJayson deserializeObject:encoded withClass:[NSData class]]);
+    NSString *dataJson = [NSString stringWithFormat:@"\"%@\"", encoded];
+    XCTAssertEqualObjects(dataJson, [JYJayson serializeObject:data]);
+    XCTAssertEqualObjects(data, [JYJayson deserializeObject:dataJson withClass:[NSData class]]);
     
 }
 
