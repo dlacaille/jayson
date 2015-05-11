@@ -27,7 +27,8 @@
     XCTAssertEqualObjects(@"\"test\"", [JYJayson serializeObject:@"test"]);
     XCTAssertEqualObjects(@"\"test\"", [JYJayson serializeObject:@"test"]);
     XCTAssertEqualObjects(@"test", [JYJayson deserializeObject:@"\"test\"" withClass:[NSString class]]);
-    XCTAssertEqualObjects(@"te\r\nst", [JYJayson deserializeObject:@"\"te\\r\\nst\"" withClass:[NSString class]]);
+    XCTAssertEqualObjects(@"\r\n", [JYJayson deserializeObject:@"\"\\r\\n\"" withClass:[NSString class]]);
+    XCTAssertEqualObjects(@"\r\n\f\b\t\u5404", [JYJayson deserializeObject:@"\"\\r\\n\\f\\b\\t\\u5404\"" withClass:[NSString class]]);
     XCTAssertEqualObjects(@"\"\"", [JYJayson serializeObject:@""]);
     XCTAssertEqualObjects(@"", [JYJayson deserializeObject:@"\"\"" withClass:[NSString class]]);
     XCTAssertThrows([JYJayson deserializeObject:@"\"" withClass:[NSString class]]);
