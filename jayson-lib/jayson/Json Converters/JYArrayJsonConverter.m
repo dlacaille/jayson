@@ -10,8 +10,6 @@
 
 @implementation JYArrayJsonConverter
 
-// These characters are whitespaces that we should ignore.
-char const IgnoredChars[] = {' ', '\r', '\n', '\t'};
 
 - (instancetype)initWithSerializer:(JYJsonSerializer *)serializer {
     if (self = [super init]) {
@@ -35,14 +33,17 @@ char const IgnoredChars[] = {' ', '\r', '\n', '\t'};
 }
 
 - (id)fromString:(NSString *)string {
+    // These characters are whitespaces that we should ignore.
+    char const IgnoredChars[] = {' ', '\r', '\n', '\t'};
+    
     if (![self canConvertJson:string])
-        [NSException raise:@"Json Converter Error" format:@"value %@ is invalid for array", string];
+        [NSException raise:@"Json Converter Error" format:@"Value '%@' is invalid for array", string];
     BOOL escaped = NO;
     BOOL inString = NO; // True if the character is currently part of a string.
     int arrayCounter = 0; // Deals with nested arrays.
     int objCounter = 0; // Deals with nested objects.
     NSMutableArray *array = [NSMutableArray new];
-    NSMutableString *builder = [NSMutableString new];    
+    NSMutableString *builder = [NSMutableString new];
     for (int i=1; i<[string length] - 1; i++)
     {
         // TODO: parse strings with \n

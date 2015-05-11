@@ -24,7 +24,7 @@
 
 - (id)fromString:(NSString *)string {
     if (![self canConvertJson:string])
-        [NSException raise:@"Json Converter Error" format:@"value %@ is invalid for null", string];
+        [NSException raise:@"Json Converter Error" format:@"Value '%@' is invalid for null", string];
     return [NSNull null];
 }
 

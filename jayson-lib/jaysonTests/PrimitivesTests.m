@@ -52,7 +52,10 @@
     XCTAssertEqualObjects((@[@[@1,@"2"],@"[2]",@[@3,@4],@4,@5]), [JYJayson deserializeObject:@"[[1,\"2\"],\"[2]\",[3,4],4,5]" withClass:[NSArray class]]);
     
     /* NSDICTIONARY */
-    XCTAssertEqualObjects(@"[\"test2\":\"test\",\"test\":1]", [JYJayson serializeObject:(@{@"test":@1,@"test2":@"test"})]);
+    XCTAssertEqualObjects(@"{\"test2\":\"test\",\"test\":1}", [JYJayson serializeObject:(@{@"test":@1,@"test2":@"test"})]);
+    XCTAssertEqualObjects((@{@"test":@1,@"test2":@"test"}), [JYJayson deserializeObject:@"{\"test2\":\"test\",\"test\":1}" withClass:[NSDictionary class]]);
+    XCTAssertEqualObjects((@{@"test":@1,@"test2":@{@"test":@1,@"test2":@"test"}}),
+                          [JYJayson deserializeObject:@"{\"test2\":{\"test2\":\"test\",\"test\":1},\"test\":1}" withClass:[NSDictionary class]]);
     
     /* NSDATA */
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:[UIColor greenColor]];
