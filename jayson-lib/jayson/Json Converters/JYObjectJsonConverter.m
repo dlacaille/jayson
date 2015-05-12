@@ -21,6 +21,7 @@
 
 - (NSString *)toString:(id)obj {
     unsigned int pCount;
+    // Get all the object properties.
     objc_property_t *properties = class_copyPropertyList([obj class], &pCount);
     NSMutableString *result = [[NSMutableString alloc] initWithString:@"{"];
     for (int i = 0; i < pCount; i++)
@@ -28,12 +29,15 @@
         if (i > 0)
             [result appendString:@","];
         objc_property_t property = properties[i];
+        // Get the property name.
         NSString *propName = [NSString stringWithUTF8String:property_getName(property)];
+        // Get value from property name.
         id value = [obj valueForKey:propName];
         [result appendString:[self.jsonSerializer serializeObject:propName]];
         [result appendString:@":"];
         [result appendString:[self.jsonSerializer serializeObject:value]];
     }
+    // Free unmanaged object properties.
     free(properties);
     [result appendString:@"}"];
     return result;
@@ -111,23 +115,31 @@
 
 - (void)setObjectProperty:(id)object withProperty:(NSString *)propertyName value:(NSString *)json {
     unsigned int pCount;
+    // Get all the object properties.
     objc_property_t *properties = class_copyPropertyList([object class], &pCount);
     for (int i=0; i<pCount; i++)
     {
         objc_property_t property = properties[i];
+        // Get the property name.
         NSString *propName = [NSString stringWithUTF8String:property_getName(property)];
         if ([propName isEqualToString:propertyName])
         {
+            // We found the property we need to set.
             NSString* propertyAttributes = [NSString stringWithUTF8String:property_getAttributes(property)];
+            // Get the attributes in order to get the property class.
             NSArray* splitPropertyAttributes = [propertyAttributes componentsSeparatedByString:@"\""];
             if ([splitPropertyAttributes count] >= 2)
             {
+                // Parse the class string to a Class type.
                 Class propClass = NSClassFromString([splitPropertyAttributes objectAtIndex:1]);
+                // Deserialize with Class and set the property value.
                 id newValue = [self.jsonSerializer deserializeObject:json withClass:propClass];
                 [object setValue:newValue forKey:propName];
             }
         }
     }
+    // Free unmanaged object properties.
+    free(properties);
 }
 
 - (BOOL)canConvert:(Class)objectClass {
