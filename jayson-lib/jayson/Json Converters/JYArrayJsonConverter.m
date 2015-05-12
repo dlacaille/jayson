@@ -33,6 +33,10 @@
 }
 
 - (id)fromString:(NSString *)string {
+    return [self fromString:string withClass:[NSArray class]];
+}
+
+- (id)fromString:(NSString *)string withClass:(Class)objectClass {
     // These characters are whitespaces that we should ignore.
     char const IgnoredChars[] = {' ', '\r', '\n', '\t'};
     

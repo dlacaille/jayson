@@ -24,6 +24,10 @@
 }
 
 - (id)fromString:(NSString *)string {
+    return [self fromString:string withClass:[NSData class]];
+}
+
+- (id)fromString:(NSString *)string withClass:(Class)objectClass {
     NSString *deserialized = [self.jsonSerializer deserializeObject:string withClass:[NSString class]];
     return  [NSData dataFromBase64String:deserialized];
 }

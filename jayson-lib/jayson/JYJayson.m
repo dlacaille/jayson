@@ -7,7 +7,6 @@
 //
 
 #import "JYJayson.h"
-#import "JYJsonSerializer.h"
 
 @implementation JYJayson
 
@@ -17,6 +16,10 @@ static JYJsonSerializer *serializer;
     if (self == [JYJayson class]) {
         serializer = [JYJsonSerializer new];
     }
+}
+
++ (JYJsonSerializer *)defaultSerializer {
+    return serializer;
 }
 
 + (NSString *)serializeObject:(id)obj {

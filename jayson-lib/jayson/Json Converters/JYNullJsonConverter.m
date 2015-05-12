@@ -23,6 +23,10 @@
 }
 
 - (id)fromString:(NSString *)string {
+    return [self fromString:string withClass:[NSNull class]];
+}
+
+- (id)fromString:(NSString *)string withClass:(Class)objectClass {
     if (![self canConvertJson:string])
         [NSException raise:@"Json Converter Error" format:@"Value '%@' is invalid for null", string];
     return [NSNull null];

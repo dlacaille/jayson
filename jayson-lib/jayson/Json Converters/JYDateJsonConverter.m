@@ -24,6 +24,10 @@
 }
 
 - (id)fromString:(NSString *)string {
+    return [self fromString:string withClass:[NSDate class]];
+}
+
+- (id)fromString:(NSString *)string withClass:(Class)objectClass {
     NSString *deserialized = [self.jsonSerializer deserializeObject:string withClass:[NSString class]];
     return [[self dateFormatter] dateFromString:deserialized];
 }
@@ -41,7 +45,8 @@
 }
 
 - (BOOL)canConvertJson:(NSString *)string {
-    return [string length] > 1 && [string hasPrefix:@"\""] && [string hasSuffix:@"\""];
+    // This converter should not be used for deserializing when the Class is unknown.
+    return false;
 }
 
 @end

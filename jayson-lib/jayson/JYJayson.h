@@ -7,8 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "JYJsonSerializer.h"
 
 @interface JYJayson : NSObject
+
+/**
+ * Returns the default serializer. This can be used to modify the default behavior of JYJayson.
+ * @return The default serializer used by JYJayson.
+ */
++ (JYJsonSerializer *)defaultSerializer;
 
 /**
  * Serializes an object to JSON.

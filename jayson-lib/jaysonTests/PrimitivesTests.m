@@ -10,6 +10,8 @@
 #import <XCTest/XCTest.h>
 #import "JYJayson.h"
 #import "NSData+Base64.h"
+#import "TestClass.h"
+#import "RecursiveTestClass.h"
 
 @interface PrimitivesTests : XCTestCase
 
@@ -68,6 +70,21 @@
     NSString *dataJson = [NSString stringWithFormat:@"\"%@\"", encoded];
     XCTAssertEqualObjects(dataJson, [JYJayson serializeObject:data]);
     XCTAssertEqualObjects(data, [JYJayson deserializeObject:dataJson withClass:[NSData class]]);
+    
+    /* NSOBJECT */
+    TestClass *testClass = [TestClass new];
+    testClass.test = @1;
+    NSString *testJson = @"{\"test\":1}";
+    XCTAssertEqualObjects(testJson, [JYJayson serializeObject:testClass]);
+    TestClass *deserialized = [JYJayson deserializeObject:testJson withClass:[TestClass class]];
+    XCTAssertTrue([testClass.test isEqual:deserialized.test]);
+    // Test if the objects can be parsed recursively.
+    RecursiveTestClass *recursiveTestClass = [RecursiveTestClass new];
+    recursiveTestClass.test = testClass;
+    NSString *recursiveTestJson = @"{\"test\":{\"test\":1}}";
+    XCTAssertEqualObjects(recursiveTestJson, [JYJayson serializeObject:recursiveTestClass]);
+    RecursiveTestClass *recursiveDeserialized = [JYJayson deserializeObject:recursiveTestJson withClass:[RecursiveTestClass class]];
+    XCTAssertTrue([recursiveTestClass.test.test isEqual:recursiveDeserialized.test.test]);
     
 }
 
