@@ -20,6 +20,7 @@
 - (void)testExample {
     /* NSSTRING */
     XCTAssertEqualObjects(@"\"test\"", [JYJayson serializeObject:@"test"]);
+    XCTAssertEqualObjects(@"\"te    st\"", [JYJayson serializeObject:@"te\\nst"]);
     XCTAssertEqualObjects(@"test", [JYJayson deserializeObject:@"\"test\"" withClass:[NSString class]]);
     XCTAssertEqualObjects(@"\"\"", [JYJayson serializeObject:@""]);
     XCTAssertEqualObjects(@"", [JYJayson deserializeObject:@"\"\"" withClass:[NSString class]]);
