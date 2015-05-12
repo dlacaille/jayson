@@ -7,8 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "JYJsonSerializer.h"
 
 @interface JYJayson : NSObject
+
+/**
+ * Returns the default serializer. This can be used to modify the default behavior of JYJayson.
+ * @return The default serializer used by JYJayson.
+ */
++ (JYJsonSerializer *)defaultSerializer;
 
 /**
  * Serializes an object to JSON.
@@ -24,5 +31,30 @@
  * @return The deserialized object of "objectClass" type.
  */
 + (id)deserializeObject:(NSString *)json withClass:(Class)objectClass;
+
+/**
+ * Deserializes a JSON string into an object.
+ *
+ * @param json JSON string to deserialize.
+ * @return The deserialized object of "objectClass" type.
+ */
++ (id)deserializeObject:(NSString *)json;
+
+/**
+ * Deserializes Data into an object. The data must be a UTF8 encoded string.
+ *
+ * @param data Data to deserialize.
+ * @return The deserialized object of "objectClass" type.
+ */
++ (id)deserializeObjectFromData:(NSData *)data;
+
+/**
+ * Deserializes Data into an object. The data must be a UTF8 encoded string.
+ *
+ * @param data Data to deserialize.
+ * @param objectClass Class of the object to return.
+ * @return The deserialized object of "objectClass" type.
+ */
++ (id)deserializeObjectFromData:(NSData *)data withClass:(Class)objectClass;
 
 @end

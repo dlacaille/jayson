@@ -16,6 +16,11 @@
 @property (nonatomic, strong) NSArray *jsonConverters;
 
 /**
+ * Format used by the date converter. Default value is ISO8601 yyyy-MM-dd'T'HH:mm:ssZZZZZ
+ */
+@property (nonatomic, strong) NSString *dateFormat;
+
+/**
  * Serializes an object to JSON.
  * @return A serialized string representing the object.
  */
@@ -37,5 +42,22 @@
  * @return The deserialized object of "objectClass" type.
  */
 - (id)deserializeObject:(NSString *)json;
+
+/**
+ * Deserializes Data into an object. The data must be a UTF8 encoded string.
+ *
+ * @param data Data to deserialize.
+ * @return The deserialized object of "objectClass" type.
+ */
+- (id)deserializeObjectFromData:(NSData *)data;
+
+/**
+ * Deserializes Data into an object. The data must be a UTF8 encoded string.
+ *
+ * @param data Data to deserialize.
+ * @param objectClass Class of the object to return.
+ * @return The deserialized object of "objectClass" type.
+ */
+- (id)deserializeObjectFromData:(NSData *)data withClass:(Class)objectClass;
 
 @end

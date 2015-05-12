@@ -10,8 +10,6 @@
 
 @implementation JYArrayJsonConverter
 
-// These characters are whitespaces that we should ignore.
-char const IgnoredChars[] = {' ', '\r', '\n', '\t'};
 
 - (instancetype)initWithSerializer:(JYJsonSerializer *)serializer {
     if (self = [super init]) {
@@ -35,18 +33,34 @@ char const IgnoredChars[] = {' ', '\r', '\n', '\t'};
 }
 
 - (id)fromString:(NSString *)string {
+    return [self fromString:string withClass:[NSArray class]];
+}
+
+- (id)fromString:(NSString *)string withClass:(Class)objectClass {
+    // These characters are whitespaces that we should ignore.
+    char const IgnoredChars[] = {' ', '\r', '\n', '\t'};
+    
     if (![self canConvertJson:string])
-        [NSException raise:@"Json Converter Error" format:@"value %@ is invalid for array", string];
+        [NSException raise:@"Json Converter Error" format:@"Value '%@' is invalid for array", string];
     BOOL escaped = NO;
-    BOOL inString = NO;
+    BOOL inString = NO; // True if the character is currently part of a string.
+    int arrayCounter = 0; // Deals with nested arrays.
+    int objCounter = 0; // Deals with nested objects.
     NSMutableArray *array = [NSMutableArray new];
-    NSMutableString *builder = [NSMutableString new];    
+    NSMutableString *builder = [NSMutableString new];
     for (int i=1; i<[string length] - 1; i++)
     {
+        // TODO: parse strings with \n
         char c = [string characterAtIndex:i];
         // If we find an unescaped " we reverse inString. We should not escape " if we are not in a string.
         if ((!inString || !escaped) && c == '\"')
             inString = !inString;
+        // If we find [ or ] and we are not in a string, update array counter.
+        if (!inString && (c == '[' || c == ']'))
+            arrayCounter += c == '[' ? 1 : -1;
+        // If we find { or } and we are not in a string, update array counter.
+        if (!inString && (c == '{' || c == '}'))
+            objCounter += c == '{' ? 1 : -1;
         // Reset escaped state.
         if (escaped)
             escaped = NO;
@@ -60,8 +74,8 @@ char const IgnoredChars[] = {' ', '\r', '\n', '\t'};
                 if (IgnoredChars[j] == c)
                     continue;
         }
-        // If we are not in a string and we find a comma we deserialize the string and add it to the array.
-        if (!inString && c == ',')
+        // If we are not in a string, an array or a dictionary and we find a comma we deserialize the string and add it to the array.
+        if (!inString && arrayCounter == 0 && objCounter == 0 && c == ',')
         {
             [array addObject:[self.jsonSerializer deserializeObject:[NSString stringWithString:builder]]];
             builder = [NSMutableString new];

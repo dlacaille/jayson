@@ -20,11 +20,16 @@
 }
 
 - (NSString *)toString:(id)obj {
-    return [((NSData *)obj) base64EncodedString];
+    return [NSString stringWithFormat:@"\"%@\"", [((NSData *)obj) base64EncodedString]];
 }
 
 - (id)fromString:(NSString *)string {
-    return  [NSData dataFromBase64String:string];
+    return [self fromString:string withClass:[NSData class]];
+}
+
+- (id)fromString:(NSString *)string withClass:(Class)objectClass {
+    NSString *deserialized = [self.jsonSerializer deserializeObject:string withClass:[NSString class]];
+    return  [NSData dataFromBase64String:deserialized];
 }
 
 - (BOOL)canConvert:(Class)objectClass {
@@ -32,7 +37,7 @@
 }
 
 - (BOOL)canConvertJson:(NSString *)string {
-    // This converter should not be used for any base64 string when deserializing.
+    // This converter should not be used for deserializing when the Class is unknown.
     return false;
 }
 

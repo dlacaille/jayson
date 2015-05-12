@@ -7,7 +7,6 @@
 //
 
 #import "JYJayson.h"
-#import "JYJsonSerializer.h"
 
 @implementation JYJayson
 
@@ -19,12 +18,28 @@ static JYJsonSerializer *serializer;
     }
 }
 
++ (JYJsonSerializer *)defaultSerializer {
+    return serializer;
+}
+
 + (NSString *)serializeObject:(id)obj {
     return [serializer serializeObject:obj];
 }
 
 + (id)deserializeObject:(NSString *)json withClass:(Class)objectClass {
     return [serializer deserializeObject:json withClass:objectClass];
+}
+
++ (id)deserializeObject:(NSString *)json {
+    return [serializer deserializeObject:json];
+}
+
++ (id)deserializeObjectFromData:(NSData *)data {
+    return [serializer deserializeObjectFromData:data];
+}
+
++ (id)deserializeObjectFromData:(NSData *)data withClass:(Class)objectClass {
+    return [serializer deserializeObjectFromData:data withClass:objectClass];
 }
 
 @end

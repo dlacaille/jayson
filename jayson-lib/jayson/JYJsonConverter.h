@@ -24,12 +24,21 @@
 - (NSString *)toString:(id)obj;
 
 /**
- * Converts a string back to an object.
+ * Converts a string back to an object with no specific class.
  *
  * @param string String to parse.
  * @return Parsed object.
  */
 - (id)fromString:(NSString *)string;
+
+/**
+ * Converts a string back to an object.
+ *
+ * @param string String to parse.
+ * @param Class to return.
+ * @return Parsed object.
+ */
+- (id)fromString:(NSString *)string withClass:(Class)objectClass;
 
 /**
  * Method to override which verifies if the class can be converted from and to a string.

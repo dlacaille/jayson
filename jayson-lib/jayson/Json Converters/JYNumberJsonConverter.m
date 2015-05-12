@@ -25,6 +25,10 @@ NSString *const regex = @"^-?(0|[1-9]\\d*)(\\.\\d+)?([eE][+-]?\\d+)?$";
 }
 
 - (id)fromString:(NSString *)string {
+    return [self fromString:string withClass:[NSNumber class]];
+}
+
+- (id)fromString:(NSString *)string withClass:(Class)objectClass {
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
     formatter.numberStyle = NSNumberFormatterNoStyle;
     return [formatter numberFromString:string];
