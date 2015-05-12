@@ -20,7 +20,8 @@
 }
 
 - (NSString *)toString:(id)obj {
-    return [NSString stringWithFormat:@"\"%@\"", [((NSData *)obj) base64EncodedString]];
+    NSString *base64 = [((NSData *)obj) base64EncodedString];
+    return [self.jsonSerializer.jsonFormatter serialize:base64];
 }
 
 - (id)fromString:(NSString *)string {

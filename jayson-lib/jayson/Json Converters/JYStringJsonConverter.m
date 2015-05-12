@@ -19,7 +19,7 @@
 }
 
 - (NSString *)toString:(id)obj {
-    return [NSString stringWithFormat:@"\"%@\"", obj];
+    return [self.jsonSerializer.jsonFormatter serialize:obj];
 }
 
 - (id)fromString:(NSString *)string {

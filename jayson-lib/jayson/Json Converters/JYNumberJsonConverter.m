@@ -21,7 +21,7 @@ NSString *const regex = @"^-?(0|[1-9]\\d*)(\\.\\d+)?([eE][+-]?\\d+)?$";
 }
 
 - (NSString *)toString:(id)obj {
-    return [(NSNumber *)obj stringValue];
+    return [self.jsonSerializer.jsonFormatter serialize:obj];
 }
 
 - (id)fromString:(NSString *)string {

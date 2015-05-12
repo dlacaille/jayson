@@ -22,6 +22,7 @@
 - (instancetype)init {
     if (self = [super init]) {
         self.jsonConverters = [self defaultConverters];
+        self.jsonFormatter = [JYJsonFormatter new];
         self.dateFormat = @"yyyy-MM-dd'T'HH:mm:ssZZZZZ";
         return self;
     }

@@ -24,6 +24,7 @@
 		F2EFCCFD1B024CC5007A3205 /* JYObjectJsonConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = F2EFCCFC1B024CC5007A3205 /* JYObjectJsonConverter.m */; };
 		F2EFCD001B0251F7007A3205 /* TestClass.m in Sources */ = {isa = PBXBuildFile; fileRef = F2EFCCFF1B0251F7007A3205 /* TestClass.m */; };
 		F2EFCD031B02750D007A3205 /* RecursiveTestClass.m in Sources */ = {isa = PBXBuildFile; fileRef = F2EFCD021B02750D007A3205 /* RecursiveTestClass.m */; };
+		F2EFCD0A1B02A553007A3205 /* JYJsonFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = F2EFCD091B02A553007A3205 /* JYJsonFormatter.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,8 @@
 		F2EFCCFF1B0251F7007A3205 /* TestClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestClass.m; sourceTree = "<group>"; };
 		F2EFCD011B02750D007A3205 /* RecursiveTestClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecursiveTestClass.h; sourceTree = "<group>"; };
 		F2EFCD021B02750D007A3205 /* RecursiveTestClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecursiveTestClass.m; sourceTree = "<group>"; };
+		F2EFCD081B02A553007A3205 /* JYJsonFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYJsonFormatter.h; sourceTree = "<group>"; };
+		F2EFCD091B02A553007A3205 /* JYJsonFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYJsonFormatter.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,12 +136,15 @@
 			isa = PBXGroup;
 			children = (
 				A7AF26651AFBD8B300EF7F60 /* Categories */,
+				F2AA32B11B02B7FA0020F22E /* Json Formatters */,
 				F2D6298C1AFAA930008A7027 /* Json Converters */,
 				F2105BE81AFA9A8D005EA2E9 /* JYJayson.h */,
 				F2105BEA1AFA9A8E005EA2E9 /* JYJayson.m */,
 				F2D629861AFAA168008A7027 /* JYJsonConverter.h */,
 				F2D629891AFAA2EC008A7027 /* JYJsonSerializer.h */,
 				F2D6298A1AFAA2EC008A7027 /* JYJsonSerializer.m */,
+				F2EFCD081B02A553007A3205 /* JYJsonFormatter.h */,
+				F2EFCD091B02A553007A3205 /* JYJsonFormatter.m */,
 			);
 			path = Jayson;
 			sourceTree = "<group>";
@@ -162,6 +168,13 @@
 				F2105BF61AFA9A90005EA2E9 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F2AA32B11B02B7FA0020F22E /* Json Formatters */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Json Formatters";
 			sourceTree = "<group>";
 		};
 		F2D6298C1AFAA930008A7027 /* Json Converters */ = {
@@ -285,6 +298,7 @@
 				F2105BEB1AFA9A8E005EA2E9 /* JYJayson.m in Sources */,
 				A7AF26681AFBD8B300EF7F60 /* NSData+Base64.m in Sources */,
 				A7AF26611AFBC65200EF7F60 /* JYDataJsonConverter.m in Sources */,
+				F2EFCD0A1B02A553007A3205 /* JYJsonFormatter.m in Sources */,
 				F2D6298F1AFAAB13008A7027 /* JYStringJsonConverter.m in Sources */,
 				F2EFCCF71AFC1874007A3205 /* JYNullJsonConverter.m in Sources */,
 			);

@@ -20,27 +20,7 @@
 }
 
 - (NSString *)toString:(id)obj {
-    unsigned int pCount;
-    // Get all the object properties.
-    objc_property_t *properties = class_copyPropertyList([obj class], &pCount);
-    NSMutableString *result = [[NSMutableString alloc] initWithString:@"{"];
-    for (int i = 0; i < pCount; i++)
-    {
-        if (i > 0)
-            [result appendString:@","];
-        objc_property_t property = properties[i];
-        // Get the property name.
-        NSString *propName = [NSString stringWithUTF8String:property_getName(property)];
-        // Get value from property name.
-        id value = [obj valueForKey:propName];
-        [result appendString:[self.jsonSerializer serializeObject:propName]];
-        [result appendString:@":"];
-        [result appendString:[self.jsonSerializer serializeObject:value]];
-    }
-    // Free unmanaged object properties.
-    free(properties);
-    [result appendString:@"}"];
-    return result;
+    return [self.jsonSerializer.jsonFormatter serialize:obj];
 }
 
 - (id)fromString:(NSString *)string {

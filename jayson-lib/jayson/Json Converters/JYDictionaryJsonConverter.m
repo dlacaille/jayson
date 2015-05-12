@@ -19,19 +19,7 @@
 }
 
 - (NSString *)toString:(id)obj {
-    NSMutableString *result = [[NSMutableString alloc] initWithString:@"{"];
-    for (int i = 0; i < [(NSDictionary *)obj count]; i++)
-    {
-        if (i > 0)
-            [result appendString:@","];
-        id key = [[(NSDictionary *)obj allKeys] objectAtIndex:i];
-        id value = [[(NSDictionary *)obj allValues] objectAtIndex:i];
-        [result appendString:[self.jsonSerializer serializeObject:key]];
-        [result appendString:@":"];
-        [result appendString:[self.jsonSerializer serializeObject:value]];
-    }
-    [result appendString:@"}"];
-    return result;
+    return [self.jsonSerializer.jsonFormatter serialize:obj];
 }
 
 - (id)fromString:(NSString *)string {

@@ -20,16 +20,7 @@
 }
 
 - (NSString *)toString:(id)obj {
-    NSMutableString *result = [[NSMutableString alloc] initWithString:@"["];
-    for (int i = 0; i < [(NSArray *)obj count]; i++)
-    {
-        if (i > 0)
-            [result appendString:@","];
-        id item = [(NSArray *)obj objectAtIndex:i];
-        [result appendString:[self.jsonSerializer serializeObject:item]];
-    }
-    [result appendString:@"]"];
-    return result;
+    return [self.jsonSerializer.jsonFormatter serialize:obj];
 }
 
 - (id)fromString:(NSString *)string {

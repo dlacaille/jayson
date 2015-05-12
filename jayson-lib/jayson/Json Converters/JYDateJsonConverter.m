@@ -20,7 +20,8 @@
 
 - (NSString *)toString:(id)obj {
     NSDate *date = (NSDate *)obj;
-    return [NSString stringWithFormat:@"\"%@\"", [[self dateFormatter] stringFromDate:date]];
+    NSString *formattedDate = [[self dateFormatter] stringFromDate:date];
+    return [self.jsonSerializer.jsonFormatter serialize:formattedDate];
 }
 
 - (id)fromString:(NSString *)string {
