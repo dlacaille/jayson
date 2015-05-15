@@ -8,6 +8,7 @@
 
 #import "JYJsonSerializer.h"
 #import "JYJsonConverter.h"
+#import "JYJsonFormatter.h"
 #import "JYNullJsonConverter.h"
 #import "JYStringJsonConverter.h"
 #import "JYNumberJsonConverter.h"
@@ -22,7 +23,7 @@
 - (instancetype)init {
     if (self = [super init]) {
         self.jsonConverters = [self defaultConverters];
-        self.jsonFormatter = [JYJsonFormatter new];
+        self.jsonFormatter = [[JYJsonFormatter alloc] initWithSerializer:self];
         self.dateFormat = @"yyyy-MM-dd'T'HH:mm:ssZZZZZ";
         return self;
     }

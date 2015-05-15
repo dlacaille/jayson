@@ -10,40 +10,20 @@
 
 @interface JYJsonFormatter : NSObject
 
-/**
- * Begins an object.
+/*
+ * When true, the json is indented when serializing objects.
  */
-- (void)beginObject;
+@property (assign, nonatomic) BOOL indented;
 
-/**
- * Ends an object.
+/*
+ * Serializer used by the json formatter.
  */
-- (void)endObject;
+@property (nonatomic, strong) id jsonSerializer;
 
-/**
- * Begins an array.
+/*
+ * Initializes a json formatter with a json formatter.
  */
-- (void)beginArray;
-
-/**
- * Ends an array.
- */
-- (void)endArray;
-
-/**
- * Writes a property with a key and a value.
- */
-- (void)writeProperty:(NSString *)key withValue:(id)value;
-
-/**
- * Writes an object.
- */
-- (void)writeObject:(id)obj;
-
-/**
- * Writes a raw string.
- */
-- (void)write:(NSString *)str;
+- (instancetype)initWithSerializer:(id)serializer;
 
 /**
  * Serializes an object.
