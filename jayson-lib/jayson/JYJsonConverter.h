@@ -41,6 +41,15 @@
 - (id)fromString:(NSString *)string withClass:(Class)objectClass;
 
 /**
+ * Converts a string back to an array of objects.
+ *
+ * @param string String to parse.
+ * @param Class of the objects in the array.
+ * @return Parsed object.
+ */
+- (id)fromArrayString:(NSString *)string withClass:(Class)objectClass;
+
+/**
  * Method to override which verifies if the class can be converted from and to a string.
  *
  * @param objectClass Class to verify.

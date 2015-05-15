@@ -33,6 +33,15 @@
 - (NSString *)serializeObject:(id)obj;
 
 /**
+ * Deserializes a JSON array into an object.
+ *
+ * @param json JSON string to deserialize.
+ * @param objectClass Class of the object to return.
+ * @return The deserialized object of "objectClass" type.
+ */
+- (id)deserializeObjectArray:(NSString *)json withClass:(Class)objectClass;
+
+/**
  * Deserializes a JSON string into an object.
  *
  * @param json JSON string to deserialize.

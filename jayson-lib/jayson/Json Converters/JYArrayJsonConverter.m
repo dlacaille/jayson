@@ -7,6 +7,7 @@
 //
 
 #import "JYArrayJsonConverter.h"
+#import <objc/runtime.h>
 
 @implementation JYArrayJsonConverter
 
@@ -28,9 +29,12 @@
 }
 
 - (id)fromString:(NSString *)string withClass:(Class)objectClass {
+    return [self fromArrayString:string withClass:nil];
+}
+
+- (id)fromArrayString:(NSString *)string withClass:(Class)objectClass {
     // These characters are whitespaces that we should ignore.
     char const IgnoredChars[] = {' ', '\r', '\n', '\t'};
-    
     if (![self canConvertJson:string])
         [NSException raise:@"Json Converter Error" format:@"Value '%@' is invalid for array", string];
     BOOL escaped = NO;
@@ -68,7 +72,7 @@
         // If we are not in a string, an array or a dictionary and we find a comma we deserialize the string and add it to the array.
         if (!inString && arrayCounter == 0 && objCounter == 0 && c == ',')
         {
-            [array addObject:[self.jsonSerializer deserializeObject:[NSString stringWithString:builder]]];
+            [array addObject:[self.jsonSerializer deserializeObject:[NSString stringWithString:builder] withClass:objectClass]];
             builder = [NSMutableString new];
             // We should not add the comma to the next object.
             continue;
@@ -77,7 +81,7 @@
         [builder appendFormat:@"%c", c];
     }
     // In the end we are left with a string and no comma. We should add the deserialized string to the array.
-    [array addObject:[self.jsonSerializer deserializeObject:[NSString stringWithString:builder]]];
+    [array addObject:[self.jsonSerializer deserializeObject:[NSString stringWithString:builder] withClass:objectClass]];
     // Return the completed array.
     return array;
 }

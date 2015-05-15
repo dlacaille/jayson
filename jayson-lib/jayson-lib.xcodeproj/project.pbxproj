@@ -15,6 +15,7 @@
 		F2105BEB1AFA9A8E005EA2E9 /* JYJayson.m in Sources */ = {isa = PBXBuildFile; fileRef = F2105BEA1AFA9A8E005EA2E9 /* JYJayson.m */; };
 		F2105BF11AFA9A90005EA2E9 /* libJayson.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F2105BE51AFA9A8D005EA2E9 /* libJayson.a */; };
 		F23E8F191B06695B00C570BE /* DeserializerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F23E8F181B06695B00C570BE /* DeserializerTests.m */; };
+		F23E8F1E1B06995800C570BE /* TypedArrayTestClass.m in Sources */ = {isa = PBXBuildFile; fileRef = F23E8F1D1B06995800C570BE /* TypedArrayTestClass.m */; };
 		F2D6298B1AFAA2EC008A7027 /* JYJsonSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D6298A1AFAA2EC008A7027 /* JYJsonSerializer.m */; };
 		F2D6298F1AFAAB13008A7027 /* JYStringJsonConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D6298E1AFAAB13008A7027 /* JYStringJsonConverter.m */; };
 		F2D629A31AFABC14008A7027 /* SerializerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D629A21AFABC14008A7027 /* SerializerTests.m */; };
@@ -64,6 +65,8 @@
 		F2105BF01AFA9A90005EA2E9 /* JaysonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JaysonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2105BF61AFA9A90005EA2E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F23E8F181B06695B00C570BE /* DeserializerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeserializerTests.m; sourceTree = "<group>"; };
+		F23E8F1C1B06995800C570BE /* TypedArrayTestClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TypedArrayTestClass.h; sourceTree = "<group>"; };
+		F23E8F1D1B06995800C570BE /* TypedArrayTestClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TypedArrayTestClass.m; sourceTree = "<group>"; };
 		F2D629861AFAA168008A7027 /* JYJsonConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYJsonConverter.h; sourceTree = "<group>"; };
 		F2D629891AFAA2EC008A7027 /* JYJsonSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYJsonSerializer.h; sourceTree = "<group>"; };
 		F2D6298A1AFAA2EC008A7027 /* JYJsonSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYJsonSerializer.m; sourceTree = "<group>"; };
@@ -160,6 +163,8 @@
 				F2EFCCFF1B0251F7007A3205 /* TestClass.m */,
 				F2EFCD011B02750D007A3205 /* RecursiveTestClass.h */,
 				F2EFCD021B02750D007A3205 /* RecursiveTestClass.m */,
+				F23E8F1C1B06995800C570BE /* TypedArrayTestClass.h */,
+				F23E8F1D1B06995800C570BE /* TypedArrayTestClass.m */,
 			);
 			path = JaysonTests;
 			sourceTree = "<group>";
@@ -304,6 +309,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F23E8F191B06695B00C570BE /* DeserializerTests.m in Sources */,
+				F23E8F1E1B06995800C570BE /* TypedArrayTestClass.m in Sources */,
 				F2EFCD001B0251F7007A3205 /* TestClass.m in Sources */,
 				F2EFCD031B02750D007A3205 /* RecursiveTestClass.m in Sources */,
 				F2D629A31AFABC14008A7027 /* SerializerTests.m in Sources */,

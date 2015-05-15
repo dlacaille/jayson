@@ -12,6 +12,7 @@
 #import "NSData+Base64.h"
 #import "TestClass.h"
 #import "RecursiveTestClass.h"
+#import "TypedArrayTestClass.h"
 
 @interface DeserializerTests : XCTestCase
 
@@ -69,6 +70,15 @@
     NSString *recursiveTestJson = @"{\"test\":{\"test\":1}}";
     RecursiveTestClass *recursiveDeserialized = [JYJayson deserializeObject:recursiveTestJson withClass:[RecursiveTestClass class]];
     XCTAssertTrue([recursiveTestClass.test.test isEqual:recursiveDeserialized.test.test]);
+}
+
+- (void)testTypedArray {
+    TestClass *testClass = [TestClass new];
+    testClass.test = @1;
+    TypedArrayTestClass *typedArrayTestClass = [TypedArrayTestClass new];
+    typedArrayTestClass.testArray = (NSArray<TestClass> *)@[testClass];
+    TypedArrayTestClass *deserialized = [JYJayson deserializeObject:@"{\"testArray\":[{\"test\":1}]}" withClass:[TypedArrayTestClass class]];
+    XCTAssertEqualObjects([[typedArrayTestClass.testArray objectAtIndex:0] test], [[deserialized.testArray objectAtIndex:0] test]);
 }
 
 @end

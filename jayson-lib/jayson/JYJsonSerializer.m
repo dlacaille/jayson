@@ -52,7 +52,18 @@
     return nil;
 }
 
+- (id)deserializeObjectArray:(NSString *)json withClass:(Class)objectClass {
+    for (NSObject<JYJsonConverter> *jsonConverter in self.jsonConverters)
+    {
+        if ([jsonConverter canConvert:[NSArray class]])
+            return [jsonConverter fromArrayString:json withClass:objectClass];
+    }
+    return nil;
+}
+
 - (id)deserializeObject:(NSString *)json withClass:(Class)objectClass {
+    if (objectClass == nil)
+        return [self deserializeObject:json];
     for (NSObject<JYJsonConverter> *jsonConverter in self.jsonConverters)
     {
         if ([jsonConverter canConvert:objectClass])
