@@ -8,7 +8,8 @@
 
 #import "JYJsonFormatter.h"
 #import "JYJsonSerializer.h"
-#import <objc/runtime.h>
+#import "JYClassDescriptor.h"
+#import "JYPropertyDescriptor.h"
 
 @interface FormatterState : NSObject
 
@@ -116,18 +117,18 @@
 
 - (void)writeProperties:(NSObject *)obj withState:(FormatterState *)state {
     [self beginObjectWithState:state];
-    unsigned int pCount;
-    objc_property_t *properties = class_copyPropertyList([obj class], &pCount);
-    for (int i = 0; i < pCount; i++)
+    JYClassDescriptor *classDesc = [[JYClassDescriptor alloc] initWithClass:[obj class]];
+    for (JYPropertyDescriptor *prop in classDesc.propertyDescriptors)
     {
+        if ([prop.protocolNames containsObject:@"JYIgnore"])
+            continue; // Ignore the property.
         [self writeCommaIfNeededWithState:state];
         [self writeIndentsWithState:state];
         [self incrementItemCountWithState:state];
-        NSString *propName = [NSString stringWithUTF8String:property_getName(properties[i])];
+        NSString *propName = prop.name;
         id value = [obj valueForKey:propName];
         [self writeProperty:propName withValue:value withState:state];
     }
-    free(properties);
     [self endObjectWithState:state];
 }
 

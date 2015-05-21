@@ -13,11 +13,11 @@
 #import "TestClass.h"
 #import "RecursiveTestClass.h"
 
-@interface PrimitivesTests : XCTestCase
+@interface SerializerTests : XCTestCase
 
 @end
 
-@implementation PrimitivesTests
+@implementation SerializerTests
 
 - (void)testNull {
     XCTAssertEqualObjects(@"null", [JYJayson serializeObject:[NSNull null]]);

@@ -7,7 +7,8 @@
 //
 
 #import "JYObjectJsonConverter.h"
-#import <objc/runtime.h>
+#import "JYClassDescriptor.h"
+#import "JYPropertyDescriptor.h"
 
 @implementation JYObjectJsonConverter
 
@@ -94,45 +95,27 @@
 }
 
 - (void)setObjectProperty:(id)object withProperty:(NSString *)propertyName value:(NSString *)json {
-    unsigned int pCount;
-    // Get all the object properties.
-    objc_property_t *properties = class_copyPropertyList([object class], &pCount);
-    for (int i=0; i<pCount; i++)
-    {
-        objc_property_t property = properties[i];
-        // Get the property name.
-        NSString *propName = [NSString stringWithUTF8String:property_getName(property)];
-        if ([propName isEqualToString:propertyName])
+    JYClassDescriptor *classDesc = [[JYClassDescriptor alloc] initWithClass:[object class]];
+    for (JYPropertyDescriptor *desc in [classDesc propertyDescriptors]) {
+        if ([desc.protocolNames containsObject:@"JYIgnore"])
+            continue; // Ignore the property.
+        // Find the property with the same name.
+        if ([propertyName isEqual:desc.name])
         {
-            // We found the property we need to set.
-            NSString* propertyAttributes = [NSString stringWithUTF8String:property_getAttributes(property)];
-            // Get the attributes in order to get the property class.
-            NSArray* splitPropertyAttributes = [propertyAttributes componentsSeparatedByString:@"\""];
-            if ([splitPropertyAttributes count] >= 2)
-            {
-                NSString *classNameWithProtocol = [splitPropertyAttributes objectAtIndex:1];
-                NSArray *splitProtocol = [classNameWithProtocol componentsSeparatedByString:@"<"];
-                // Parse the class string to a Class type.
-                Class propClass = NSClassFromString([splitProtocol objectAtIndex:0]);
-                if ([propClass isSubclassOfClass:[NSArray class]] && [splitProtocol count] > 1) {
-                    // If the class is a NSArray with a protocol, assume there is a class with the same name and parse with that class.
-                    NSString *protocolName = [splitProtocol objectAtIndex:1];
-                    protocolName = [protocolName substringToIndex:[protocolName length]-1];
-                    Class arrayClass = NSClassFromString(protocolName);
-                    // Deserialize array with Class and set the property value.
-                    id newValue = [self.jsonSerializer deserializeObjectArray:json withClass:arrayClass];
-                    [object setValue:newValue forKey:propName];
-                }
-                else {
-                    // Deserialize with Class and set the property value.
-                    id newValue = [self.jsonSerializer deserializeObject:json withClass:propClass];
-                    [object setValue:newValue forKey:propName];
-                }
+            Class propClass = desc.propertyClass;
+            NSArray *protocols = desc.protocolNames;
+            if ([propClass isSubclassOfClass:[NSArray class]] && [protocols count] > 0) {
+                Class arrayClass = desc.classFromProtocol;
+                id newValue = [self.jsonSerializer deserializeObjectArray:json withClass:arrayClass];
+                [object setValue:newValue forKey:propertyName];
+                
+            } else {
+                // Deserialize with Class and set the property value.
+                id newValue = [self.jsonSerializer deserializeObject:json withClass:propClass];
+                [object setValue:newValue forKey:propertyName];
             }
         }
     }
-    // Free unmanaged object properties.
-    free(properties);
 }
 
 - (BOOL)canConvert:(Class)objectClass {
