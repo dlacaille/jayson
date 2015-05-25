@@ -6,24 +6,24 @@
 //  Copyright (c) 2015 ldom66. All rights reserved.
 //
 
-#import "NSString+UTF8.h"
+#import "JYUtf8Helper.h"
 
-@implementation NSString (UTF8)
+@implementation JYUtf8Helper
 
-- (NSString *)stringByReplacingUTF8Escapes; {
++ (NSString *)stringByReplacingUTF8Escapes:(NSString *)str {
     NSDictionary *const escMap = @{
                                    @"\"": @"\"", @"/": @"/", @"b": @"\b", @"f": @"\f",
                                    @"n": @"\n", @"r": @"\r", @"t": @"\t",
                                    };
     NSMutableString *builder = [NSMutableString new];
     BOOL escaped = NO;
-    for (int i=0; i<[self length]; i++)
+    for (int i=0; i<[str length]; i++)
     {
-        char c = [self characterAtIndex:i];
+        char c = [str characterAtIndex:i];
         if (escaped) {
             if (c == 'u')
             {
-                NSString *hex = [self substringWithRange:NSMakeRange(i+1, 4)];
+                NSString *hex = [str substringWithRange:NSMakeRange(i+1, 4)];
                 NSScanner *scanner = [NSScanner scannerWithString:hex];
                 unsigned int outVal;
                 [scanner scanHexInt:&outVal];

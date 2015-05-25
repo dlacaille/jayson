@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSString (UTF8)
+@interface JYUtf8Helper : NSObject
 
-- (NSString *)stringByReplacingUTF8Escapes;
++ (NSString *)stringByReplacingUTF8Escapes:(NSString *)str;
 
 @end

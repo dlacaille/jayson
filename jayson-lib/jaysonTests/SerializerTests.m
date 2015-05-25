@@ -12,6 +12,7 @@
 #import "NSData+Base64.h"
 #import "TestClass.h"
 #import "RecursiveTestClass.h"
+#import "IgnoreTestClass.h"
 
 @interface SerializerTests : XCTestCase
 
@@ -80,6 +81,11 @@
     JYJsonSerializer *serializer = [JYJsonSerializer new];
     serializer.jsonFormatter.indented = YES;
     XCTAssertEqualObjects(@"{\n\t\"test2\":\"test\",\n\t\"test\":1\n}", [serializer serializeObject:(@{@"test":@1,@"test2":@"test"})]);
+}
+
+- (void)testIgnore {
+    IgnoreTestClass *testClass = [JYJayson deserializeObject:@"{\"test\":1}" withClass:[IgnoreTestClass class]];;
+    XCTAssertEqualObjects([JYJayson serializeObject:testClass], @"{}");
 }
 
 @end

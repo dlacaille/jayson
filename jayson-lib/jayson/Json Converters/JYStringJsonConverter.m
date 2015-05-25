@@ -7,7 +7,7 @@
 //
 
 #import "JYStringJsonConverter.h"
-#import "NSString+UTF8.h"
+#import "JYUtf8Helper.h"
 
 @implementation JYStringJsonConverter
 
@@ -31,7 +31,7 @@
     if (![self canConvertJson:string])
         [NSException raise:@"Json Converter Error" format:@"Value '%@' is invalid for string", string];
     NSString *trimmed = [string substringWithRange:NSMakeRange(1, [string length] - 2)];
-    return [trimmed stringByReplacingUTF8Escapes];
+    return [JYUtf8Helper stringByReplacingUTF8Escapes:trimmed];
 }
 
 - (BOOL)canConvert:(Class)objectClass {
