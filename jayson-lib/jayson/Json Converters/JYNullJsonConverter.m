@@ -33,11 +33,13 @@
 }
 
 - (BOOL)canConvert:(Class)objectClass {
+    if (objectClass == nil)
+        return YES;
     return [objectClass isSubclassOfClass:[NSNull class]];
 }
 
 - (BOOL)canConvertJson:(NSString *)string {
-    return [string isEqual: @"null"];
+    return [string isEqual:@"null"];
 }
 
 @end

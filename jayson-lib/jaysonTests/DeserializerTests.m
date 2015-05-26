@@ -26,30 +26,37 @@
 }
 
 - (void)testString {
-    XCTAssertEqualObjects(@"\"\"", [JYJayson serializeObject:@""]);
     XCTAssertEqualObjects(@"", [JYJayson deserializeObject:@"\"\"" withClass:[NSString class]]);
     XCTAssertThrows([JYJayson deserializeObject:@"\"" withClass:[NSString class]]);
     XCTAssertThrows([JYJayson deserializeObject:@"test" withClass:[NSString class]]);
     XCTAssertThrows([JYJayson deserializeObject:@"\"test" withClass:[NSString class]]);
+    XCTAssertEqualObjects(@"test", [JYJayson deserializeObject:@"\"test\"" withClass:[NSString class]]);
+    XCTAssertEqualObjects(@"\r\n", [JYJayson deserializeObject:@"\"\\r\\n\"" withClass:[NSString class]]);
+    XCTAssertEqualObjects(@"\r\n\f\b\t\u5404", [JYJayson deserializeObject:@"\"\\r\\n\\f\\b\\t\\u5404\"" withClass:[NSString class]]);
+    XCTAssertEqualObjects(nil, [JYJayson deserializeObject:@"null" withClass:[NSString class]]);
 }
 
 - (void)testNumber {
     XCTAssertEqualObjects(@(12), [JYJayson deserializeObject:@"12" withClass:[NSNumber class]]);
+    XCTAssertEqualObjects(nil, [JYJayson deserializeObject:@"null" withClass:[NSNumber class]]);
 }
 
 - (void)testDate {
     XCTAssertEqualObjects([NSDate dateWithTimeIntervalSince1970:0], [JYJayson deserializeObject:@"\"1969-12-31T19:00:00-05:00\"" withClass:[NSDate class]]);
+    XCTAssertEqualObjects(nil, [JYJayson deserializeObject:@"null" withClass:[NSDate class]]);
 }
 
 - (void)testArray {
     XCTAssertEqualObjects((@[@1,@2,@3,@4,@5]), [JYJayson deserializeObject:@"[1,2,3,4,5]" withClass:[NSArray class]]);
     XCTAssertEqualObjects((@[@[@1,@"2"],@"[2]",@[@3,@4],@4,@5]), [JYJayson deserializeObject:@"[[1,\"2\"],\"[2]\",[3,4],4,5]" withClass:[NSArray class]]);
+    XCTAssertEqualObjects(nil, [JYJayson deserializeObject:@"null" withClass:[NSArray class]]);
 }
 
 - (void)testDictionary {
     XCTAssertEqualObjects((@{@"test":@1,@"test2":@"test"}), [JYJayson deserializeObject:@"{\"test2\":\"test\",\"test\":1}" withClass:[NSDictionary class]]);
     XCTAssertEqualObjects((@{@"test":@1,@"test2":@{@"test":@1,@"test2":@"test"}}),
                           [JYJayson deserializeObject:@"{\"test2\":{\"test2\":\"test\",\"test\":1},\"test\":1}" withClass:[NSDictionary class]]);
+    XCTAssertEqualObjects(nil, [JYJayson deserializeObject:@"null" withClass:[NSDictionary class]]);
 }
 
 - (void)testData {
@@ -57,6 +64,7 @@
     NSString *encoded = [data base64EncodedString];
     NSString *dataJson = [NSString stringWithFormat:@"\"%@\"", encoded];
     XCTAssertEqualObjects(data, [JYJayson deserializeObject:dataJson withClass:[NSData class]]);
+    XCTAssertEqualObjects(nil, [JYJayson deserializeObject:@"null" withClass:[NSData class]]);
 }
 
 - (void)testObject {
@@ -71,6 +79,7 @@
     NSString *recursiveTestJson = @"{\"test\":{\"test\":1}}";
     RecursiveTestClass *recursiveDeserialized = [JYJayson deserializeObject:recursiveTestJson withClass:[RecursiveTestClass class]];
     XCTAssertTrue([recursiveTestClass.test.test isEqual:recursiveDeserialized.test.test]);
+    XCTAssertEqualObjects(nil, [JYJayson deserializeObject:@"null" withClass:[RecursiveTestClass class]]);
 }
 
 - (void)testTypedArray {
@@ -80,6 +89,8 @@
     typedArrayTestClass.testArray = (NSArray<TestClass> *)@[testClass];
     TypedArrayTestClass *deserialized = [JYJayson deserializeObject:@"{\"testArray\":[{\"test\":1}]}" withClass:[TypedArrayTestClass class]];
     XCTAssertEqualObjects([[typedArrayTestClass.testArray objectAtIndex:0] test], [[deserialized.testArray objectAtIndex:0] test]);
+    TypedArrayTestClass *deserializedNull = [JYJayson deserializeObject:@"{\"testArray\":null}" withClass:[TypedArrayTestClass class]];
+    XCTAssertEqualObjects(nil, deserializedNull.testArray);
 }
 
 - (void)testIgnore {

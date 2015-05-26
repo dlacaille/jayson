@@ -105,7 +105,7 @@
         [self write:[NSString stringWithFormat:@"\"%@\"", obj] withState:state];
     else if ([[obj class] isSubclassOfClass:[NSNumber class]])
         [self write:[(NSNumber *)obj stringValue] withState:state];
-    else if ([[obj class] isSubclassOfClass:[NSNull class]])
+    else if (obj == nil || [[obj class] isSubclassOfClass:[NSNull class]])
         [self write:@"null" withState:state];
     else if ([[obj class] isSubclassOfClass:[NSArray class]])
         [self writeArray:obj withState:state];

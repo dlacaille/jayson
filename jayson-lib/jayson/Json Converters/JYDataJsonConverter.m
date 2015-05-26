@@ -29,6 +29,8 @@
 }
 
 - (id)fromString:(NSString *)string withClass:(Class)objectClass {
+    if ([string isEqual:@"null"])
+        return nil;
     NSString *deserialized = [self.jsonSerializer deserializeObject:string withClass:[NSString class]];
     return  [NSData dataFromBase64String:deserialized];
 }

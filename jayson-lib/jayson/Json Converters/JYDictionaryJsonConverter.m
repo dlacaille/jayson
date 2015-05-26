@@ -27,6 +27,8 @@
 }
 
 - (id)fromString:(NSString *)string withClass:(Class)objectClass {
+    if ([string isEqual:@"null"])
+        return nil;
     // These characters are whitespaces that we should ignore.
     char const IgnoredChars[] = {' ', '\r', '\n', '\t'};
     if (![self canConvertJson:string])

@@ -28,6 +28,8 @@
 }
 
 - (id)fromString:(NSString *)string withClass:(Class)objectClass {
+    if ([string isEqual:@"null"])
+        return nil;
     if (![self canConvertJson:string])
         [NSException raise:@"Json Converter Error" format:@"Value '%@' is invalid for string", string];
     NSString *trimmed = [string substringWithRange:NSMakeRange(1, [string length] - 2)];
