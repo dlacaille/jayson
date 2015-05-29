@@ -13,6 +13,7 @@
 #import "TestClass.h"
 #import "RecursiveTestClass.h"
 #import "IgnoreTestClass.h"
+#import "CircularRefTestClass.h"
 
 @interface SerializerTests : XCTestCase
 
@@ -83,8 +84,16 @@
 }
 
 - (void)testIgnore {
-    IgnoreTestClass *testClass = [JYJayson deserializeObject:@"{\"test\":1}" withClass:[IgnoreTestClass class]];;
+    IgnoreTestClass *testClass = [IgnoreTestClass new];
+    testClass.test = @1;
     XCTAssertEqualObjects([JYJayson serializeObject:testClass], @"{}");
+}
+
+- (void)testCircularRef {
+    CircularRefTestClass *testClass = [CircularRefTestClass new];
+    testClass.test = @"test";
+    testClass.ref = testClass;
+    XCTAssertEqualObjects([JYJayson serializeObject:testClass], @"{\"test\":\"test\",\"ref\":null}");
 }
 
 @end

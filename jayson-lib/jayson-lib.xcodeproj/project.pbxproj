@@ -20,6 +20,7 @@
 		F23E8F261B0E4FA900C570BE /* JYPropertyDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = F23E8F251B0E4FA900C570BE /* JYPropertyDescriptor.m */; };
 		F23E8F291B0E5C4100C570BE /* JYUtf8Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = F23E8F281B0E5C4100C570BE /* JYUtf8Helper.m */; };
 		F23E8F2C1B0E7DA600C570BE /* IgnoreTestClass.m in Sources */ = {isa = PBXBuildFile; fileRef = F23E8F2B1B0E7DA600C570BE /* IgnoreTestClass.m */; };
+		F2AAF9F71B18D2DC00AE38BD /* CircularRefTestClass.m in Sources */ = {isa = PBXBuildFile; fileRef = F2AAF9F61B18D2DC00AE38BD /* CircularRefTestClass.m */; };
 		F2D6298B1AFAA2EC008A7027 /* JYJsonSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D6298A1AFAA2EC008A7027 /* JYJsonSerializer.m */; };
 		F2D6298F1AFAAB13008A7027 /* JYStringJsonConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D6298E1AFAAB13008A7027 /* JYStringJsonConverter.m */; };
 		F2D629A31AFABC14008A7027 /* SerializerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D629A21AFABC14008A7027 /* SerializerTests.m */; };
@@ -80,6 +81,8 @@
 		F23E8F281B0E5C4100C570BE /* JYUtf8Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JYUtf8Helper.m; path = ../Categories/JYUtf8Helper.m; sourceTree = "<group>"; };
 		F23E8F2A1B0E7DA600C570BE /* IgnoreTestClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IgnoreTestClass.h; sourceTree = "<group>"; };
 		F23E8F2B1B0E7DA600C570BE /* IgnoreTestClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IgnoreTestClass.m; sourceTree = "<group>"; };
+		F2AAF9F51B18D2DC00AE38BD /* CircularRefTestClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircularRefTestClass.h; sourceTree = "<group>"; };
+		F2AAF9F61B18D2DC00AE38BD /* CircularRefTestClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircularRefTestClass.m; sourceTree = "<group>"; };
 		F2D629861AFAA168008A7027 /* JYJsonConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYJsonConverter.h; sourceTree = "<group>"; };
 		F2D629891AFAA2EC008A7027 /* JYJsonSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYJsonSerializer.h; sourceTree = "<group>"; };
 		F2D6298A1AFAA2EC008A7027 /* JYJsonSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYJsonSerializer.m; sourceTree = "<group>"; };
@@ -185,6 +188,8 @@
 				F23E8F1D1B06995800C570BE /* TypedArrayTestClass.m */,
 				F23E8F2A1B0E7DA600C570BE /* IgnoreTestClass.h */,
 				F23E8F2B1B0E7DA600C570BE /* IgnoreTestClass.m */,
+				F2AAF9F51B18D2DC00AE38BD /* CircularRefTestClass.h */,
+				F2AAF9F61B18D2DC00AE38BD /* CircularRefTestClass.m */,
 			);
 			path = JaysonTests;
 			sourceTree = "<group>";
@@ -355,6 +360,7 @@
 				F2EFCD031B02750D007A3205 /* RecursiveTestClass.m in Sources */,
 				F23E8F2C1B0E7DA600C570BE /* IgnoreTestClass.m in Sources */,
 				F2D629A31AFABC14008A7027 /* SerializerTests.m in Sources */,
+				F2AAF9F71B18D2DC00AE38BD /* CircularRefTestClass.m in Sources */,
 				A7AF26691AFBD8B300EF7F60 /* NSData+Base64.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
