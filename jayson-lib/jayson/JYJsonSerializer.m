@@ -72,7 +72,7 @@
 
 - (BOOL)hasAncestor:(id)obj {
     for (id ancestor in self.history)
-        if (ancestor == obj)
+        if (ancestor == obj) // Check for pointer equality instead of isEqual:
             return true;
     return false;
 }
