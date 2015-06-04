@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "JYCaseConverter.h"
 
 @interface JYJsonFormatter : NSObject
 
@@ -19,6 +20,11 @@
  * Serializer used by the json formatter.
  */
 @property (nonatomic, strong) id jsonSerializer;
+
+/**
+ * Case converter used to name json properties.
+ */
+@property (nonatomic, strong) NSObject<JYCaseConverter> *caseConverter;
 
 /*
  * Initializes a json formatter with a json formatter.

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "JYJsonFormatter.h"
+#import "JYCaseConverter.h"
 
 @interface JYJsonSerializer : NSObject
 
@@ -15,6 +16,11 @@
  * Array of converters to be used when serializing or deserializing an object.
  */
 @property (nonatomic, strong) NSArray *jsonConverters;
+
+/**
+ * Case converter used to translate json property names to objC properties.
+ */
+@property (nonatomic, strong) NSObject<JYCaseConverter> *caseConverter;
 
 /**
  * Format used by the date converter. Default value is ISO8601 yyyy-MM-dd'T'HH:mm:ssZZZZZ

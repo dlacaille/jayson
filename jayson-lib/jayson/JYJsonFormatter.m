@@ -10,6 +10,7 @@
 #import "JYJsonSerializer.h"
 #import "JYClassDescriptor.h"
 #import "JYPropertyDescriptor.h"
+#import "JYCamelCaseConverter.h"
 
 @interface FormatterState : NSObject
 
@@ -36,6 +37,7 @@
 - (instancetype)initWithSerializer:(id)serializer {
     if (self = [super init]) {
         self.jsonSerializer = serializer;
+        self.caseConverter = [JYCamelCaseConverter new];
         return self;
     }
     return nil;
@@ -125,8 +127,8 @@
         [self writeCommaIfNeededWithState:state];
         [self writeIndentsWithState:state];
         [self incrementItemCountWithState:state];
-        NSString *propName = prop.name;
-        id value = [obj valueForKey:propName];
+        id value = [obj valueForKey:prop.name];
+        NSString *propName = [self.caseConverter convert:prop.name];
         [self writeProperty:propName withValue:value withState:state];
     }
     [self endObjectWithState:state];
@@ -155,7 +157,8 @@
         [self incrementItemCountWithState:state];
         NSString *key = [[dict allKeys] objectAtIndex:i];
         id value = [[dict allValues] objectAtIndex:i];
-        [self writeProperty:key withValue:value withState:state];
+        NSString *propName = [self.caseConverter convert:key];
+        [self writeProperty:propName withValue:value withState:state];
     }
     [self endObjectWithState:state];
 }

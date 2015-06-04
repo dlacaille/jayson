@@ -17,6 +17,7 @@
 #import "JYArrayJsonConverter.h"
 #import "JYDictionaryJsonConverter.h"
 #import "JYObjectJsonConverter.h"
+#import "JYCamelCaseConverter.h"
 
 @interface JYJsonSerializer()
 
@@ -29,6 +30,7 @@
 - (instancetype)init {
     if (self = [super init]) {
         self.jsonConverters = [self defaultConverters];
+        self.caseConverter = [JYCamelCaseConverter new];
         self.jsonFormatter = [[JYJsonFormatter alloc] initWithSerializer:self];
         self.history = [NSMutableArray new];
         self.dateFormat = @"yyyy-MM-dd'T'HH:mm:ssZZZZZ";

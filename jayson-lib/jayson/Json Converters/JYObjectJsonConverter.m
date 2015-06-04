@@ -97,24 +97,25 @@
 }
 
 - (void)setObjectProperty:(id)object withProperty:(NSString *)propertyName value:(NSString *)json {
+    NSString *convertedPropName = [self.jsonSerializer.caseConverter convert:propertyName];
     JYClassDescriptor *classDesc = [[JYClassDescriptor alloc] initWithClass:[object class]];
     for (JYPropertyDescriptor *desc in [classDesc propertyDescriptors]) {
         if ([desc.protocolNames containsObject:@"JYIgnore"])
             continue; // Ignore the property.
         // Find the property with the same name.
-        if ([propertyName isEqual:desc.name])
+        if ([convertedPropName isEqual:desc.name])
         {
             Class propClass = desc.propertyClass;
             NSArray *protocols = desc.protocolNames;
             if ([propClass isSubclassOfClass:[NSArray class]] && [protocols count] > 0) {
                 Class arrayClass = desc.classFromProtocol;
                 id newValue = [self.jsonSerializer deserializeObjectArray:json withClass:arrayClass];
-                [object setValue:newValue forKey:propertyName];
+                [object setValue:newValue forKey:convertedPropName];
                 
             } else {
                 // Deserialize with Class and set the property value.
                 id newValue = [self.jsonSerializer deserializeObject:json withClass:propClass];
-                [object setValue:newValue forKey:propertyName];
+                [object setValue:newValue forKey:convertedPropName];
             }
         }
     }
