@@ -157,8 +157,7 @@
         [self incrementItemCountWithState:state];
         NSString *key = [[dict allKeys] objectAtIndex:i];
         id value = [[dict allValues] objectAtIndex:i];
-        NSString *propName = [self.caseConverter convert:key];
-        [self writeProperty:propName withValue:value withState:state];
+        [self writeProperty:key withValue:value withState:state];
     }
     [self endObjectWithState:state];
 }
