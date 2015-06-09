@@ -67,9 +67,12 @@
         // If we are not in a string, we should escape whitespaces.
         if (!inString)
         {
+            BOOL ignored = NO;
             for (int j=0; j<sizeof IgnoredChars; j++)
                 if (IgnoredChars[j] == c)
-                    continue;
+                    ignored = YES;
+            if (ignored)
+                continue;
         }
         // If we are not in a string, an array or a dictionary and we find a comma we deserialize the string and add it to the array.
         if (!inString && arrayCounter == 0 && objCounter == 0 && c == ',')
