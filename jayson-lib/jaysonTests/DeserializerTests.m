@@ -14,6 +14,7 @@
 #import "RecursiveTestClass.h"
 #import "TypedArrayTestClass.h"
 #import "IgnoreTestClass.h"
+#import "TestSubObjectClass.h"
 
 @interface DeserializerTests : XCTestCase
 
@@ -107,9 +108,22 @@
     XCTAssertEqualObjects([[typedArrayTestClass.testArray objectAtIndex:0] test], [[deserialized objectAtIndex:0] test]);
     NSArray *emptyArray = [JYJayson deserializeObjectArray:@"[]" withClass:[TestClass class]];
     XCTAssertEqualObjects([NSArray new], emptyArray);
+}
+
+- (void)testSubObject {
     
-    NSArray *nilArray = [JYJayson deserializeObjectArray:@"" withClass:[TestClass class]];
-    XCTAssertEqualObjects(nil, nilArray);
+    TestSubObjectClass *subTestClass = [TestSubObjectClass new];
+    
+    TestClass *testClass1 = [TestClass new];
+    testClass1.test = @1;
+    
+    subTestClass.test = testClass1;
+    
+    TestSubObjectClass *deserialized = [JYJayson deserializeObject:@"{\"test\":{\"test\":1}}" withClass:[TestSubObjectClass class]];
+    XCTAssertEqualObjects(subTestClass.test.test, deserialized.test.test);
+    
+    TestSubObjectClass *nilDeserialized = [JYJayson deserializeObject:@"{\"test\":null }" withClass:[TestSubObjectClass class]];
+    XCTAssertEqualObjects(nil, nilDeserialized.test);
     
 }
 

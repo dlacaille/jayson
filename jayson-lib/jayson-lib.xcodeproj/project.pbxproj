@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A7633D871B274F39003963EB /* TestSubObjectClass.m in Sources */ = {isa = PBXBuildFile; fileRef = A7633D861B274F39003963EB /* TestSubObjectClass.m */; };
 		A7798FDC1AFAC5D600E14064 /* JYNumberJsonConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = A7798FDB1AFAC5D600E14064 /* JYNumberJsonConverter.m */; };
 		A7AF26611AFBC65200EF7F60 /* JYDataJsonConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = A7AF26601AFBC65200EF7F60 /* JYDataJsonConverter.m */; };
 		A7AF26681AFBD8B300EF7F60 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = A7AF26671AFBD8B300EF7F60 /* NSData+Base64.m */; };
@@ -64,6 +65,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A7633D851B274F38003963EB /* TestSubObjectClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestSubObjectClass.h; path = jaysonTests/TestSubObjectClass.h; sourceTree = SOURCE_ROOT; };
+		A7633D861B274F39003963EB /* TestSubObjectClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TestSubObjectClass.m; path = jaysonTests/TestSubObjectClass.m; sourceTree = SOURCE_ROOT; };
 		A7798FDA1AFAC5D600E14064 /* JYNumberJsonConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JYNumberJsonConverter.h; path = "jayson/Json Converters/JYNumberJsonConverter.h"; sourceTree = SOURCE_ROOT; };
 		A7798FDB1AFAC5D600E14064 /* JYNumberJsonConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JYNumberJsonConverter.m; path = "jayson/Json Converters/JYNumberJsonConverter.m"; sourceTree = SOURCE_ROOT; };
 		A7AF265F1AFBC65200EF7F60 /* JYDataJsonConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JYDataJsonConverter.h; path = "jayson/Json Converters/JYDataJsonConverter.h"; sourceTree = SOURCE_ROOT; };
@@ -210,6 +213,8 @@
 				F23E8F2B1B0E7DA600C570BE /* IgnoreTestClass.m */,
 				F2AAF9F51B18D2DC00AE38BD /* CircularRefTestClass.h */,
 				F2AAF9F61B18D2DC00AE38BD /* CircularRefTestClass.m */,
+				A7633D851B274F38003963EB /* TestSubObjectClass.h */,
+				A7633D861B274F39003963EB /* TestSubObjectClass.m */,
 			);
 			path = JaysonTests;
 			sourceTree = "<group>";
@@ -403,6 +408,7 @@
 				F2EFCD031B02750D007A3205 /* RecursiveTestClass.m in Sources */,
 				F2597A341B1E2E28004AAFB4 /* CaseTests.m in Sources */,
 				F23E8F2C1B0E7DA600C570BE /* IgnoreTestClass.m in Sources */,
+				A7633D871B274F39003963EB /* TestSubObjectClass.m in Sources */,
 				F2D629A31AFABC14008A7027 /* SerializerTests.m in Sources */,
 				F2AAF9F71B18D2DC00AE38BD /* CircularRefTestClass.m in Sources */,
 				A7AF26691AFBD8B300EF7F60 /* NSData+Base64.m in Sources */,
