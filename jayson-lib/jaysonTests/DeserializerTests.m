@@ -15,10 +15,6 @@
 #import "TypedArrayTestClass.h"
 #import "IgnoreTestClass.h"
 
-
-@protocol TestClass
-@end
-
 @interface DeserializerTests : XCTestCase
 
 @end
@@ -104,13 +100,17 @@
     
     TestClass *testClass2 = [TestClass new];
     testClass2.test = @2;
-    JYJsonSerializer objec
+    
     TypedArrayTestClass *typedArrayTestClass = [TypedArrayTestClass new];
     typedArrayTestClass.testArray = (NSArray<TestClass> *)@[testClass1, testClass2];
-    NSArray *deserialized = [JYJayson deserializeObject:@"[{\"test\":1},{\"test\":2}]" withClass:[NSArray class]];
+    NSArray *deserialized = [JYJayson deserializeObjectArray:@"[{\"test\":1},{\"test\":2}]" withClass:[TestClass class]];
     XCTAssertEqualObjects([[typedArrayTestClass.testArray objectAtIndex:0] test], [[deserialized objectAtIndex:0] test]);
-    NSArray *deserializedNull = [JYJayson deserializeObject:@"[]" withClass:[TypedArrayTestClass class]];
-    XCTAssertEqualObjects(nil, deserializedNull);
+    NSArray *emptyArray = [JYJayson deserializeObjectArray:@"[]" withClass:[TestClass class]];
+    XCTAssertEqualObjects([NSArray new], emptyArray);
+    
+    NSArray *nilArray = [JYJayson deserializeObjectArray:@"" withClass:[TestClass class]];
+    XCTAssertEqualObjects(nil, nilArray);
+    
 }
 
 - (void)testIgnore {
