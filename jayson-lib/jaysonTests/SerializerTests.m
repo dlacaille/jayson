@@ -77,6 +77,41 @@
     XCTAssertEqualObjects(recursiveTestJson, [JYJayson serializeObject:recursiveTestClass]);
 }
 
+
+//- (void)testObjectArray {
+//    NSArray *deserialized = [JYJayson deserializeObjectArray:@"[{\"test\":1},{\"test\":2}]" withClass:[TestClass class]];
+//    XCTAssertEqualObjects(@1, [[deserialized objectAtIndex:0] test]);
+//    XCTAssertEqualObjects(@2, [[deserialized objectAtIndex:1] test]);
+//    NSArray *emptyArray = [JYJayson deserializeObjectArray:@"[]" withClass:[TestClass class]];
+//    XCTAssertEqualObjects([NSArray new], emptyArray);
+//    
+//    NSArray *emptyTabArray = [JYJayson deserializeObjectArray:@"[ ]" withClass:[TestClass class]];
+//    XCTAssertEqualObjects([NSArray new], emptyTabArray);
+//}
+//
+//- (void)testSubObject {
+//    TestSubObjectClass *deserialized = [JYJayson deserializeObject: withClass:[TestSubObjectClass class]];
+//    XCTAssertEqualObjects(@"{\"test\":{\"test\":1}}", deserialized.test.test);
+//    
+//    TestClass *testClass1 = [TestClass new];
+//    testClass1.test = @1;
+//    
+//    TestClass *testClass2 = [TestClass new];
+//    testClass2.test = @2;
+//    
+//    NSArray<TestClass> *testArray = (NSArray<TestClass> *)@[testClass1, testClass2];
+//    TestSubObjectClass *subTestArrayClass = [TestSubObjectClass new];
+//    subTestArrayClass.testArray = testArray;
+//    
+//    TestSubObjectClass *arrayDeserialized = [JYJayson deserializeObject:@"{\"testArray\":[{\"test\":1},{\"test\":2}] }" withClass:[TestSubObjectClass class]];
+//    XCTAssertEqualObjects(@(subTestArrayClass.testArray.count), @(arrayDeserialized.testArray.count));
+//    
+//    
+//    TestSubObjectClass *nilDeserialized = [JYJayson deserializeObject:@"{\"test\":null }" withClass:[TestSubObjectClass class]];
+//    XCTAssertEqualObjects(@"{\"test\":null }", nilDeserialized.test);
+//}
+
+
 - (void)testIndented {
     JYJsonSerializer *serializer = [JYJsonSerializer new];
     serializer.jsonFormatter.indented = YES;
