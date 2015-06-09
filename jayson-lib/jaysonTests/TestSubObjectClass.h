@@ -11,4 +11,5 @@
 
 @interface TestSubObjectClass : NSObject
 @property TestClass *test;
+@property NSArray *testArray;
 @end
