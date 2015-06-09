@@ -101,10 +101,9 @@
     TestClass *testClass2 = [TestClass new];
     testClass2.test = @2;
     
-    TypedArrayTestClass *typedArrayTestClass = [TypedArrayTestClass new];
-    typedArrayTestClass.testArray = (NSArray<TestClass> *)@[testClass1, testClass2];
+    NSArray<TestClass> *testArray = (NSArray<TestClass> *)@[testClass1, testClass2];
     NSArray *deserialized = [JYJayson deserializeObjectArray:@"[{\"test\":1},{\"test\":2}]" withClass:[TestClass class]];
-    XCTAssertEqualObjects([[typedArrayTestClass.testArray objectAtIndex:0] test], [[deserialized objectAtIndex:0] test]);
+    XCTAssertEqualObjects([[testArray objectAtIndex:0] test], [[deserialized objectAtIndex:0] test]);
     XCTAssertEqualObjects([NSArray new], [JYJayson deserializeObjectArray:@"[]" withClass:[TestClass class]]);
 }
 
