@@ -14,6 +14,7 @@
 #import "RecursiveTestClass.h"
 #import "IgnoreTestClass.h"
 #import "CircularRefTestClass.h"
+#import "TestSubObjectClass.h"
 
 @interface SerializerTests : XCTestCase
 
@@ -78,38 +79,38 @@
 }
 
 
-//- (void)testObjectArray {
-//    NSArray *deserialized = [JYJayson deserializeObjectArray:@"[{\"test\":1},{\"test\":2}]" withClass:[TestClass class]];
-//    XCTAssertEqualObjects(@1, [[deserialized objectAtIndex:0] test]);
-//    XCTAssertEqualObjects(@2, [[deserialized objectAtIndex:1] test]);
-//    NSArray *emptyArray = [JYJayson deserializeObjectArray:@"[]" withClass:[TestClass class]];
-//    XCTAssertEqualObjects([NSArray new], emptyArray);
-//    
-//    NSArray *emptyTabArray = [JYJayson deserializeObjectArray:@"[ ]" withClass:[TestClass class]];
-//    XCTAssertEqualObjects([NSArray new], emptyTabArray);
-//}
-//
-//- (void)testSubObject {
-//    TestSubObjectClass *deserialized = [JYJayson deserializeObject: withClass:[TestSubObjectClass class]];
-//    XCTAssertEqualObjects(@"{\"test\":{\"test\":1}}", deserialized.test.test);
-//    
-//    TestClass *testClass1 = [TestClass new];
-//    testClass1.test = @1;
-//    
-//    TestClass *testClass2 = [TestClass new];
-//    testClass2.test = @2;
-//    
-//    NSArray<TestClass> *testArray = (NSArray<TestClass> *)@[testClass1, testClass2];
-//    TestSubObjectClass *subTestArrayClass = [TestSubObjectClass new];
-//    subTestArrayClass.testArray = testArray;
-//    
-//    TestSubObjectClass *arrayDeserialized = [JYJayson deserializeObject:@"{\"testArray\":[{\"test\":1},{\"test\":2}] }" withClass:[TestSubObjectClass class]];
-//    XCTAssertEqualObjects(@(subTestArrayClass.testArray.count), @(arrayDeserialized.testArray.count));
-//    
-//    
-//    TestSubObjectClass *nilDeserialized = [JYJayson deserializeObject:@"{\"test\":null }" withClass:[TestSubObjectClass class]];
-//    XCTAssertEqualObjects(@"{\"test\":null }", nilDeserialized.test);
-//}
+- (void)testObjectArray {
+    
+    TestClass *testClass1 = [TestClass new];
+    testClass1.test = @1;
+    
+    TestClass *testClass2 = [TestClass new];
+    testClass2.test = @2;
+    
+    NSString *serialized = [JYJayson serializeObject:@[testClass1,testClass2]];
+    XCTAssertEqualObjects(@"[{\"test\":1},{\"test\":2}]", serialized);
+    NSString *emptySerialized = [JYJayson serializeObject:@[]];
+    XCTAssertEqualObjects(@"[]", emptySerialized);
+}
+
+- (void)testSubObject {
+
+    
+    TestClass *testClass1 = [TestClass new];
+    testClass1.test = @1;
+    
+    TestClass *testClass2 = [TestClass new];
+    testClass2.test = @2;
+    
+    TestSubObjectClass *subTestClass = [TestSubObjectClass new];
+    subTestClass.test = testClass1;
+    
+    NSString *serialized = [JYJayson serializeObject:subTestClass];
+    XCTAssertEqualObjects(@"{\"test\":{\"test\":1},\"testArray\":null}", serialized);
+    
+    TestSubObjectClass *nilDeserialized = [TestSubObjectClass new];
+    XCTAssertEqualObjects(@"{\"test\":null,\"testArray\":null}", [JYJayson serializeObject:nilDeserialized]);
+}
 
 
 - (void)testIndented {
