@@ -72,6 +72,10 @@
     return nil;
 }
 
+- (NSString *)trim:(NSString *)str {
+    return [str stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+}
+
 - (BOOL)hasAncestor:(id)obj {
     for (id ancestor in self.history)
         if (ancestor == obj) // Check for pointer equality instead of isEqual:
@@ -80,10 +84,11 @@
 }
 
 - (id)deserializeObjectArray:(NSString *)json withClass:(Class)objectClass {
+    NSString *trimmed = [self trim:json];
     for (NSObject<JYJsonConverter> *jsonConverter in self.jsonConverters)
     {
         if ([jsonConverter canConvert:[NSArray class]])
-            return [jsonConverter fromArrayString:json withClass:objectClass];
+            return [jsonConverter fromArrayString:trimmed withClass:objectClass];
     }
     return nil;
 }
@@ -91,19 +96,21 @@
 - (id)deserializeObject:(NSString *)json withClass:(Class)objectClass {
     if (objectClass == nil)
         return [self deserializeObject:json];
+    NSString *trimmed = [self trim:json];
     for (NSObject<JYJsonConverter> *jsonConverter in self.jsonConverters)
     {
         if ([jsonConverter canConvert:objectClass])
-            return [jsonConverter fromString:json withClass:objectClass];
+            return [jsonConverter fromString:trimmed withClass:objectClass];
     }
     return nil;
 }
 
 - (id)deserializeObject:(NSString *)json {
+    NSString *trimmed = [self trim:json];
     for (NSObject<JYJsonConverter> *jsonConverter in self.jsonConverters)
     {
-        if ([jsonConverter canConvertJson:json])
-            return [jsonConverter fromString:json];
+        if ([jsonConverter canConvertJson:trimmed])
+            return [jsonConverter fromString:trimmed];
     }
     return nil;
 }

@@ -96,30 +96,22 @@
 }
 
 - (void)testObjectArray {
-    TestClass *testClass1 = [TestClass new];
-    testClass1.test = @1;
-    
-    TestClass *testClass2 = [TestClass new];
-    testClass2.test = @2;
-    
-    NSArray<TestClass> *testArray = (NSArray<TestClass> *)@[testClass1, testClass2];
     NSArray *deserialized = [JYJayson deserializeObjectArray:@"[{\"test\":1},{\"test\":2}]" withClass:[TestClass class]];
-    XCTAssertEqualObjects([[testArray objectAtIndex:0] test], [[deserialized objectAtIndex:0] test]);
+    XCTAssertEqualObjects(@1, [[deserialized objectAtIndex:0] test]);
+    XCTAssertEqualObjects(@2, [[deserialized objectAtIndex:1] test]);
     NSArray *emptyArray = [JYJayson deserializeObjectArray:@"[]" withClass:[TestClass class]];
     XCTAssertEqualObjects([NSArray new], emptyArray);
+    
+    NSArray *emptyTabArray = [JYJayson deserializeObjectArray:@"[ ]" withClass:[TestClass class]];
+    XCTAssertEqualObjects([NSArray new], emptyTabArray);
 }
 
 - (void)testSubObject {
-    
-    TestSubObjectClass *subTestClass = [TestSubObjectClass new];
+    TestSubObjectClass *deserialized = [JYJayson deserializeObject:@"{\"test\":{\"test\":1}}" withClass:[TestSubObjectClass class]];
+    XCTAssertEqualObjects(@1, deserialized.test.test);
     
     TestClass *testClass1 = [TestClass new];
     testClass1.test = @1;
-    
-    subTestClass.test = testClass1;
-    
-    TestSubObjectClass *deserialized = [JYJayson deserializeObject:@"{\"test\":{\"test\":1}}" withClass:[TestSubObjectClass class]];
-    XCTAssertEqualObjects(subTestClass.test.test, deserialized.test.test);
     
     TestClass *testClass2 = [TestClass new];
     testClass2.test = @2;
@@ -134,7 +126,6 @@
     
     TestSubObjectClass *nilDeserialized = [JYJayson deserializeObject:@"{\"test\":null }" withClass:[TestSubObjectClass class]];
     XCTAssertEqualObjects(nil, nilDeserialized.test);
-    
 }
 
 - (void)testIgnore {
