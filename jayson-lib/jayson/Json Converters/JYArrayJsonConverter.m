@@ -83,7 +83,8 @@
         [builder appendFormat:@"%c", c];
     }
     // In the end we are left with a string and no comma. We should add the deserialized string to the array.
-    [array addObject:[self.jsonSerializer deserializeObject:[NSString stringWithString:builder] withClass:objectClass]];
+    if ([builder length] > 0)
+        [array addObject:[self.jsonSerializer deserializeObject:[NSString stringWithString:builder] withClass:objectClass]];
     // Return the completed array.
     return array;
 }

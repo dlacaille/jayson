@@ -57,6 +57,7 @@
     XCTAssertEqualObjects((@{@"test":@1,@"test2":@{@"test":@1,@"test2":@"test"}}),
                           [JYJayson deserializeObject:@"{\"test2\":{\"test2\":\"test\",\"test\":1},\"test\":1}" withClass:[NSDictionary class]]);
     XCTAssertEqualObjects(nil, [JYJayson deserializeObject:@"null" withClass:[NSDictionary class]]);
+    XCTAssertEqualObjects([NSDictionary new], [JYJayson deserializeObject:@"{}" withClass:[NSDictionary class]]);
 }
 
 - (void)testData {
@@ -93,7 +94,6 @@
     XCTAssertEqualObjects(nil, deserializedNull.testArray);
 }
 
-
 - (void)testObjectArray {
     TestClass *testClass1 = [TestClass new];
     testClass1.test = @1;
@@ -105,12 +105,7 @@
     typedArrayTestClass.testArray = (NSArray<TestClass> *)@[testClass1, testClass2];
     NSArray *deserialized = [JYJayson deserializeObjectArray:@"[{\"test\":1},{\"test\":2}]" withClass:[TestClass class]];
     XCTAssertEqualObjects([[typedArrayTestClass.testArray objectAtIndex:0] test], [[deserialized objectAtIndex:0] test]);
-    NSArray *emptyArray = [JYJayson deserializeObjectArray:@"[]" withClass:[TestClass class]];
-    XCTAssertEqualObjects([NSArray new], emptyArray);
-    
-    NSArray *nilArray = [JYJayson deserializeObjectArray:@"" withClass:[TestClass class]];
-    XCTAssertEqualObjects(nil, nilArray);
-    
+    XCTAssertEqualObjects([NSArray new], [JYJayson deserializeObjectArray:@"[]" withClass:[TestClass class]]);
 }
 
 - (void)testIgnore {
