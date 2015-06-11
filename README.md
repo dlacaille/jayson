@@ -14,9 +14,9 @@ book.genres = @[@"Comedy",@"Science-Fiction"];
 
 NSString *serialized = [JYJayson serializeObject:book];
 //{
-//  "title":"The Hitchthiker's Guide to the Galaxy",
-//  "publishedDate":"1979-10-12T00:00:00Z",
-//  "genres":[
+//  "title": "The Hitchthiker's Guide to the Galaxy",
+//  "publishedDate": "1979-10-12T00:00:00Z",
+//  "genres": [
 //    "Comedy",
 //    "Science-Fiction"
 //  ]
