@@ -10,7 +10,7 @@
 #import <XCTest/XCTest.h>
 #import "JYJayson.h"
 #import "NSData+Base64.h"
-#import "TestClass.h"
+#import "ComplexTypeTestClass.h"
 #import "RecursiveTestClass.h"
 #import "TypedArrayTestClass.h"
 #import "IgnoreTestClass.h"
@@ -70,10 +70,10 @@
 }
 
 - (void)testObject {
-    TestClass *testClass = [TestClass new];
+    ComplexTypeTestClass *testClass = [ComplexTypeTestClass new];
     testClass.test = @1;
     NSString *testJson = @"{\"test\":1}";
-    TestClass *deserialized = [JYJayson deserializeObject:testJson withClass:[TestClass class]];
+    ComplexTypeTestClass *deserialized = [JYJayson deserializeObject:testJson withClass:[ComplexTypeTestClass class]];
     XCTAssertTrue([testClass.test isEqual:deserialized.test]);
     // Test if the objects can be parsed recursively.
     RecursiveTestClass *recursiveTestClass = [RecursiveTestClass new];
@@ -85,10 +85,10 @@
 }
 
 - (void)testTypedArray {
-    TestClass *testClass = [TestClass new];
+    ComplexTypeTestClass *testClass = [ComplexTypeTestClass new];
     testClass.test = @1;
     TypedArrayTestClass *typedArrayTestClass = [TypedArrayTestClass new];
-    typedArrayTestClass.testArray = (NSArray<TestClass> *)@[testClass];
+    typedArrayTestClass.testArray = (NSArray<ComplexTypeTestClass> *)@[testClass];
     TypedArrayTestClass *deserialized = [JYJayson deserializeObject:@"{\"testArray\":[{\"test\":1}]}" withClass:[TypedArrayTestClass class]];
     XCTAssertEqualObjects([[typedArrayTestClass.testArray objectAtIndex:0] test], [[deserialized.testArray objectAtIndex:0] test]);
     TypedArrayTestClass *deserializedNull = [JYJayson deserializeObject:@"{\"testArray\":null}" withClass:[TypedArrayTestClass class]];
@@ -96,21 +96,21 @@
 }
 
 - (void)testObjectArray {
-    NSArray *deserialized = [JYJayson deserializeObjectArray:@"[{\"test\":1},{\"test\":2}]" withClass:[TestClass class]];
+    NSArray *deserialized = [JYJayson deserializeObjectArray:@"[{\"test\":1},{\"test\":2}]" withClass:[ComplexTypeTestClass class]];
     XCTAssertEqualObjects(@1, [[deserialized objectAtIndex:0] test]);
     XCTAssertEqualObjects(@2, [[deserialized objectAtIndex:1] test]);
-    XCTAssertEqualObjects([NSArray new], [JYJayson deserializeObjectArray:@"[]" withClass:[TestClass class]]);
-    XCTAssertEqualObjects([NSArray new], [JYJayson deserializeObjectArray:@"[ ]" withClass:[TestClass class]]);
+    XCTAssertEqualObjects([NSArray new], [JYJayson deserializeObjectArray:@"[]" withClass:[ComplexTypeTestClass class]]);
+    XCTAssertEqualObjects([NSArray new], [JYJayson deserializeObjectArray:@"[ ]" withClass:[ComplexTypeTestClass class]]);
 }
 
 - (void)testSubObject {
     TestSubObjectClass *deserialized = [JYJayson deserializeObject:@"{\"test\":{\"test\":1}}" withClass:[TestSubObjectClass class]];
     XCTAssertEqualObjects(@1, deserialized.test.test);
     
-    TestClass *testClass1 = [TestClass new];
+    ComplexTypeTestClass *testClass1 = [ComplexTypeTestClass new];
     testClass1.test = @1;
     
-    TestClass *testClass2 = [TestClass new];
+    ComplexTypeTestClass *testClass2 = [ComplexTypeTestClass new];
     testClass2.test = @2;
     
     TestSubObjectClass *arrayDeserialized = [JYJayson deserializeObject:@"{\"testArray\":[{\"test\":1},{\"test\":2}] }" withClass:[TestSubObjectClass class]];

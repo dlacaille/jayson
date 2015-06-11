@@ -20,15 +20,15 @@ NSString *const regex = @"^-?(0|[1-9]\\d*)(\\.\\d+)?([eE][+-]?\\d+)?$";
     return nil;
 }
 
-- (NSString *)toString:(id)obj {
-    return [self.jsonSerializer.jsonFormatter serialize:obj];
+- (id)serialize:(id)obj {
+    return obj;
 }
 
-- (id)fromString:(NSString *)string {
-    return [self fromString:string withClass:[NSNumber class]];
+- (id)deserialize:(NSString *)string {
+    return [self deserialize:string withClass:[NSNumber class]];
 }
 
-- (id)fromString:(NSString *)string withClass:(Class)objectClass {
+- (id)deserialize:(NSString *)string withClass:(Class)objectClass {
     if ([string isEqual:@"null"])
         return nil;
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];

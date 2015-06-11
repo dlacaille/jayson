@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "TestClass.h"
+#import "ComplexTypeTestClass.h"
 
 @interface TestSubObjectClass : NSObject
-@property TestClass *test;
+@property ComplexTypeTestClass *test;
 @property NSArray *testArray;
 @end

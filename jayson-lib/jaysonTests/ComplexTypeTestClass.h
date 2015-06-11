@@ -1,5 +1,5 @@
 //
-//  RecursiveTestClass.h
+//  TestClass.h
 //  jayson-lib
 //
 //  Created by Dominic Lacaille on 2015-05-12.
@@ -7,10 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ComplexTypeTestClass.h"
 
-@interface RecursiveTestClass : NSObject
+@interface ComplexTypeTestClass : NSObject
 
-@property (nonatomic, strong) ComplexTypeTestClass *test;
+@property (nonatomic, strong) NSNumber *test;
 
 @end

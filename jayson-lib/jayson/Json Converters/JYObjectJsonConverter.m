@@ -20,16 +20,16 @@
     return nil;
 }
 
-- (NSString *)toString:(id)obj {
-    return [self.jsonSerializer.jsonFormatter serialize:obj];
+- (id)serialize:(id)obj {
+    return obj;
 }
 
-- (id)fromString:(NSString *)string {
+- (id)deserialize:(NSString *)string {
     // This converter should not be used for deserializing when the Class is unknown.
     return nil;
 }
 
-- (id)fromString:(NSString *)string withClass:(Class)objectClass {
+- (id)deserialize:(NSString *)string withClass:(Class)objectClass {
     if ([string isEqual:@"null"])
         return nil;
     // These characters are whitespaces that we should ignore.

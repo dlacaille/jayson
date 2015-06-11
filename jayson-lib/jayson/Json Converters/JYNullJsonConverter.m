@@ -18,15 +18,15 @@
     return nil;
 }
 
-- (NSString *)toString:(id)obj {
-    return [self.jsonSerializer.jsonFormatter serialize:obj];
+- (id)serialize:(id)obj {
+    return obj;
 }
 
-- (id)fromString:(NSString *)string {
-    return [self fromString:string withClass:[NSNull class]];
+- (id)deserialize:(NSString *)string {
+    return [self deserialize:string withClass:[NSNull class]];
 }
 
-- (id)fromString:(NSString *)string withClass:(Class)objectClass {
+- (id)deserialize:(NSString *)string withClass:(Class)objectClass {
     if (![self canConvertJson:string])
         [NSException raise:@"Json Converter Error" format:@"Value '%@' is invalid for null", string];
     return [NSNull null];

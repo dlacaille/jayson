@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "JYCaseConverter.h"
+#import "JYFormatterState.h"
 
 @interface JYJsonFormatter : NSObject
 
@@ -32,8 +33,8 @@
 - (instancetype)initWithSerializer:(id)serializer;
 
 /**
- * Serializes an object.
+ * Writes an object to the state.
  */
-- (NSString *)serialize:(id)object;
+- (void)writeObject:(id)obj withState:(JYFormatterState *)state;
 
 @end

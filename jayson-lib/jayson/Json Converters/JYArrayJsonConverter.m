@@ -20,19 +20,19 @@
     return nil;
 }
 
-- (NSString *)toString:(id)obj {
-    return [self.jsonSerializer.jsonFormatter serialize:obj];
+- (id)serialize:(id)obj {
+    return obj;
 }
 
-- (id)fromString:(NSString *)string {
-    return [self fromString:string withClass:[NSArray class]];
+- (id)deserialize:(NSString *)string {
+    return [self deserialize:string withClass:[NSArray class]];
 }
 
-- (id)fromString:(NSString *)string withClass:(Class)objectClass {
-    return [self fromArrayString:string withClass:nil];
+- (id)deserialize:(NSString *)string withClass:(Class)objectClass {
+    return [self deserializeArray:string withClass:nil];
 }
 
-- (id)fromArrayString:(NSString *)string withClass:(Class)objectClass {
+- (id)deserializeArray:(NSString *)string withClass:(Class)objectClass {
     if ([string isEqual:@"null"])
         return nil;
     // These characters are whitespaces that we should ignore.

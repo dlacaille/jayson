@@ -19,16 +19,15 @@
     return nil;
 }
 
-- (NSString *)toString:(id)obj {
-    NSString *base64 = [((NSData *)obj) base64EncodedString];
-    return [self.jsonSerializer.jsonFormatter serialize:base64];
+- (id)serialize:(id)obj {
+    return [((NSData *)obj) base64EncodedString];
 }
 
-- (id)fromString:(NSString *)string {
-    return [self fromString:string withClass:[NSData class]];
+- (id)deserialize:(NSString *)string {
+    return [self deserialize:string withClass:[NSData class]];
 }
 
-- (id)fromString:(NSString *)string withClass:(Class)objectClass {
+- (id)deserialize:(NSString *)string withClass:(Class)objectClass {
     if ([string isEqual:@"null"])
         return nil;
     NSString *deserialized = [self.jsonSerializer deserializeObject:string withClass:[NSString class]];

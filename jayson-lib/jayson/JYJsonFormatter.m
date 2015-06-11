@@ -12,30 +12,11 @@
 #import "JYPropertyDescriptor.h"
 #import "JYCamelCaseConverter.h"
 
-@interface FormatterState : NSObject
-
-@property (nonatomic, strong) NSMutableString *builder;
-@property (nonatomic, strong) NSMutableArray *levelItemCount;
-
-@end
-
-@implementation FormatterState
-
-- (instancetype)init {
-    if (self = [super init]) {
-        self.builder = [NSMutableString new];
-        self.levelItemCount = [NSMutableArray new];
-        return self;
-    }
-    return nil;
-}
-
-@end
-
 @implementation JYJsonFormatter
 
 - (instancetype)initWithSerializer:(id)serializer {
     if (self = [super init]) {
+        self.indented = YES;
         self.jsonSerializer = serializer;
         self.caseConverter = [JYCamelCaseConverter new];
         return self;
@@ -43,7 +24,7 @@
     return nil;
 }
 
-- (void)writeIndentsWithState:(FormatterState *)state  {
+- (void)writeIndentsWithState:(JYFormatterState *)state  {
     if (![self indented])
         return;
     if ([state.builder length] > 0)
@@ -52,42 +33,41 @@
         [self write:@"\t" withState:state];
 }
 
-- (void)beginObjectWithState:(FormatterState *)state {
+- (void)beginObjectWithState:(JYFormatterState *)state {
     [self writeIndentsWithState:state];
     [state.levelItemCount addObject:@0];
     [self write:@"{" withState:state];
 }
 
-- (void)endObjectWithState:(FormatterState *)state {
+- (void)endObjectWithState:(JYFormatterState *)state {
     [state.levelItemCount removeLastObject];
     [self writeIndentsWithState:state];
     [self write:@"}" withState:state];
 }
 
-- (void)beginArrayWithState:(FormatterState *)state {
+- (void)beginArrayWithState:(JYFormatterState *)state {
     [self writeIndentsWithState:state];
     [state.levelItemCount addObject:@0];
     [self write:@"[" withState:state];
 }
 
-- (void)endArrayWithState:(FormatterState *)state {
+- (void)endArrayWithState:(JYFormatterState *)state {
     [state.levelItemCount removeLastObject];
     [self writeIndentsWithState:state];
     [self write:@"]" withState:state];
 }
 
-- (void)writeProperty:(NSString *)key withValue:(id)value withState:(FormatterState *)state {
+- (void)writeProperty:(NSString *)key withValue:(id)value withState:(JYFormatterState *)state {
     [self writeObject:key withState:state];
     [self write:@":" withState:state];
-    NSString *serialized = [self.jsonSerializer serializeObject:value];
-    [self write:serialized withState:state];
+    [self.jsonSerializer serializeObject:value withState:state];
 }
 
-- (void)write:(NSString *)str withState:(FormatterState *)state {
+- (void)write:(NSString *)str withState:(JYFormatterState *)state {
     [state.builder appendString:str];
 }
 
-- (void)incrementItemCountWithState:(FormatterState *)state {
+- (void)incrementItemCountWithState:(JYFormatterState *)state {
     if ([self levelWithState:state] < 1)
         return;
     int itemCount = [[state.levelItemCount lastObject] intValue];
@@ -95,14 +75,14 @@
     [state.levelItemCount replaceObjectAtIndex:[self levelWithState:state]-1 withObject:newObj];
 }
 
-- (void)writeCommaIfNeededWithState:(FormatterState *)state {
+- (void)writeCommaIfNeededWithState:(JYFormatterState *)state {
     if ([self levelWithState:state] == 0)
         return;
     if ([[state.levelItemCount lastObject] integerValue] > 0)
         [self write:@"," withState:state];
 }
 
-- (void)writeObject:(id)obj withState:(FormatterState *)state {
+- (void)writeObject:(id)obj withState:(JYFormatterState *)state {
     if ([[obj class] isSubclassOfClass:[NSString class]])
         [self write:[NSString stringWithFormat:@"\"%@\"", obj] withState:state];
     else if ([[obj class] isSubclassOfClass:[NSNumber class]])
@@ -117,7 +97,7 @@
         [self writeProperties:obj withState:state];
 }
 
-- (void)writeProperties:(NSObject *)obj withState:(FormatterState *)state {
+- (void)writeProperties:(NSObject *)obj withState:(JYFormatterState *)state {
     [self beginObjectWithState:state];
     JYClassDescriptor *classDesc = [[JYClassDescriptor alloc] initWithClass:[obj class]];
     for (JYPropertyDescriptor *prop in classDesc.propertyDescriptors)
@@ -134,7 +114,7 @@
     [self endObjectWithState:state];
 }
 
-- (void)writeArray:(NSArray *)array withState:(FormatterState *)state {
+- (void)writeArray:(NSArray *)array withState:(JYFormatterState *)state {
     [self beginArrayWithState:state];
     for (int i = 0; i < [array count]; i++)
     {
@@ -148,7 +128,7 @@
     [self endArrayWithState:state];
 }
 
-- (void)writeDictionary:(NSDictionary *)dict withState:(FormatterState *)state {
+- (void)writeDictionary:(NSDictionary *)dict withState:(JYFormatterState *)state {
     [self beginObjectWithState:state];
     for (int i = 0; i < [dict count]; i++)
     {
@@ -162,13 +142,7 @@
     [self endObjectWithState:state];
 }
 
-- (NSString *)serialize:(id)object {
-    FormatterState *state = [FormatterState new];
-    [self writeObject:object withState:state];
-    return [NSString stringWithString:state.builder];
-}
-
-- (NSUInteger)levelWithState:(FormatterState *)state {
+- (NSUInteger)levelWithState:(JYFormatterState *)state {
     return [state.levelItemCount count];
 }
 

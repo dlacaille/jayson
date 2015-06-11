@@ -18,17 +18,16 @@
     return nil;
 }
 
-- (NSString *)toString:(id)obj {
+- (id)serialize:(id)obj {
     NSDate *date = (NSDate *)obj;
-    NSString *formattedDate = [[self dateFormatter] stringFromDate:date];
-    return [self.jsonSerializer.jsonFormatter serialize:formattedDate];
+    return [[self dateFormatter] stringFromDate:date];
 }
 
-- (id)fromString:(NSString *)string {
-    return [self fromString:string withClass:[NSDate class]];
+- (id)deserialize:(NSString *)string {
+    return [self deserialize:string withClass:[NSDate class]];
 }
 
-- (id)fromString:(NSString *)string withClass:(Class)objectClass {
+- (id)deserialize:(NSString *)string withClass:(Class)objectClass {
     if ([string isEqual:@"null"])
         return nil;
     NSString *deserialized = [self.jsonSerializer deserializeObject:string withClass:[NSString class]];

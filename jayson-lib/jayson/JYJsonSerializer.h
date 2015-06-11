@@ -39,6 +39,13 @@
 - (NSString *)serializeObject:(id)obj;
 
 /**
+ * Writes a serialized object to an existing FormatterState.
+ * @param state State of the JsonFormatter
+ * @return A serialized string representing the object.
+ */
+- (void)serializeObject:(id)obj withState:(JYFormatterState *)state;
+
+/**
  * Deserializes a JSON array into an object.
  *
  * @param json JSON string to deserialize.

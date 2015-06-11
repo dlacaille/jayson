@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "JYJsonSerializer.h"
+#import "JYFormatterState.h"
 
 @protocol JYJsonConverter
 
@@ -21,7 +22,7 @@
  * @param obj Object to convert.
  * @return String representation of the object.
  */
-- (NSString *)toString:(id)obj;
+- (id)serialize:(id)obj;
 
 /**
  * Converts a string back to an object with no specific class.
@@ -29,7 +30,7 @@
  * @param string String to parse.
  * @return Parsed object.
  */
-- (id)fromString:(NSString *)string;
+- (id)deserialize:(NSString *)string;
 
 /**
  * Converts a string back to an object.
@@ -38,7 +39,7 @@
  * @param Class to return.
  * @return Parsed object.
  */
-- (id)fromString:(NSString *)string withClass:(Class)objectClass;
+- (id)deserialize:(NSString *)string withClass:(Class)objectClass;
 
 /**
  * Converts a string back to an array of objects.
@@ -47,7 +48,7 @@
  * @param Class of the objects in the array.
  * @return Parsed object.
  */
-- (id)fromArrayString:(NSString *)string withClass:(Class)objectClass;
+- (id)deserializeArray:(NSString *)string withClass:(Class)objectClass;
 
 /**
  * Method to override which verifies if the class can be converted from and to a string.

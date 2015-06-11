@@ -53,23 +53,32 @@
 }
 
 - (NSString *)serializeObject:(id)obj {
+    JYFormatterState *state = [JYFormatterState new];
+    [self serializeObject:obj withState:state];
+    return state.string;
+}
+
+- (void)serializeObject:(id)obj withState:(JYFormatterState *)state {
     for (NSObject<JYJsonConverter> *jsonConverter in self.jsonConverters)
     {
         if ([jsonConverter canConvert:[obj class]])
         {
             // Do not serialize an object that is his own ancestor.
             if (obj == nil || [self hasAncestor:obj])
-                return [jsonConverter toString:nil];
+            {
+                [self.jsonFormatter writeObject:nil withState:state];
+                return;
+            }
             // Add the object to history for circular reference checking.
             [self.history addObject:obj];
             // Serialize the object.
-            NSString *result = [jsonConverter toString:obj];
+            id serialized = [jsonConverter serialize:obj];
+            [self.jsonFormatter writeObject:serialized withState:state];
             // Remove the object from history as it has been serialized.
             [self.history removeObject:obj];
-            return result;
+            return;
         }
     }
-    return nil;
 }
 
 - (NSString *)trim:(NSString *)str {
@@ -88,7 +97,7 @@
     for (NSObject<JYJsonConverter> *jsonConverter in self.jsonConverters)
     {
         if ([jsonConverter canConvert:[NSArray class]])
-            return [jsonConverter fromArrayString:trimmed withClass:objectClass];
+            return [jsonConverter deserializeArray:trimmed withClass:objectClass];
     }
     return nil;
 }
@@ -100,7 +109,7 @@
     for (NSObject<JYJsonConverter> *jsonConverter in self.jsonConverters)
     {
         if ([jsonConverter canConvert:objectClass])
-            return [jsonConverter fromString:trimmed withClass:objectClass];
+            return [jsonConverter deserialize:trimmed withClass:objectClass];
     }
     return nil;
 }
@@ -110,7 +119,7 @@
     for (NSObject<JYJsonConverter> *jsonConverter in self.jsonConverters)
     {
         if ([jsonConverter canConvertJson:trimmed])
-            return [jsonConverter fromString:trimmed];
+            return [jsonConverter deserialize:trimmed];
     }
     return nil;
 }

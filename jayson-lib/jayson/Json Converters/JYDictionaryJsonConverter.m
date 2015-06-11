@@ -18,15 +18,15 @@
     return nil;
 }
 
-- (NSString *)toString:(id)obj {
-    return [self.jsonSerializer.jsonFormatter serialize:obj];
+- (id)serialize:(id)obj {
+    return obj;
 }
 
-- (id)fromString:(NSString *)string {
-    return [self fromString:string withClass:[NSDictionary class]];
+- (id)deserialize:(NSString *)string {
+    return [self deserialize:string withClass:[NSDictionary class]];
 }
 
-- (id)fromString:(NSString *)string withClass:(Class)objectClass {
+- (id)deserialize:(NSString *)string withClass:(Class)objectClass {
     if ([string isEqual:@"null"])
         return nil;
     // These characters are whitespaces that we should ignore.

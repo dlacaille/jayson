@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol TestClass;
+@protocol ComplexTypeTestClass;
 
 @interface TypedArrayTestClass : NSObject
 
-@property (strong, nonatomic) NSArray<TestClass> *testArray;
+@property (strong, nonatomic) NSArray<ComplexTypeTestClass> *testArray;
 
 @end

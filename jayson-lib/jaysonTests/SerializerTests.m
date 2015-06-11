@@ -10,7 +10,7 @@
 #import <XCTest/XCTest.h>
 #import "JYJayson.h"
 #import "NSData+Base64.h"
-#import "TestClass.h"
+#import "ComplexTypeTestClass.h"
 #import "RecursiveTestClass.h"
 #import "IgnoreTestClass.h"
 #import "CircularRefTestClass.h"
@@ -49,13 +49,13 @@
 }
 
 - (void)testArray {
-    XCTAssertEqualObjects(@"[1,2,3,4,5]", [JYJayson serializeObject:(@[@1,@2,@3,@4,@5])]);
-    XCTAssertEqualObjects(@"[\"test\",\"test2\",\"test3\"]", [JYJayson serializeObject:(@[@"test",@"test2",@"test3"])]);
+    XCTAssertEqualObjects(@"[\n\t1,\n\t2,\n\t3,\n\t4,\n\t5\n]", [JYJayson serializeObject:(@[@1,@2,@3,@4,@5])]);
+    XCTAssertEqualObjects(@"[\n\t\"test\",\n\t\"test2\",\n\t\"test3\"\n]", [JYJayson serializeObject:(@[@"test",@"test2",@"test3"])]);
 }
 
 - (void)testDictionary {
-    XCTAssertEqualObjects(@"{\"test2\":\"test\",\"test\":1}", [JYJayson serializeObject:(@{@"test":@1,@"test2":@"test"})]);
-    XCTAssertEqualObjects(@"{\"test2\":\"1969-12-31T19:00:00-05:00\",\"test\":1}", [JYJayson serializeObject:(@{@"test":@1,@"test2":[NSDate dateWithTimeIntervalSince1970:0]})]);
+    XCTAssertEqualObjects(@"{\n\t\"test2\":\"test\",\n\t\"test\":1\n}", [JYJayson serializeObject:(@{@"test":@1,@"test2":@"test"})]);
+    XCTAssertEqualObjects(@"{\n\t\"test2\":\"1969-12-31T19:00:00-05:00\",\n\t\"test\":1\n}", [JYJayson serializeObject:(@{@"test":@1,@"test2":[NSDate dateWithTimeIntervalSince1970:0]})]);
 }
 
 - (void)testData {
@@ -66,14 +66,18 @@
 }
 
 - (void)testObject {
-    TestClass *testClass = [TestClass new];
+    ComplexTypeTestClass *testClass = [ComplexTypeTestClass new];
     testClass.test = @1;
-    NSString *testJson = @"{\"test\":1}";
+    NSString *testJson = @"{\n\t\"test\":1\n}";
     XCTAssertEqualObjects(testJson, [JYJayson serializeObject:testClass]);
-    // Test if the objects can be parsed recursively.
+}
+
+- (void)testRecursiveObject {
+    ComplexTypeTestClass *testClass = [ComplexTypeTestClass new];
+    testClass.test = @1;
     RecursiveTestClass *recursiveTestClass = [RecursiveTestClass new];
     recursiveTestClass.test = testClass;
-    NSString *recursiveTestJson = @"{\"test\":{\"test\":1}}";
+    NSString *recursiveTestJson = @"{\n\t\"test\":\n\t{\n\t\t\"test\":1\n\t}\n}";
     XCTAssertEqualObjects(recursiveTestJson, [JYJayson serializeObject:recursiveTestClass]);
 }
 
@@ -86,14 +90,14 @@
 - (void)testIgnore {
     IgnoreTestClass *testClass = [IgnoreTestClass new];
     testClass.test = @1;
-    XCTAssertEqualObjects([JYJayson serializeObject:testClass], @"{}");
+    XCTAssertEqualObjects([JYJayson serializeObject:testClass], @"{\n}");
 }
 
 - (void)testCircularRef {
     CircularRefTestClass *testClass = [CircularRefTestClass new];
     testClass.test = @"test";
     testClass.ref = testClass;
-    XCTAssertEqualObjects([JYJayson serializeObject:testClass], @"{\"test\":\"test\",\"ref\":null}");
+    XCTAssertEqualObjects([JYJayson serializeObject:testClass], @"{\n\t\"test\":\"test\",\n\t\"ref\":null\n}");
 }
 
 @end
