@@ -14,7 +14,7 @@ book.genres = @[@"Comedy",@"Science-Fiction"];
 
 NSString *serialized = [JYJayson serializeObject:book];
 //{
-//  "title":"The Highthiker's Guide to the Galaxy",
+//  "title":"The Hitchthiker's Guide to the Galaxy",
 //  "publishedDate":"1979-10-12T00:00:00Z",
 //  "genres":[
 //    "Comedy",
@@ -26,7 +26,7 @@ NSString *serialized = [JYJayson serializeObject:book];
 You can also deserialize a json string using [JYJayson deserializeObject:withClass:]
 
 ```objc
-NSString *json = @"{\"title\":\"The Highthiker's Guide to the Galaxy\",\
+NSString *json = @"{\"title\":\"The Hitchthiker's Guide to the Galaxy\",\
                   \"publishedDate\":\"1979-10-12T00:00:00Z\",\
                   \"genres\":[\"Comedy\",\"Science-Fiction\"]}";
 
