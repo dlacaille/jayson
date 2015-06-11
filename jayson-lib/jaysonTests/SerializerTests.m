@@ -55,8 +55,8 @@
 }
 
 - (void)testDictionary {
-    XCTAssertEqualObjects(@"{\n\t\"test2\":\"test\",\n\t\"test\":1\n}", [JYJayson serializeObject:(@{@"test":@1,@"test2":@"test"})]);
-    XCTAssertEqualObjects(@"{\n\t\"test2\":\"1969-12-31T19:00:00-05:00\",\n\t\"test\":1\n}", [JYJayson serializeObject:(@{@"test":@1,@"test2":[NSDate dateWithTimeIntervalSince1970:0]})]);
+    XCTAssertEqualObjects(@"{\n\t\"test2\": \"test\",\n\t\"test\": 1\n}", [JYJayson serializeObject:(@{@"test":@1,@"test2":@"test"})]);
+    XCTAssertEqualObjects(@"{\n\t\"test2\": \"1969-12-31T19:00:00-05:00\",\n\t\"test\": 1\n}", [JYJayson serializeObject:(@{@"test":@1,@"test2":[NSDate dateWithTimeIntervalSince1970:0]})]);
 }
 
 - (void)testData {
@@ -69,7 +69,7 @@
 - (void)testObject {
     ComplexTypeTestClass *testClass = [ComplexTypeTestClass new];
     testClass.test = @1;
-    NSString *testJson = @"{\n\t\"test\":1\n}";
+    NSString *testJson = @"{\n\t\"test\": 1\n}";
     XCTAssertEqualObjects(testJson, [JYJayson serializeObject:testClass]);
 }
 
@@ -78,62 +78,59 @@
     testClass.test = @1;
     RecursiveTestClass *recursiveTestClass = [RecursiveTestClass new];
     recursiveTestClass.test = testClass;
-    NSString *recursiveTestJson = @"{\n\t\"test\":\n\t{\n\t\t\"test\":1\n\t}\n}";
+    NSString *recursiveTestJson = @"{\n\t\"test\": {\n\t\t\"test\": 1\n\t}\n}";
     XCTAssertEqualObjects(recursiveTestJson, [JYJayson serializeObject:recursiveTestClass]);
 }
 
 
 - (void)testObjectArray {
-    
-    TestClass *testClass1 = [TestClass new];
+    ComplexTypeTestClass *testClass1 = [ComplexTypeTestClass new];
     testClass1.test = @1;
     
-    TestClass *testClass2 = [TestClass new];
+    ComplexTypeTestClass *testClass2 = [ComplexTypeTestClass new];
     testClass2.test = @2;
     
     NSString *serialized = [JYJayson serializeObject:@[testClass1,testClass2]];
-    XCTAssertEqualObjects(@"[{\"test\":1},{\"test\":2}]", serialized);
+    XCTAssertEqualObjects(@"[\n\t{\n\t\t\"test\": 1\n\t},\n\t{\n\t\t\"test\": 2\n\t}\n]", serialized);
     NSString *emptySerialized = [JYJayson serializeObject:@[]];
     XCTAssertEqualObjects(@"[]", emptySerialized);
 }
 
 - (void)testSubObject {
-
     
-    TestClass *testClass1 = [TestClass new];
+    ComplexTypeTestClass *testClass1 = [ComplexTypeTestClass new];
     testClass1.test = @1;
     
-    TestClass *testClass2 = [TestClass new];
+    ComplexTypeTestClass *testClass2 = [ComplexTypeTestClass new];
     testClass2.test = @2;
     
     TestSubObjectClass *subTestClass = [TestSubObjectClass new];
     subTestClass.test = testClass1;
     
     NSString *serialized = [JYJayson serializeObject:subTestClass];
-    XCTAssertEqualObjects(@"{\"test\":{\"test\":1},\"testArray\":null}", serialized);
+    XCTAssertEqualObjects(@"{\n\t\"test\": {\n\t\t\"test\": 1\n\t},\n\t\"testArray\": null\n}", serialized);
     
     TestSubObjectClass *nilDeserialized = [TestSubObjectClass new];
-    XCTAssertEqualObjects(@"{\"test\":null,\"testArray\":null}", [JYJayson serializeObject:nilDeserialized]);
+    XCTAssertEqualObjects(@"{\n\t\"test\": null,\n\t\"testArray\": null\n}", [JYJayson serializeObject:nilDeserialized]);
 }
 
 
 - (void)testIndented {
     JYJsonSerializer *serializer = [JYJsonSerializer new];
     serializer.jsonFormatter.indented = YES;
-    XCTAssertEqualObjects(@"{\n\t\"test2\":\"test\",\n\t\"test\":1\n}", [serializer serializeObject:(@{@"test":@1,@"test2":@"test"})]);
+    XCTAssertEqualObjects(@"{\n\t\"test2\": \"test\",\n\t\"test\": 1\n}", [serializer serializeObject:(@{@"test":@1,@"test2":@"test"})]);
 }
 
 - (void)testIgnore {
     IgnoreTestClass *testClass = [IgnoreTestClass new];
-    testClass.test = @1;
-    XCTAssertEqualObjects([JYJayson serializeObject:testClass], @"{\n}");
+    XCTAssertEqualObjects([JYJayson serializeObject:testClass], @"{}");
 }
 
 - (void)testCircularRef {
     CircularRefTestClass *testClass = [CircularRefTestClass new];
     testClass.test = @"test";
     testClass.ref = testClass;
-    XCTAssertEqualObjects([JYJayson serializeObject:testClass], @"{\n\t\"test\":\"test\",\n\t\"ref\":null\n}");
+    XCTAssertEqualObjects([JYJayson serializeObject:testClass], @"{\n\t\"test\": \"test\",\n\t\"ref\": null\n}");
 }
 
 @end

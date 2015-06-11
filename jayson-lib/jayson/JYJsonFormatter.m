@@ -33,33 +33,42 @@
         [self write:@"\t" withState:state];
 }
 
+- (void)writeSpace:(JYFormatterState *)state  {
+    if (![self indented])
+        return;
+    [self write:@" " withState:state];
+}
+
 - (void)beginObjectWithState:(JYFormatterState *)state {
-    [self writeIndentsWithState:state];
     [state.levelItemCount addObject:@0];
     [self write:@"{" withState:state];
 }
 
 - (void)endObjectWithState:(JYFormatterState *)state {
+    NSInteger itemCount = [[state.levelItemCount lastObject] integerValue];
     [state.levelItemCount removeLastObject];
-    [self writeIndentsWithState:state];
+    if (itemCount > 0)
+        [self writeIndentsWithState:state];
     [self write:@"}" withState:state];
 }
 
 - (void)beginArrayWithState:(JYFormatterState *)state {
-    [self writeIndentsWithState:state];
     [state.levelItemCount addObject:@0];
     [self write:@"[" withState:state];
 }
 
 - (void)endArrayWithState:(JYFormatterState *)state {
+    NSInteger itemCount = [[state.levelItemCount lastObject] integerValue];
     [state.levelItemCount removeLastObject];
-    [self writeIndentsWithState:state];
+    if (itemCount > 0)
+        [self writeIndentsWithState:state];
     [self write:@"]" withState:state];
 }
 
 - (void)writeProperty:(NSString *)key withValue:(id)value withState:(JYFormatterState *)state {
     [self writeObject:key withState:state];
     [self write:@":" withState:state];
+    [self writeSpace:state];
     [self.jsonSerializer serializeObject:value withState:state];
 }
 
@@ -122,8 +131,7 @@
         [self writeIndentsWithState:state];
         [self incrementItemCountWithState:state];
         id value = [array objectAtIndex:i];
-        NSString *serialized = [self.jsonSerializer serializeObject:value];
-        [self write:serialized withState:state];
+        [self.jsonSerializer serializeObject:value withState:state];
     }
     [self endArrayWithState:state];
 }
