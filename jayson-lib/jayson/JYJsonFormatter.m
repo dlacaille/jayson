@@ -24,8 +24,7 @@
 }
 
 - (void)writeIndentsWithState:(JYFormatterState *)state  {
-    JYJsonSerializer *serializer = self.jsonSerializer;
-    if (!serializer.serializerSettings.indented)
+    if (![self serializerSettings].indented)
         return;
     if ([state.builder length] > 0)
         [self write:@"\n" withState:state];
@@ -34,8 +33,7 @@
 }
 
 - (void)writeSpace:(JYFormatterState *)state  {
-    JYJsonSerializer *serializer = self.jsonSerializer;
-    if (!serializer.serializerSettings.indented)
+    if (![self serializerSettings].indented)
         return;
     [self write:@" " withState:state];
 }
@@ -149,6 +147,11 @@
         [self writeProperty:key withValue:value withState:state];
     }
     [self endObjectWithState:state];
+}
+
+- (JYSerializerSettings *)serializerSettings {
+    JYJsonSerializer *serializer = self.jsonSerializer;
+    return serializer.serializerSettings;
 }
 
 - (NSUInteger)levelWithState:(JYFormatterState *)state {
