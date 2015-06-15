@@ -14,6 +14,11 @@
 @interface JYJsonSerializer : NSObject
 
 /**
+ * Creates an instance of JYJsonSerializer with specified settings.
+ */
+- (instancetype)initWithSettings:(JYSerializerSettings *)settings;
+
+/**
  * Array of converters to be used when serializing or deserializing an object.
  */
 @property (nonatomic, strong) NSArray *jsonConverters;
@@ -29,10 +34,9 @@
 @property (nonatomic, strong) JYJsonFormatter *jsonFormatter;
 
 /**
- * Settings used to configure serialization
- .
+ * Settings used to configure serialization.
  */
-@property (nonatomic, strong) JYSerializerSettings *serializerSettings;
+@property (nonatomic, strong, readonly) JYSerializerSettings *serializerSettings;
 
 /**
  * Serializes an object to JSON.

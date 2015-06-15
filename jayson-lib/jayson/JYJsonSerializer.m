@@ -22,18 +22,25 @@
 @interface JYJsonSerializer()
 
 @property (nonatomic, strong) NSMutableArray *history;
+@property (nonatomic, strong, readwrite) JYSerializerSettings *serializerSettings;
 
 @end
 
 @implementation JYJsonSerializer
 
 - (instancetype)init {
+    if (self = [self initWithSettings:[JYSerializerSettings defaultSettings]])
+        return self;
+    return nil;
+}
+
+- (instancetype)initWithSettings:(JYSerializerSettings *)settings {
     if (self = [super init]) {
         self.jsonConverters = [self defaultConverters];
         self.caseConverter = [JYCamelCaseConverter new];
         self.jsonFormatter = [[JYJsonFormatter alloc] initWithSerializer:self];
         self.history = [NSMutableArray new];
-        self.serializerSettings = [JYSerializerSettings defaultSettings];
+        self.serializerSettings = settings;
         return self;
     }
     return nil;

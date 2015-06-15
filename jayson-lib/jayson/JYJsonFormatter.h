@@ -15,7 +15,7 @@
 /*
  * Serializer used by the json formatter.
  */
-@property (nonatomic, strong) id jsonSerializer;
+@property (nonatomic, strong, readonly) id jsonSerializer;
 
 /**
  * Case converter used to name json properties.

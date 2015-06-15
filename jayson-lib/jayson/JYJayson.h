@@ -18,10 +18,16 @@
 + (JYJsonSerializer *)defaultSerializer;
 
 /**
- * Serializes an object to JSON.
+ * Serializes an object to JSON using the default serializer.
  * @return A serialized string representing the object.
  */
 + (NSString *)serializeObject:(id)obj;
+
+/**
+ * Serializes an object to JSON using a new serializer with specified settings.
+ * @return A serialized string representing the object.
+ */
++ (NSString *)serializeObject:(id)obj withSettings:(JYSerializerSettings *)settings;
 
 /**
  * Deserializes a JSON array into an object.

@@ -126,6 +126,15 @@
     XCTAssertEqualObjects([JYJayson serializeObject:testClass], @"{}");
 }
 
+- (void)testIgnoreNull {
+    JYJsonSerializer *serializer = [[JYJsonSerializer alloc] init];
+    serializer.serializerSettings.ignoreNull = YES;
+    
+    ComplexTypeTestClass *testClass = [ComplexTypeTestClass new];
+    testClass.test = nil;
+    XCTAssertEqualObjects(@"{}", [serializer serializeObject:testClass]);
+}
+
 - (void)testCircularRef {
     CircularRefTestClass *testClass = [CircularRefTestClass new];
     testClass.test = @"test";

@@ -12,9 +12,15 @@
 #import "JYPropertyDescriptor.h"
 #import "JYCamelCaseConverter.h"
 
+@interface JYJsonFormatter()
+
+@property (nonatomic, strong, readwrite) id jsonSerializer;
+
+@end
+
 @implementation JYJsonFormatter
 
-- (instancetype)initWithSerializer:(id)serializer {
+- (instancetype)initWithSerializer:(JYJsonSerializer *)serializer {
     if (self = [super init]) {
         self.jsonSerializer = serializer;
         self.caseConverter = [JYCamelCaseConverter new];
@@ -112,10 +118,12 @@
     {
         if ([prop.protocolNames containsObject:@"JYIgnore"])
             continue; // Ignore the property.
+        id value = [obj valueForKey:prop.name];
+        if ([self serializerSettings].ignoreNull && (value == nil || value == [NSNull null]))
+            continue; // Ignore null values.
         [self writeCommaIfNeededWithState:state];
         [self writeIndentsWithState:state];
         [self incrementItemCountWithState:state];
-        id value = [obj valueForKey:prop.name];
         NSString *propName = [self.caseConverter convert:prop.name];
         [self writeProperty:propName withValue:value withState:state];
     }

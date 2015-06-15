@@ -10,40 +10,45 @@
 
 @implementation JYJayson
 
-static JYJsonSerializer *serializer;
+static JYJsonSerializer *_serializer;
 
 + (void) initialize {
     if (self == [JYJayson class]) {
-        serializer = [JYJsonSerializer new];
+        _serializer = [JYJsonSerializer new];
     }
 }
 
 + (JYJsonSerializer *)defaultSerializer {
-    return serializer;
+    return _serializer;
 }
 
 + (NSString *)serializeObject:(id)obj {
+    return [_serializer serializeObject:obj];
+}
+
++ (NSString *)serializeObject:(id)obj withSettings:(JYSerializerSettings *)settings {
+    JYJsonSerializer *serializer = [[JYJsonSerializer alloc] initWithSettings:settings];
     return [serializer serializeObject:obj];
 }
 
 + (id)deserializeObjectArray:(NSString *)json withClass:(Class)objectClass {
-    return [serializer deserializeObjectArray:json withClass:objectClass];
+    return [_serializer deserializeObjectArray:json withClass:objectClass];
 }
 
 + (id)deserializeObject:(NSString *)json withClass:(Class)objectClass {
-    return [serializer deserializeObject:json withClass:objectClass];
+    return [_serializer deserializeObject:json withClass:objectClass];
 }
 
 + (id)deserializeObject:(NSString *)json {
-    return [serializer deserializeObject:json];
+    return [_serializer deserializeObject:json];
 }
 
 + (id)deserializeObjectFromData:(NSData *)data {
-    return [serializer deserializeObjectFromData:data];
+    return [_serializer deserializeObjectFromData:data];
 }
 
 + (id)deserializeObjectFromData:(NSData *)data withClass:(Class)objectClass {
-    return [serializer deserializeObjectFromData:data withClass:objectClass];
+    return [_serializer deserializeObjectFromData:data withClass:objectClass];
 }
 
 @end
