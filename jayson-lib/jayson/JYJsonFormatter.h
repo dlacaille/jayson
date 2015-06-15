@@ -13,11 +13,6 @@
 @interface JYJsonFormatter : NSObject
 
 /*
- * When true, the json is indented when serializing objects.
- */
-@property (assign, nonatomic) BOOL indented;
-
-/*
  * Serializer used by the json formatter.
  */
 @property (nonatomic, strong) id jsonSerializer;

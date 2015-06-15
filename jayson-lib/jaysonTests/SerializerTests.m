@@ -117,7 +117,7 @@
 
 - (void)testIndented {
     JYJsonSerializer *serializer = [JYJsonSerializer new];
-    serializer.jsonFormatter.indented = YES;
+    serializer.serializerSettings.indented = YES;
     XCTAssertEqualObjects(@"{\n\t\"test2\": \"test\",\n\t\"test\": 1\n}", [serializer serializeObject:(@{@"test":@1,@"test2":@"test"})]);
 }
 

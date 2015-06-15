@@ -16,7 +16,6 @@
 
 - (instancetype)initWithSerializer:(id)serializer {
     if (self = [super init]) {
-        self.indented = YES;
         self.jsonSerializer = serializer;
         self.caseConverter = [JYCamelCaseConverter new];
         return self;
@@ -25,7 +24,8 @@
 }
 
 - (void)writeIndentsWithState:(JYFormatterState *)state  {
-    if (![self indented])
+    JYJsonSerializer *serializer = self.jsonSerializer;
+    if (!serializer.serializerSettings.indented)
         return;
     if ([state.builder length] > 0)
         [self write:@"\n" withState:state];
@@ -34,7 +34,8 @@
 }
 
 - (void)writeSpace:(JYFormatterState *)state  {
-    if (![self indented])
+    JYJsonSerializer *serializer = self.jsonSerializer;
+    if (!serializer.serializerSettings.indented)
         return;
     [self write:@" " withState:state];
 }

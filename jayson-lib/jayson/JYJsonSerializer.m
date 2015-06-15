@@ -33,7 +33,7 @@
         self.caseConverter = [JYCamelCaseConverter new];
         self.jsonFormatter = [[JYJsonFormatter alloc] initWithSerializer:self];
         self.history = [NSMutableArray new];
-        self.dateFormat = @"yyyy-MM-dd'T'HH:mm:ssZZZZZ";
+        self.serializerSettings = [JYSerializerSettings defaultSettings];
         return self;
     }
     return nil;

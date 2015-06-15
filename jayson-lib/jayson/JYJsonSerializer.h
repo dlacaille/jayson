@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "JYJsonFormatter.h"
 #import "JYCaseConverter.h"
+#import "JYSerializerSettings.h"
 
 @interface JYJsonSerializer : NSObject
 
@@ -23,14 +24,15 @@
 @property (nonatomic, strong) NSObject<JYCaseConverter> *caseConverter;
 
 /**
- * Format used by the date converter. Default value is ISO8601 yyyy-MM-dd'T'HH:mm:ssZZZZZ
- */
-@property (nonatomic, strong) NSString *dateFormat;
-
-/**
  * Json Formatter to use in serialization.
  */
 @property (nonatomic, strong) JYJsonFormatter *jsonFormatter;
+
+/**
+ * Settings used to configure serialization
+ .
+ */
+@property (nonatomic, strong) JYSerializerSettings *serializerSettings;
 
 /**
  * Serializes an object to JSON.
