@@ -8,6 +8,7 @@
 
 #import "JYStringJsonConverter.h"
 #import "JYUtf8Helper.h"
+#import "JYSerializerException.h"
 
 @implementation JYStringJsonConverter
 
@@ -31,7 +32,7 @@
     if ([string isEqual:@"null"])
         return nil;
     if (![self canConvertJson:string])
-        [NSException raise:@"Json Converter Error" format:@"Value '%@' is invalid for string", string];
+        [JYSerializerException raise:@"Json Converter Error" format:@"Value '%@' is invalid for string", string];
     NSString *trimmed = [string substringWithRange:NSMakeRange(1, [string length] - 2)];
     return [JYUtf8Helper stringByReplacingUTF8Escapes:trimmed];
 }

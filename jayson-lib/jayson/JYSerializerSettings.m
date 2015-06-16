@@ -15,6 +15,7 @@
     settings.dateFormat = @"yyyy-MM-dd'T'HH:mm:ssZZZZZ";
     settings.ignoreNull = NO;
     settings.indented = YES;
+    settings.circularReferenceHandling = JYCircularReferenceIgnore;
     return settings;
 }
 

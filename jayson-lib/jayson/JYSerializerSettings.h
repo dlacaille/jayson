@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "JYCircularReferenceHandling.h"
 
 @interface JYSerializerSettings : NSObject
 
@@ -24,6 +25,11 @@
  * When true, null values are not included in the json.
  */
 @property (assign, nonatomic) BOOL ignoreNull;
+
+/*
+ * Change the behavior of circular references in the serializer.
+ */
+@property (assign, nonatomic) enum JYCircularReferenceHandling circularReferenceHandling;
 
 /*
  * Returns a new instance of JYSerializerSettings with default values.

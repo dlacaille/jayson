@@ -18,6 +18,7 @@
 #import "JYDictionaryJsonConverter.h"
 #import "JYObjectJsonConverter.h"
 #import "JYCamelCaseConverter.h"
+#import "JYSerializerException.h"
 
 @interface JYJsonSerializer()
 
@@ -70,9 +71,21 @@
     {
         if ([jsonConverter canConvert:[obj class]])
         {
+            if ([self hasAncestor:obj]) {
+                switch (self.serializerSettings.circularReferenceHandling)
+                {
+                    case JYCircularReferenceIgnore:
+                        [self.jsonFormatter writeObject:nil withState:state];
+                        return;
+                    case JYCircularReferenceThrow:
+                        [JYSerializerException raise:@"Json Serializer Exception" format:@"Serializer settings do not allow circular references."];
+                        break;
+                    default:
+                        break;
+                }
+            }
             // Do not serialize an object that is his own ancestor.
-            if (obj == nil || [self hasAncestor:obj])
-            {
+            if (obj == nil) {
                 [self.jsonFormatter writeObject:nil withState:state];
                 return;
             }

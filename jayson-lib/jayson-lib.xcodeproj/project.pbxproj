@@ -30,6 +30,7 @@
 		F2AAF9F71B18D2DC00AE38BD /* CircularRefTestClass.m in Sources */ = {isa = PBXBuildFile; fileRef = F2AAF9F61B18D2DC00AE38BD /* CircularRefTestClass.m */; };
 		F2BD27DA1B29F977001BDE18 /* JYFormatterState.m in Sources */ = {isa = PBXBuildFile; fileRef = F2BD27D91B29F977001BDE18 /* JYFormatterState.m */; };
 		F2BD27DD1B2F3B10001BDE18 /* JYSerializerSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = F2BD27DC1B2F3B10001BDE18 /* JYSerializerSettings.m */; };
+		F2BD27E21B2F4AB8001BDE18 /* JYSerializerException.m in Sources */ = {isa = PBXBuildFile; fileRef = F2BD27E11B2F4AB8001BDE18 /* JYSerializerException.m */; };
 		F2D6298B1AFAA2EC008A7027 /* JYJsonSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D6298A1AFAA2EC008A7027 /* JYJsonSerializer.m */; };
 		F2D6298F1AFAAB13008A7027 /* JYStringJsonConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D6298E1AFAAB13008A7027 /* JYStringJsonConverter.m */; };
 		F2D629A31AFABC14008A7027 /* SerializerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D629A21AFABC14008A7027 /* SerializerTests.m */; };
@@ -110,6 +111,9 @@
 		F2BD27D91B29F977001BDE18 /* JYFormatterState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYFormatterState.m; sourceTree = "<group>"; };
 		F2BD27DB1B2F3B10001BDE18 /* JYSerializerSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYSerializerSettings.h; sourceTree = "<group>"; };
 		F2BD27DC1B2F3B10001BDE18 /* JYSerializerSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYSerializerSettings.m; sourceTree = "<group>"; };
+		F2BD27DF1B2F4895001BDE18 /* JYCircularReferenceHandling.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYCircularReferenceHandling.h; sourceTree = "<group>"; };
+		F2BD27E01B2F4AB8001BDE18 /* JYSerializerException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYSerializerException.h; sourceTree = "<group>"; };
+		F2BD27E11B2F4AB8001BDE18 /* JYSerializerException.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYSerializerException.m; sourceTree = "<group>"; };
 		F2D629861AFAA168008A7027 /* JYJsonConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYJsonConverter.h; sourceTree = "<group>"; };
 		F2D629891AFAA2EC008A7027 /* JYJsonSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYJsonSerializer.h; sourceTree = "<group>"; };
 		F2D6298A1AFAA2EC008A7027 /* JYJsonSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYJsonSerializer.m; sourceTree = "<group>"; };
@@ -183,6 +187,7 @@
 		F2105BE71AFA9A8D005EA2E9 /* Jayson */ = {
 			isa = PBXGroup;
 			children = (
+				F2BD27DE1B2F4862001BDE18 /* Enums */,
 				F23E8F2D1B139ABF00C570BE /* Helpers */,
 				A7AF26651AFBD8B300EF7F60 /* Categories */,
 				F23E8F201B0E4B0200C570BE /* Protocols */,
@@ -202,6 +207,8 @@
 				F2BD27D91B29F977001BDE18 /* JYFormatterState.m */,
 				F2BD27DB1B2F3B10001BDE18 /* JYSerializerSettings.h */,
 				F2BD27DC1B2F3B10001BDE18 /* JYSerializerSettings.m */,
+				F2BD27E01B2F4AB8001BDE18 /* JYSerializerException.h */,
+				F2BD27E11B2F4AB8001BDE18 /* JYSerializerException.m */,
 			);
 			path = Jayson;
 			sourceTree = "<group>";
@@ -271,6 +278,14 @@
 				F2597A311B1E2C18004AAFB4 /* JYAllCapsCaseConverter.m */,
 			);
 			path = "Case Converters";
+			sourceTree = "<group>";
+		};
+		F2BD27DE1B2F4862001BDE18 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				F2BD27DF1B2F4895001BDE18 /* JYCircularReferenceHandling.h */,
+			);
+			path = Enums;
 			sourceTree = "<group>";
 		};
 		F2D6298C1AFAA930008A7027 /* Json Converters */ = {
@@ -390,6 +405,7 @@
 				F2EFCCF41AFBF03D007A3205 /* JYDictionaryJsonConverter.m in Sources */,
 				F2D6298B1AFAA2EC008A7027 /* JYJsonSerializer.m in Sources */,
 				F23E8F261B0E4FA900C570BE /* JYPropertyDescriptor.m in Sources */,
+				F2BD27E21B2F4AB8001BDE18 /* JYSerializerException.m in Sources */,
 				F2EFCCFA1B015686007A3205 /* JYDateJsonConverter.m in Sources */,
 				F2597A321B1E2C18004AAFB4 /* JYAllCapsCaseConverter.m in Sources */,
 				F2597A2C1B1E2A79004AAFB4 /* JYSnakeCaseConverter.m in Sources */,

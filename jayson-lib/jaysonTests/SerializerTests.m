@@ -142,4 +142,14 @@
     XCTAssertEqualObjects([JYJayson serializeObject:testClass], @"{\n\t\"test\": \"test\",\n\t\"ref\": null\n}");
 }
 
+- (void)testCircularRefThrows {
+    CircularRefTestClass *testClass = [CircularRefTestClass new];
+    testClass.test = @"test";
+    testClass.ref = testClass;
+    
+    JYJsonSerializer *serializer = [JYJsonSerializer new];
+    serializer.serializerSettings.circularReferenceHandling = JYCircularReferenceThrow;
+    XCTAssertThrows([serializer serializeObject:testClass]);
+}
+
 @end
