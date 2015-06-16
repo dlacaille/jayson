@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A71253581B307F640084FC7C /* JYError.m in Sources */ = {isa = PBXBuildFile; fileRef = A71253571B307F640084FC7C /* JYError.m */; };
 		A7633D871B274F39003963EB /* TestSubObjectClass.m in Sources */ = {isa = PBXBuildFile; fileRef = A7633D861B274F39003963EB /* TestSubObjectClass.m */; };
 		A7798FDC1AFAC5D600E14064 /* JYNumberJsonConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = A7798FDB1AFAC5D600E14064 /* JYNumberJsonConverter.m */; };
 		A7AF26611AFBC65200EF7F60 /* JYDataJsonConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = A7AF26601AFBC65200EF7F60 /* JYDataJsonConverter.m */; };
@@ -67,6 +68,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A71253561B307F640084FC7C /* JYError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JYError.h; path = jayson/JYError.h; sourceTree = SOURCE_ROOT; };
+		A71253571B307F640084FC7C /* JYError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JYError.m; path = jayson/JYError.m; sourceTree = SOURCE_ROOT; };
 		A7633D851B274F38003963EB /* TestSubObjectClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestSubObjectClass.h; path = jaysonTests/TestSubObjectClass.h; sourceTree = SOURCE_ROOT; };
 		A7633D861B274F39003963EB /* TestSubObjectClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TestSubObjectClass.m; path = jaysonTests/TestSubObjectClass.m; sourceTree = SOURCE_ROOT; };
 		A7798FDA1AFAC5D600E14064 /* JYNumberJsonConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JYNumberJsonConverter.h; path = "jayson/Json Converters/JYNumberJsonConverter.h"; sourceTree = SOURCE_ROOT; };
@@ -202,6 +205,8 @@
 				F2BD27D91B29F977001BDE18 /* JYFormatterState.m */,
 				F2BD27DB1B2F3B10001BDE18 /* JYSerializerSettings.h */,
 				F2BD27DC1B2F3B10001BDE18 /* JYSerializerSettings.m */,
+				A71253561B307F640084FC7C /* JYError.h */,
+				A71253571B307F640084FC7C /* JYError.m */,
 			);
 			path = Jayson;
 			sourceTree = "<group>";
@@ -403,6 +408,7 @@
 				F2BD27DD1B2F3B10001BDE18 /* JYSerializerSettings.m in Sources */,
 				A7AF26611AFBC65200EF7F60 /* JYDataJsonConverter.m in Sources */,
 				F2597A291B1E26E3004AAFB4 /* JYPascalCaseConverter.m in Sources */,
+				A71253581B307F640084FC7C /* JYError.m in Sources */,
 				F2EFCD0A1B02A553007A3205 /* JYJsonFormatter.m in Sources */,
 				F2D6298F1AFAAB13008A7027 /* JYStringJsonConverter.m in Sources */,
 				F2EFCCF71AFC1874007A3205 /* JYNullJsonConverter.m in Sources */,

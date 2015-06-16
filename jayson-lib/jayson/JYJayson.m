@@ -51,4 +51,9 @@ static JYJsonSerializer *_serializer;
     return [_serializer deserializeObjectFromData:data withClass:objectClass];
 }
 
++ (NSDictionary *)toDictionary:(NSString *)json {
+    return [_serializer deserializeObject:json withClass:[NSDictionary class]];
+}
+
+
 @end

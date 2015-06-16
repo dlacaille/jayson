@@ -69,6 +69,14 @@
     XCTAssertEqualObjects(nil, [JYJayson deserializeObject:@"null" withClass:[NSData class]]);
 }
 
+- (void)testToDictionary {
+    ComplexTypeTestClass *testClass = [ComplexTypeTestClass new];
+    testClass.test = @1;
+    NSString *testJson = @"{\"test\":1}";
+    NSDictionary *dictionary =  [JYJayson toDictionary:testJson];
+    XCTAssertEqualObjects(@(1), [dictionary objectForKey:@"test"]);
+}
+
 - (void)testObject {
     ComplexTypeTestClass *testClass = [ComplexTypeTestClass new];
     testClass.test = @1;
