@@ -72,4 +72,12 @@
  */
 + (id)deserializeObjectFromData:(NSData *)data withClass:(Class)objectClass;
 
+/**
+ * Return a dictionary from a JSON string.
+ *
+ *@param json JSON string to convert into dictionary.
+ *@return The dictionary from the JSON string.
+ */
++ (NSDictionary *)toDictionary:(NSString *)json;
+
 @end
