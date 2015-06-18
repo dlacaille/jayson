@@ -45,11 +45,26 @@
 - (NSString *)serializeObject:(id)obj;
 
 /**
+ * Serializes an object to JSON.
+ * @param errors Errors while deserializing.
+ * @return A serialized string representing the object.
+ */
+- (NSString *)serializeObject:(id)obj errors:(NSArray **)errors;
+
+/**
  * Writes a serialized object to an existing FormatterState.
  * @param state State of the JsonFormatter
  * @return A serialized string representing the object.
  */
 - (void)serializeObject:(id)obj withState:(JYFormatterState *)state;
+
+/**
+ * Writes a serialized object to an existing FormatterState.
+ * @param state State of the JsonFormatter
+ * @param errors Errors while deserializing.
+ * @return A serialized string representing the object.
+ */
+- (void)serializeObject:(id)obj withState:(JYFormatterState *)state errors:(NSArray **)errors;
 
 /**
  * Deserializes a JSON array into an object.
@@ -59,6 +74,16 @@
  * @return The deserialized object of "objectClass" type.
  */
 - (id)deserializeObjectArray:(NSString *)json withClass:(Class)objectClass;
+
+/**
+ * Deserializes a JSON array into an object.
+ *
+ * @param json JSON string to deserialize.
+ * @param objectClass Class of the object to return.
+ * @param errors Errors while deserializing.
+ * @return The deserialized object of "objectClass" type.
+ */
+- (id)deserializeObjectArray:(NSString *)json withClass:(Class)objectClass errors:(NSArray **)errors;
 
 /**
  * Deserializes a JSON string into an object.
@@ -73,9 +98,28 @@
  * Deserializes a JSON string into an object.
  *
  * @param json JSON string to deserialize.
+ * @param objectClass Class of the object to return.
+ * @param errors Errors while deserializing.
+ * @return The deserialized object of "objectClass" type.
+ */
+- (id)deserializeObject:(NSString *)json withClass:(Class)objectClass errors:(NSArray **)errors;
+
+/**
+ * Deserializes a JSON string into an object.
+ *
+ * @param json JSON string to deserialize.
  * @return The deserialized object of "objectClass" type.
  */
 - (id)deserializeObject:(NSString *)json;
+
+/**
+ * Deserializes a JSON string into an object.
+ *
+ * @param json JSON string to deserialize.
+ * @param errors Errors while deserializing.
+ * @return The deserialized object of "objectClass" type.
+ */
+- (id)deserializeObject:(NSString *)json errors:(NSArray **)errors;
 
 /**
  * Deserializes Data into an object. The data must be a UTF8 encoded string.
@@ -89,9 +133,47 @@
  * Deserializes Data into an object. The data must be a UTF8 encoded string.
  *
  * @param data Data to deserialize.
+ * @param errors Errors while deserializing.
+ * @return The deserialized object of "objectClass" type.
+ */
+- (id)deserializeObjectFromData:(NSData *)data errors:(NSArray **)errors;
+
+/**
+ * Deserializes Data into an object. The data must be a UTF8 encoded string.
+ *
+ * @param data Data to deserialize.
  * @param objectClass Class of the object to return.
  * @return The deserialized object of "objectClass" type.
  */
 - (id)deserializeObjectFromData:(NSData *)data withClass:(Class)objectClass;
+
+/**
+ * Deserializes Data into an object. The data must be a UTF8 encoded string.
+ *
+ * @param data Data to deserialize.
+ * @param objectClass Class of the object to return.
+ * @param errors Errors while deserializing.
+ * @return The deserialized object of "objectClass" type.
+ */
+- (id)deserializeObjectFromData:(NSData *)data withClass:(Class)objectClass errors:(NSArray **)errors;
+
+/**
+ * Deserializes Data into an array of objects. The data must be a UTF8 encoded string.
+ *
+ * @param data Data to deserialize.
+ * @param objectClass Class of the object in the array to return.
+ * @return The deserialized object of "objectClass" type.
+ */
+- (id)deserializeObjectArrayFromData:(NSData *)data withClass:(Class)objectClass;
+
+/**
+ * Deserializes Data into an array of objects. The data must be a UTF8 encoded string.
+ *
+ * @param data Data to deserialize.
+ * @param objectClass Class of the object in the array to return.
+ * @param errors Errors while deserializing.
+ * @return The deserialized object of "objectClass" type.
+ */
+- (id)deserializeObjectArrayFromData:(NSData *)data withClass:(Class)objectClass errors:(NSArray **)errors;
 
 @end

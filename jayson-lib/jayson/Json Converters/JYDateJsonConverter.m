@@ -18,16 +18,16 @@
     return nil;
 }
 
-- (id)serialize:(id)obj {
+- (id)serialize:(id)obj errors:(NSArray **)errors {
     NSDate *date = (NSDate *)obj;
     return [[self dateFormatter] stringFromDate:date];
 }
 
-- (id)deserialize:(NSString *)string {
-    return [self deserialize:string withClass:[NSDate class]];
+- (id)deserialize:(NSString *)string errors:(NSArray **)errors {
+    return [self deserialize:string withClass:[NSDate class] errors:errors];
 }
 
-- (id)deserialize:(NSString *)string withClass:(Class)objectClass {
+- (id)deserialize:(NSString *)string withClass:(Class)objectClass errors:(NSArray **)errors {
     if ([string isEqual:@"null"])
         return nil;
     NSString *deserialized = [self.jsonSerializer deserializeObject:string withClass:[NSString class]];
@@ -42,11 +42,11 @@
     return dateFormatter;
 }
 
-- (BOOL)canConvert:(Class)objectClass {
+- (BOOL)canConvert:(Class)objectClass errors:(NSArray **)errors {
     return [objectClass isSubclassOfClass:[NSDate class]];
 }
 
-- (BOOL)canConvertJson:(NSString *)string {
+- (BOOL)canConvertJson:(NSString *)string errors:(NSArray **)errors {
     // This converter should not be used for deserializing when the Class is unknown.
     return false;
 }

@@ -22,7 +22,7 @@
  * @param obj Object to convert.
  * @return String representation of the object.
  */
-- (id)serialize:(id)obj;
+- (id)serialize:(id)obj errors:(NSArray **)errors;
 
 /**
  * Converts a string back to an object with no specific class.
@@ -30,7 +30,7 @@
  * @param string String to parse.
  * @return Parsed object.
  */
-- (id)deserialize:(NSString *)string;
+- (id)deserialize:(NSString *)string errors:(NSArray **)errors;
 
 /**
  * Converts a string back to an object.
@@ -39,7 +39,7 @@
  * @param Class to return.
  * @return Parsed object.
  */
-- (id)deserialize:(NSString *)string withClass:(Class)objectClass;
+- (id)deserialize:(NSString *)string withClass:(Class)objectClass errors:(NSArray **)errors;
 
 /**
  * Converts a string back to an array of objects.
@@ -48,7 +48,7 @@
  * @param Class of the objects in the array.
  * @return Parsed object.
  */
-- (id)deserializeArray:(NSString *)string withClass:(Class)objectClass;
+- (id)deserializeArray:(NSString *)string withClass:(Class)objectClass errors:(NSArray **)errors;
 
 /**
  * Method to override which verifies if the class can be converted from and to a string.
@@ -56,7 +56,7 @@
  * @param objectClass Class to verify.
  * @return True if the class can be converted.
  */
-- (BOOL)canConvert:(Class)objectClass;
+- (BOOL)canConvert:(Class)objectClass errors:(NSArray **)errors;
 
 /**
  * Method to override which verifies if the string can be converted to a class.
@@ -64,6 +64,6 @@
  * @param json Json to verify.
  * @return True if the class can be converted.
  */
-- (BOOL)canConvertJson:(NSString *)string;
+- (BOOL)canConvertJson:(NSString *)string errors:(NSArray **)errors;
 
 @end

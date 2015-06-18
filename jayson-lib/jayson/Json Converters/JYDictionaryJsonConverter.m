@@ -18,20 +18,20 @@
     return nil;
 }
 
-- (id)serialize:(id)obj {
+- (id)serialize:(id)obj errors:(NSArray **)errors {
     return obj;
 }
 
-- (id)deserialize:(NSString *)string {
-    return [self deserialize:string withClass:[NSDictionary class]];
+- (id)deserialize:(NSString *)string errors:(NSArray **)errors {
+    return [self deserialize:string withClass:[NSDictionary class] errors:errors];
 }
 
-- (id)deserialize:(NSString *)string withClass:(Class)objectClass {
+- (id)deserialize:(NSString *)string withClass:(Class)objectClass errors:(NSArray **)errors {
     if ([string isEqual:@"null"])
         return nil;
     // These characters are whitespaces that we should ignore.
     char const IgnoredChars[] = {' ', '\r', '\n', '\t'};
-    if (![self canConvertJson:string])
+    if (![self canConvertJson:string errors:errors])
         [NSException raise:@"Json Converter Error" format:@"Value '%@' is invalid for dictionary", string];
     BOOL escaped = NO;
     BOOL isKey = YES; // True if we are currently parsing the key.
@@ -103,11 +103,11 @@
     return dict;
 }
 
-- (BOOL)canConvert:(Class)objectClass {
+- (BOOL)canConvert:(Class)objectClass errors:(NSArray **)errors {
     return [objectClass isSubclassOfClass:[NSDictionary class]];
 }
 
-- (BOOL)canConvertJson:(NSString *)string {
+- (BOOL)canConvertJson:(NSString *)string errors:(NSArray **)errors {
     return [string hasPrefix:@"{"] && [string hasSuffix:@"}"];
 }
 

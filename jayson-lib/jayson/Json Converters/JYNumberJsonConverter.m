@@ -20,15 +20,15 @@ NSString *const regex = @"^-?(0|[1-9]\\d*)(\\.\\d+)?([eE][+-]?\\d+)?$";
     return nil;
 }
 
-- (id)serialize:(id)obj {
+- (id)serialize:(id)obj errors:(NSArray **)errors {
     return obj;
 }
 
-- (id)deserialize:(NSString *)string {
-    return [self deserialize:string withClass:[NSNumber class]];
+- (id)deserialize:(NSString *)string errors:(NSArray **)errors {
+    return [self deserialize:string withClass:[NSNumber class] errors:errors];
 }
 
-- (id)deserialize:(NSString *)string withClass:(Class)objectClass {
+- (id)deserialize:(NSString *)string withClass:(Class)objectClass errors:(NSArray **)errors {
     if ([string isEqual:@"null"])
         return nil;
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
@@ -36,11 +36,11 @@ NSString *const regex = @"^-?(0|[1-9]\\d*)(\\.\\d+)?([eE][+-]?\\d+)?$";
     return [formatter numberFromString:string];
 }
 
-- (BOOL)canConvert:(Class)objectClass {
+- (BOOL)canConvert:(Class)objectClass errors:(NSArray **)errors {
     return [objectClass isSubclassOfClass:[NSNumber class]];
 }
 
-- (BOOL)canConvertJson:(NSString *)string {
+- (BOOL)canConvertJson:(NSString *)string errors:(NSArray **)errors {
     NSPredicate *match = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
     return [match evaluateWithObject:string];
 }

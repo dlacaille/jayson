@@ -8,7 +8,7 @@
 
 #import "JYStringJsonConverter.h"
 #import "JYUtf8Helper.h"
-#import "JYSerializerException.h"
+#import "JYError.h"
 
 @implementation JYStringJsonConverter
 
@@ -20,28 +20,34 @@
     return nil;
 }
 
-- (id)serialize:(id)obj {
+- (id)serialize:(id)obj errors:(NSArray **)errors {
     return obj;
 }
 
-- (id)deserialize:(NSString *)string {
-    return [self deserialize:string withClass:[NSString class]];
+- (id)deserialize:(NSString *)string errors:(NSArray **)errors {
+    return [self deserialize:string withClass:[NSString class] errors:errors];
 }
 
-- (id)deserialize:(NSString *)string withClass:(Class)objectClass {
-    if ([string isEqual:@"null"])
+- (id)deserialize:(NSString *)string withClass:(Class)objectClass errors:(NSArray **)errors {
+    if ([string isEqualToString:@"null"])
         return nil;
-    if (![self canConvertJson:string])
-        [JYSerializerException raise:@"Json Converter Error" format:@"Value '%@' is invalid for string", string];
+    if (![self canConvertJson:string errors:errors])
+        [JYError raiseError:JYErrorInvalidFormat withMessage:[NSString stringWithFormat:@"Value '%@' is invalid for string", string] inArray:errors];
+    if ([string isEqualToString:@""])
+        return @"";
     NSString *trimmed = [string substringWithRange:NSMakeRange(1, [string length] - 2)];
     return [JYUtf8Helper stringByReplacingUTF8Escapes:trimmed];
 }
 
-- (BOOL)canConvert:(Class)objectClass {
+- (id)deserializeArray:(NSString *)string withClass:(Class)objectClass errors:(NSArray *__autoreleasing *)errors {
+    return nil;
+}
+
+- (BOOL)canConvert:(Class)objectClass errors:(NSArray **)errors {
     return [objectClass isSubclassOfClass:[NSString class]];
 }
 
-- (BOOL)canConvertJson:(NSString *)string {
+- (BOOL)canConvertJson:(NSString *)string errors:(NSArray **)errors {
     return [string length] > 1 && [string hasPrefix:@"\""] && [string hasSuffix:@"\""];
 }
 

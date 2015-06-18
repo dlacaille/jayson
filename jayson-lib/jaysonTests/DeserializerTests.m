@@ -15,6 +15,7 @@
 #import "TypedArrayTestClass.h"
 #import "IgnoreTestClass.h"
 #import "TestSubObjectClass.h"
+#import "JYError.h"
 
 @interface DeserializerTests : XCTestCase
 
@@ -28,13 +29,20 @@
 
 - (void)testString {
     XCTAssertEqualObjects(@"", [JYJayson deserializeObject:@"\"\"" withClass:[NSString class]]);
-    XCTAssertThrows([JYJayson deserializeObject:@"\"" withClass:[NSString class]]);
-    XCTAssertThrows([JYJayson deserializeObject:@"test" withClass:[NSString class]]);
-    XCTAssertThrows([JYJayson deserializeObject:@"\"test" withClass:[NSString class]]);
     XCTAssertEqualObjects(@"test", [JYJayson deserializeObject:@"\"test\"" withClass:[NSString class]]);
     XCTAssertEqualObjects(@"\r\n", [JYJayson deserializeObject:@"\"\\r\\n\"" withClass:[NSString class]]);
     XCTAssertEqualObjects(@"\r\n\f\b\t\u5404", [JYJayson deserializeObject:@"\"\\r\\n\\f\\b\\t\\u5404\"" withClass:[NSString class]]);
     XCTAssertEqualObjects(nil, [JYJayson deserializeObject:@"null" withClass:[NSString class]]);
+    // Test errors
+    NSArray *errors = nil;
+    [JYJayson deserializeObject:@"\"" withClass:[NSString class] errors:&errors];
+    XCTAssertEqual(errors.count, 1);
+    errors = nil;
+    [JYJayson deserializeObject:@"" withClass:[NSString class] errors:&errors];
+    XCTAssertEqual(errors.count, 1);
+    errors = nil;
+    [JYJayson deserializeObject:@"test" withClass:[NSString class] errors:&errors];
+    XCTAssertEqual(errors.count, 1);
 }
 
 - (void)testNumber {

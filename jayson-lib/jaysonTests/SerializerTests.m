@@ -149,7 +149,9 @@
     
     JYJsonSerializer *serializer = [JYJsonSerializer new];
     serializer.serializerSettings.circularReferenceHandling = JYCircularReferenceThrow;
-    XCTAssertThrows([serializer serializeObject:testClass]);
+    NSArray *errors = nil;
+    [serializer serializeObject:testClass errors:&errors];
+    XCTAssertEqual([errors count], 1);
 }
 
 @end

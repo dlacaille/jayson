@@ -30,6 +30,6 @@
 /**
  * Writes an object to the state.
  */
-- (void)writeObject:(id)obj withState:(JYFormatterState *)state;
+- (void)writeObject:(id)obj withState:(JYFormatterState *)state errors:(NSArray **)errors;
 
 @end

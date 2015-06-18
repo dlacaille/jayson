@@ -70,11 +70,11 @@
     [self write:@"]" withState:state];
 }
 
-- (void)writeProperty:(NSString *)key withValue:(id)value withState:(JYFormatterState *)state {
-    [self writeObject:key withState:state];
+- (void)writeProperty:(NSString *)key withValue:(id)value withState:(JYFormatterState *)state errors:(NSArray **)errors {
+    [self writeObject:key withState:state errors:errors];
     [self write:@":" withState:state];
     [self writeSpace:state];
-    [self.jsonSerializer serializeObject:value withState:state];
+    [self.jsonSerializer serializeObject:value withState:state errors:errors];
 }
 
 - (void)write:(NSString *)str withState:(JYFormatterState *)state {
@@ -96,7 +96,7 @@
         [self write:@"," withState:state];
 }
 
-- (void)writeObject:(id)obj withState:(JYFormatterState *)state {
+- (void)writeObject:(id)obj withState:(JYFormatterState *)state errors:(NSArray **)errors {
     if ([[obj class] isSubclassOfClass:[NSString class]])
         [self write:[NSString stringWithFormat:@"\"%@\"", obj] withState:state];
     else if ([[obj class] isSubclassOfClass:[NSNumber class]])
@@ -104,14 +104,14 @@
     else if (obj == nil || [[obj class] isSubclassOfClass:[NSNull class]])
         [self write:@"null" withState:state];
     else if ([[obj class] isSubclassOfClass:[NSArray class]])
-        [self writeArray:obj withState:state];
+        [self writeArray:obj withState:state errors:(NSArray **)errors];
     else if ([[obj class] isSubclassOfClass:[NSDictionary class]])
-        [self writeDictionary:obj withState:state];
+        [self writeDictionary:obj withState:state errors:errors];
     else
-        [self writeProperties:obj withState:state];
+        [self writeProperties:obj withState:state errors:errors];
 }
 
-- (void)writeProperties:(NSObject *)obj withState:(JYFormatterState *)state {
+- (void)writeProperties:(NSObject *)obj withState:(JYFormatterState *)state errors:(NSArray **)errors {
     [self beginObjectWithState:state];
     JYClassDescriptor *classDesc = [[JYClassDescriptor alloc] initWithClass:[obj class]];
     for (JYPropertyDescriptor *prop in classDesc.propertyDescriptors)
@@ -125,12 +125,12 @@
         [self writeIndentsWithState:state];
         [self incrementItemCountWithState:state];
         NSString *propName = [self.caseConverter convert:prop.name];
-        [self writeProperty:propName withValue:value withState:state];
+        [self writeProperty:propName withValue:value withState:state errors:errors];
     }
     [self endObjectWithState:state];
 }
 
-- (void)writeArray:(NSArray *)array withState:(JYFormatterState *)state {
+- (void)writeArray:(NSArray *)array withState:(JYFormatterState *)state errors:(NSArray **)errors {
     [self beginArrayWithState:state];
     for (int i = 0; i < [array count]; i++)
     {
@@ -138,12 +138,12 @@
         [self writeIndentsWithState:state];
         [self incrementItemCountWithState:state];
         id value = [array objectAtIndex:i];
-        [self.jsonSerializer serializeObject:value withState:state];
+        [self.jsonSerializer serializeObject:value withState:state errors:errors];
     }
     [self endArrayWithState:state];
 }
 
-- (void)writeDictionary:(NSDictionary *)dict withState:(JYFormatterState *)state {
+- (void)writeDictionary:(NSDictionary *)dict withState:(JYFormatterState *)state errors:(NSArray **)errors {
     [self beginObjectWithState:state];
     for (int i = 0; i < [dict count]; i++)
     {
@@ -152,7 +152,7 @@
         [self incrementItemCountWithState:state];
         NSString *key = [[dict allKeys] objectAtIndex:i];
         id value = [[dict allValues] objectAtIndex:i];
-        [self writeProperty:key withValue:value withState:state];
+        [self writeProperty:key withValue:value withState:state errors:errors];
     }
     [self endObjectWithState:state];
 }

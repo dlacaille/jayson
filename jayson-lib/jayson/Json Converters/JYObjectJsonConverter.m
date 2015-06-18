@@ -20,16 +20,16 @@
     return nil;
 }
 
-- (id)serialize:(id)obj {
+- (id)serialize:(id)obj errors:(NSArray **)errors {
     return obj;
 }
 
-- (id)deserialize:(NSString *)string {
+- (id)deserialize:(NSString *)string errors:(NSArray **)errors {
     // This converter should not be used for deserializing when the Class is unknown.
     return nil;
 }
 
-- (id)deserialize:(NSString *)string withClass:(Class)objectClass {
+- (id)deserialize:(NSString *)string withClass:(Class)objectClass errors:(NSArray **)errors {
     if ([string isEqual:@"null"])
         return nil;
     // These characters are whitespaces that we should ignore.
@@ -124,11 +124,11 @@
     }
 }
 
-- (BOOL)canConvert:(Class)objectClass {
+- (BOOL)canConvert:(Class)objectClass errors:(NSArray **)errors {
     return [objectClass isSubclassOfClass:[NSObject class]];
 }
 
-- (BOOL)canConvertJson:(NSString *)string {
+- (BOOL)canConvertJson:(NSString *)string errors:(NSArray **)errors {
     // This converter should not be used for deserializing when the Class is unknown.
     return false;
 }

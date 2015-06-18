@@ -18,7 +18,7 @@
 #import "JYDictionaryJsonConverter.h"
 #import "JYObjectJsonConverter.h"
 #import "JYCamelCaseConverter.h"
-#import "JYSerializerException.h"
+#import "JYError.h"
 
 @interface JYJsonSerializer()
 
@@ -61,39 +61,48 @@
 }
 
 - (NSString *)serializeObject:(id)obj {
+    NSArray *errors = nil;
+    return [self serializeObject:obj errors:&errors];
+}
+
+- (NSString *)serializeObject:(id)obj errors:(NSArray **)errors {
     JYFormatterState *state = [JYFormatterState new];
-    [self serializeObject:obj withState:state];
+    [self serializeObject:obj withState:state errors:errors];
     return state.string;
 }
 
 - (void)serializeObject:(id)obj withState:(JYFormatterState *)state {
+    NSArray *errors = nil;
+    return [self serializeObject:obj withState:state errors:&errors];
+}
+
+- (void)serializeObject:(id)obj withState:(JYFormatterState *)state errors:(NSArray **)errors {
     for (NSObject<JYJsonConverter> *jsonConverter in self.jsonConverters)
     {
-        if ([jsonConverter canConvert:[obj class]])
+        if ([jsonConverter canConvert:[obj class] errors:errors])
         {
             if ([self hasAncestor:obj]) {
                 switch (self.serializerSettings.circularReferenceHandling)
                 {
-                    case JYCircularReferenceIgnore:
-                        [self.jsonFormatter writeObject:nil withState:state];
-                        return;
                     case JYCircularReferenceThrow:
-                        [JYSerializerException raise:@"Json Serializer Exception" format:@"Serializer settings do not allow circular references."];
-                        break;
+                        [JYError raiseError:JYErrorCircularReference withMessage:@"Serializer settings do not allow circular references." inArray:errors];
+                    case JYCircularReferenceIgnore:
+                        [self.jsonFormatter writeObject:nil withState:state errors:errors];
+                        return;
                     default:
                         break;
                 }
             }
             // Do not serialize an object that is his own ancestor.
             if (obj == nil) {
-                [self.jsonFormatter writeObject:nil withState:state];
+                [self.jsonFormatter writeObject:nil withState:state errors:errors];
                 return;
             }
             // Add the object to history for circular reference checking.
             [self.history addObject:obj];
             // Serialize the object.
-            id serialized = [jsonConverter serialize:obj];
-            [self.jsonFormatter writeObject:serialized withState:state];
+            id serialized = [jsonConverter serialize:obj errors:errors];
+            [self.jsonFormatter writeObject:serialized withState:state errors:errors];
             // Remove the object from history as it has been serialized.
             [self.history removeObject:obj];
             return;
@@ -113,45 +122,80 @@
 }
 
 - (id)deserializeObjectArray:(NSString *)json withClass:(Class)objectClass {
+    NSArray *errors = nil;
+    return [self deserializeObjectArray:json withClass:objectClass errors:&errors];
+}
+
+- (id)deserializeObjectArray:(NSString *)json withClass:(Class)objectClass errors:(NSArray **)errors {
     NSString *trimmed = [self trim:json];
     for (NSObject<JYJsonConverter> *jsonConverter in self.jsonConverters)
     {
-        if ([jsonConverter canConvert:[NSArray class]])
-            return [jsonConverter deserializeArray:trimmed withClass:objectClass];
+        if ([jsonConverter canConvert:[NSArray class] errors:errors])
+            return [jsonConverter deserializeArray:trimmed withClass:objectClass errors:errors];
     }
     return nil;
 }
 
 - (id)deserializeObject:(NSString *)json withClass:(Class)objectClass {
+    NSArray *errors = nil;
+    return [self deserializeObject:json withClass:objectClass errors:&errors];
+}
+
+- (id)deserializeObject:(NSString *)json withClass:(Class)objectClass errors:(NSArray **)errors {
     if (objectClass == nil)
-        return [self deserializeObject:json];
+        return [self deserializeObject:json errors:errors];
     NSString *trimmed = [self trim:json];
     for (NSObject<JYJsonConverter> *jsonConverter in self.jsonConverters)
     {
-        if ([jsonConverter canConvert:objectClass])
-            return [jsonConverter deserialize:trimmed withClass:objectClass];
+        if ([jsonConverter canConvert:objectClass errors:errors])
+            return [jsonConverter deserialize:trimmed withClass:objectClass errors:errors];
     }
     return nil;
 }
 
 - (id)deserializeObject:(NSString *)json {
+    NSArray *errors = nil;
+    return [self deserializeObject:json errors:&errors];
+}
+
+- (id)deserializeObject:(NSString *)json errors:(NSArray **)errors {
     NSString *trimmed = [self trim:json];
     for (NSObject<JYJsonConverter> *jsonConverter in self.jsonConverters)
     {
-        if ([jsonConverter canConvertJson:trimmed])
-            return [jsonConverter deserialize:trimmed];
+        if ([jsonConverter canConvertJson:trimmed errors:errors])
+            return [jsonConverter deserialize:trimmed errors:errors];
     }
     return nil;
 }
 
 - (id)deserializeObjectFromData:(NSData *)data {
+    NSArray *errors = nil;
+    return [self deserializeObjectFromData:data errors:&errors];
+}
+
+- (id)deserializeObjectFromData:(NSData *)data errors:(NSArray **)errors {
     NSString *json = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    return [self deserializeObject:json];
+    return [self deserializeObject:json errors:errors];
 }
 
 - (id)deserializeObjectFromData:(NSData *)data withClass:(Class)objectClass {
+    NSArray *errors = nil;
+    return [self deserializeObjectFromData:data withClass:objectClass errors:&errors];
+}
+
+- (id)deserializeObjectFromData:(NSData *)data withClass:(Class)objectClass errors:(NSArray **)errors {
     NSString *json = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    return [self deserializeObject:json withClass:objectClass];
+    return [self deserializeObject:json withClass:objectClass errors:errors];
+}
+
+- (id)deserializeObjectArrayFromData:(NSData *)data withClass:(Class)objectClass {
+    NSArray *errors = nil;
+    return [self deserializeObjectArrayFromData:data withClass:objectClass errors:&errors];
+}
+
+- (id)deserializeObjectArrayFromData:(NSData *)data withClass:(Class)objectClass errors:(NSArray **)errors {
+    NSString *json = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    return [self deserializeObjectArray:json withClass:objectClass errors:errors];
 }
 
 @end
