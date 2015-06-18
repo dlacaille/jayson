@@ -36,6 +36,10 @@ NSString *const regex = @"^-?(0|[1-9]\\d*)(\\.\\d+)?([eE][+-]?\\d+)?$";
     return [formatter numberFromString:string];
 }
 
+- (id)deserializeArray:(NSString *)string withClass:(Class)objectClass errors:(NSArray **)errors {
+    return nil;
+}
+
 - (BOOL)canConvert:(Class)objectClass errors:(NSArray **)errors {
     return [objectClass isSubclassOfClass:[NSNumber class]];
 }

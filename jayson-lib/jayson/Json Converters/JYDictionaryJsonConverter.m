@@ -103,6 +103,10 @@
     return dict;
 }
 
+- (id)deserializeArray:(NSString *)string withClass:(Class)objectClass errors:(NSArray **)errors {
+    return nil;
+}
+
 - (BOOL)canConvert:(Class)objectClass errors:(NSArray **)errors {
     return [objectClass isSubclassOfClass:[NSDictionary class]];
 }

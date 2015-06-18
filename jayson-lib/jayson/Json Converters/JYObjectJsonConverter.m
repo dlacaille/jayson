@@ -99,6 +99,10 @@
     return result;
 }
 
+- (id)deserializeArray:(NSString *)string withClass:(Class)objectClass errors:(NSArray **)errors {
+    return nil;
+}
+
 - (void)setObjectProperty:(id)object withProperty:(NSString *)propertyName value:(NSString *)json {
     NSString *convertedPropName = [self.jsonSerializer.caseConverter convert:propertyName];
     JYClassDescriptor *classDesc = [[JYClassDescriptor alloc] initWithClass:[object class]];
