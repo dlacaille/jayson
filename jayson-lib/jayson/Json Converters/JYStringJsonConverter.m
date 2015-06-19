@@ -32,7 +32,7 @@
     if ([string isEqualToString:@"null"])
         return nil;
     if (![self canConvertJson:string errors:errors])
-        [JYError raiseError:JYErrorInvalidFormat withMessage:[NSString stringWithFormat:@"Value '%@' is invalid for string", string] inArray:errors];
+        [JYError errors:errors raiseError:JYErrorInvalidFormat withFormat:@"Value '%@' is invalid for string", string];
     if ([string isEqualToString:@""])
         return @"";
     NSString *trimmed = [string substringWithRange:NSMakeRange(1, [string length] - 2)];

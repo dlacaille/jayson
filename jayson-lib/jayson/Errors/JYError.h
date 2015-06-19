@@ -21,8 +21,10 @@ enum JYErrorType {
 @property (strong, nonatomic) NSString *message;
 
 - (instancetype)initWithType:(enum JYErrorType)errorType withMessage:(NSString *)message;
+- (instancetype)initWithType:(enum JYErrorType)errorType withFormat:(NSString *)message, ... NS_FORMAT_FUNCTION(2,3);
 
-+ (void)raiseError:(JYError *)error inArray:(NSArray **)errors;
-+ (void)raiseError:(enum JYErrorType)type withMessage:(NSString *)message inArray:(NSArray **)errors;
++ (void)errors:(NSArray **)errors raiseError:(JYError *)error;
++ (void)errors:(NSArray **)errors raiseError:(enum JYErrorType)type withMessage:(NSString *)message;
++ (void)errors:(NSArray **)errors raiseError:(enum JYErrorType)type withFormat:(NSString *)format, ... NS_FORMAT_FUNCTION(3,4);
 
 @end

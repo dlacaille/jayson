@@ -7,6 +7,7 @@
 //
 
 #import "JYDictionaryJsonConverter.h"
+#import "JYError.h"
 
 @implementation JYDictionaryJsonConverter
 
@@ -54,16 +55,6 @@
         // If we find { or } and we are not in a string, update array counter.
         if (!inString && (c == '{' || c == '}'))
             objCounter += c == '{' ? 1 : -1;
-        // If we find : and we are not in a string, save the key.
-        if (!inString && isKey && c == ':')
-        {
-            // We are not parsing the key anymore.
-            isKey = NO;
-            // Deserialize string key.
-            key = [self.jsonSerializer deserializeObject:[NSString stringWithString:builder] withClass:[NSString class]];
-            builder = [NSMutableString new];
-            continue;
-        }
         // Reset escaped state.
         if (escaped)
             escaped = NO;
@@ -79,6 +70,20 @@
                     ignored = YES;
             if (ignored)
                 continue;
+        }
+        // If we find : and we are not in a string, save the key.
+        if (!inString && isKey)
+        {
+            if (c == ':') {
+                // We are not parsing the key anymore.
+                isKey = NO;
+                // Deserialize string key.
+                key = [self.jsonSerializer deserializeObject:[NSString stringWithString:builder] withClass:[NSString class]];
+                builder = [NSMutableString new];
+                continue;
+            } else if (c != '"') {
+                [JYError errors:errors raiseError:JYErrorInvalidFormat withFormat:@"Character '%c' was not expected", c];
+            }
         }
         // If we are not in a string, an array or a dictionary, not parsing the key and we find a comma we deserialize the string and add it as value.
         if (!inString && !isKey && arrayCounter == 0 && objCounter == 0 && c == ',')

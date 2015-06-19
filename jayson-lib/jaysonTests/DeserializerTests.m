@@ -67,6 +67,10 @@
                           [JYJayson deserializeObject:@"{\"test2\":{\"test2\":\"test\",\"test\":1},\"test\":1}" withClass:[NSDictionary class]]);
     XCTAssertEqualObjects(nil, [JYJayson deserializeObject:@"null" withClass:[NSDictionary class]]);
     XCTAssertEqualObjects([NSDictionary new], [JYJayson deserializeObject:@"{}" withClass:[NSDictionary class]]);
+    // Test errors.
+    NSArray *errors = nil;
+    [JYJayson deserializeObject:@"{\"test2\"a\"test\"}" withClass:[NSDictionary class] errors:&errors];
+    XCTAssertEqual(errors.count, 1);
 }
 
 - (void)testData {
