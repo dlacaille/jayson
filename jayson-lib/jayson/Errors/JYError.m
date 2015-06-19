@@ -34,8 +34,6 @@
 + (void)errors:(NSArray **)errors raiseError:(JYError *)error {
     if (*errors == nil)
         *errors = [NSMutableArray new];
-    else if (![*errors isKindOfClass:[NSMutableArray class]])
-        *errors = [[NSMutableArray alloc] initWithArray:*errors];
     NSMutableArray *mutableErrors = (NSMutableArray *)*errors;
     [mutableErrors addObject:error];
 }
