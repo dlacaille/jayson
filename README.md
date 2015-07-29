@@ -26,7 +26,7 @@ NSString *serialized = [JYJayson serializeObject:book];
 You can also deserialize a json string using [JYJayson deserializeObject:withClass:]
 
 ```objc
-NSString *json = @"{\"title\":\"The Hitchthiker's Guide to the Galaxy\",\
+NSString *json = @"{\"title\":\"The Hitchhiker's Guide to the Galaxy\",\
                   \"publishedDate\":\"1979-10-12T00:00:00Z\",\
                   \"genres\":[\"Comedy\",\"Science-Fiction\"]}";
 
