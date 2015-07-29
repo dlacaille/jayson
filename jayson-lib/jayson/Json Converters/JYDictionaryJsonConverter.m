@@ -47,7 +47,7 @@
         // TODO: parse strings with \n
         char c = [string characterAtIndex:i];
         // If we find an unescaped " we reverse inString. We should not escape " if we are not in a string.
-        if ((!inString || !escaped) && c == '\"')
+        if ((!inString || !escaped) && c == '"')
             inString = !inString;
         // If we find [ or ] and we are not in a string, update array counter.
         if (!inString && (c == '[' || c == ']'))
@@ -82,13 +82,16 @@
                 builder = [NSMutableString new];
                 continue;
             } else if (c != '"') {
-                [JYError errors:errors raiseError:JYErrorInvalidFormat withFormat:@"Character '%c' was not expected", c];
+                [JYError errors:errors raiseError:JYErrorInvalidFormat withFormat:@"Character '%c' at index '%d' was not expected", c, i];
             }
         }
         // If we are not in a string, an array or a dictionary, not parsing the key and we find a comma we deserialize the string and add it as value.
         if (!inString && !isKey && arrayCounter == 0 && objCounter == 0 && c == ',')
         {
-            NSString *value = [self.jsonSerializer deserializeObject:[NSString stringWithString:builder]];
+            NSString *string = [NSString stringWithString:builder];
+            if ([string length] == 0)
+                [JYError errors:errors raiseError:JYErrorInvalidFormat withFormat:@"Character '%c' at index '%d' was not expected", c, i];
+            NSString *value = [self.jsonSerializer deserializeObject:string];
             [dict setObject:value forKey:key];
             builder = [NSMutableString new];
             isKey = YES;
