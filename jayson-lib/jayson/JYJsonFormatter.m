@@ -11,6 +11,7 @@
 #import "JYClassDescriptor.h"
 #import "JYPropertyDescriptor.h"
 #import "JYCamelCaseConverter.h"
+#import "JYJsonMappable.h"
 
 @interface JYJsonFormatter()
 
@@ -111,9 +112,12 @@
         [self writeProperties:obj withState:state errors:errors];
 }
 
-- (void)writeProperties:(NSObject *)obj withState:(JYFormatterState *)state errors:(NSArray **)errors {
+- (void)writeProperties:(id)obj withState:(JYFormatterState *)state errors:(NSArray **)errors {
     [self beginObjectWithState:state];
     JYClassDescriptor *classDesc = [[JYClassDescriptor alloc] initWithClass:[obj class]];
+    NSDictionary *propertyMap = nil;
+    if ([obj respondsToSelector:@selector(jsonPropertyMap)])
+        propertyMap = [obj jsonPropertyMap];
     for (JYPropertyDescriptor *prop in classDesc.propertyDescriptors)
     {
         if ([prop.protocolNames containsObject:@"JYIgnore"])
@@ -124,7 +128,8 @@
         [self writeCommaIfNeededWithState:state];
         [self writeIndentsWithState:state];
         [self incrementItemCountWithState:state];
-        NSString *propName = [self.caseConverter convert:prop.name];
+        // Uses mapped property name or converted property name if it is not mapped.
+        NSString *propName = [propertyMap objectForKey:prop.name] ?: [self.caseConverter convert:prop.name];
         [self writeProperty:propName withValue:value withState:state errors:errors];
     }
     [self endObjectWithState:state];

@@ -9,8 +9,12 @@
 #import "JYObjectJsonConverter.h"
 #import "JYClassDescriptor.h"
 #import "JYPropertyDescriptor.h"
+#import "JYJsonMappable.h"
 
 @implementation JYObjectJsonConverter
+{
+    NSMutableDictionary *propertyMap;
+}
 
 - (instancetype)initWithSerializer:(JYJsonSerializer *)serializer {
     if (self = [super init]) {
@@ -40,6 +44,14 @@
     int arrayCounter = 0; // Deals with nested arrays.
     int objCounter = 0; // Deals with nested objects.
     id result = [[objectClass alloc] init];
+    // Defines the property map to map json property names.
+    if ([result respondsToSelector:@selector(jsonPropertyMap)]) {
+        // Reverse property map. value -> key
+        propertyMap = [NSMutableDictionary new];
+        NSDictionary *propMap = [result jsonPropertyMap];
+        for (NSString *key in [propMap allKeys])
+            propertyMap[propMap[key]] = key;
+    }
     NSString *key = [NSMutableString new];
     NSMutableString *builder = [NSMutableString new];
     for (int i=1; i<[string length] - 1; i++)
@@ -95,6 +107,8 @@
     }
     // In the end we are left with a string and no comma. We should add the deserialized string to the array.
     [self setObjectProperty:result withProperty:key value:[NSString stringWithString:builder]];
+    // Clear property map.
+    propertyMap = nil;
     // Return the completed array.
     return result;
 }
@@ -104,25 +118,26 @@
 }
 
 - (void)setObjectProperty:(id)object withProperty:(NSString *)propertyName value:(NSString *)json {
-    NSString *convertedPropName = [self.jsonSerializer.caseConverter convert:propertyName];
+    // Uses mapped property name or converted property name if it is not mapped.
+    NSString *propName = [propertyMap objectForKey:propertyName] ?: [self.jsonSerializer.caseConverter convert:propertyName];
     JYClassDescriptor *classDesc = [[JYClassDescriptor alloc] initWithClass:[object class]];
     for (JYPropertyDescriptor *desc in [classDesc propertyDescriptors]) {
         if ([desc.protocolNames containsObject:@"JYIgnore"])
             continue; // Ignore the property.
         // Find the property with the same name.
-        if ([convertedPropName isEqual:desc.name])
+        if ([propName isEqual:desc.name])
         {
             Class propClass = desc.propertyClass;
             NSArray *protocols = desc.protocolNames;
             if ([propClass isSubclassOfClass:[NSArray class]] && [protocols count] > 0) {
                 Class arrayClass = desc.classFromProtocol;
                 id newValue = [self.jsonSerializer deserializeObjectArray:json withClass:arrayClass];
-                [object setValue:newValue forKey:convertedPropName];
+                [object setValue:newValue forKey:propName];
                 
             } else {
                 // Deserialize with Class and set the property value.
                 id newValue = [self.jsonSerializer deserializeObject:json withClass:propClass];
-                [object setValue:newValue forKey:convertedPropName];
+                [object setValue:newValue forKey:propName];
             }
         }
     }

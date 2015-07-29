@@ -16,6 +16,7 @@
 #import "IgnoreTestClass.h"
 #import "TestSubObjectClass.h"
 #import "JYError.h"
+#import "PropertyMapTestClass.h"
 
 @interface DeserializerTests : XCTestCase
 
@@ -144,6 +145,13 @@
 - (void)testIgnore {
     IgnoreTestClass *testClass = [JYJayson deserializeObject:@"{\"test\":1}" withClass:[IgnoreTestClass class]];;
     XCTAssertEqualObjects([testClass test], nil);
+}
+
+- (void)testPropertyMap {
+    PropertyMapTestClass *testClass = [PropertyMapTestClass new];
+    testClass.numId = @1;
+    PropertyMapTestClass *deserialized = [JYJayson deserializeObject:@"{\"id\":1}" withClass:[PropertyMapTestClass class]];
+    XCTAssertEqualObjects(testClass.numId, deserialized.numId);
 }
 
 @end

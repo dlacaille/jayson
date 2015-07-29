@@ -15,6 +15,7 @@
 #import "IgnoreTestClass.h"
 #import "CircularRefTestClass.h"
 #import "TestSubObjectClass.h"
+#import "PropertyMapTestClass.h"
 
 @interface SerializerTests : XCTestCase
 
@@ -152,6 +153,12 @@
     NSArray *errors = nil;
     [serializer serializeObject:testClass errors:&errors];
     XCTAssertEqual([errors count], 1);
+}
+
+- (void)testPropertyMap {
+    PropertyMapTestClass *testClass = [PropertyMapTestClass new];
+    testClass.numId = @1;
+    XCTAssertEqualObjects([JYJayson serializeObject:testClass], @"{\n\t\"id\": 1\n}");
 }
 
 @end
