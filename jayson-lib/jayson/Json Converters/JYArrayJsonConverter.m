@@ -8,6 +8,7 @@
 
 #import "JYArrayJsonConverter.h"
 #import <objc/runtime.h>
+#import "JYError.h"
 
 @implementation JYArrayJsonConverter
 
@@ -33,63 +34,132 @@
 }
 
 - (id)deserializeArray:(NSString *)string withClass:(Class)objectClass errors:(NSArray **)errors {
-    if ([string isEqual:@"null"])
+    int i = 0;
+    if (![self expectAndSkip:'[' inString:string cursor:&i errors:errors])
         return nil;
-    // These characters are whitespaces that we should ignore.
-    char const IgnoredChars[] = {' ', '\r', '\n', '\t'};
-    if (![self canConvertJson:string errors:errors])
-        [NSException raise:@"Json Converter Error" format:@"Value '%@' is invalid for array", string];
-    BOOL escaped = NO;
-    BOOL inString = NO; // True if the character is currently part of a string.
-    int arrayCounter = 0; // Deals with nested arrays.
-    int objCounter = 0; // Deals with nested objects.
+    // Iterate through characters.
     NSMutableArray *array = [NSMutableArray new];
-    NSMutableString *builder = [NSMutableString new];
-    for (int i=1; i<[string length] - 1; i++)
-    {
+    while (i < [string length]) {
         // TODO: parse strings with \n
         char c = [string characterAtIndex:i];
-        // If we find an unescaped " we reverse inString. We should not escape " if we are not in a string.
-        if ((!inString || !escaped) && c == '\"')
-            inString = !inString;
-        // If we find [ or ] and we are not in a string, update array counter.
-        if (!inString && (c == '[' || c == ']'))
-            arrayCounter += c == '[' ? 1 : -1;
-        // If we find { or } and we are not in a string, update array counter.
-        if (!inString && (c == '{' || c == '}'))
-            objCounter += c == '{' ? 1 : -1;
-        // Reset escaped state.
-        if (escaped)
-            escaped = NO;
-        // Escape characters with \ before them (eg: \" or \n)
-        if (inString && c == '\\')
-            escaped = YES;
-        // If we are not in a string, we should escape whitespaces.
-        if (!inString)
-        {
-            BOOL ignored = NO;
-            for (int j=0; j<sizeof IgnoredChars; j++)
-                if (IgnoredChars[j] == c)
-                    ignored = YES;
-            if (ignored)
-                continue;
-        }
-        // If we are not in a string, an array or a dictionary and we find a comma we deserialize the string and add it to the array.
-        if (!inString && arrayCounter == 0 && objCounter == 0 && c == ',')
-        {
-            [array addObject:[self.jsonSerializer deserializeObject:[NSString stringWithString:builder] withClass:objectClass]];
-            builder = [NSMutableString new];
-            // We should not add the comma to the next object.
+        // Skip ignored characters
+        if ([self isWhitespace:c]) {
+            i++;
             continue;
         }
-        // We add the current character to the string.
-        [builder appendFormat:@"%c", c];
+        // Check if the dictionary ended.
+        if (c == ']')
+            return array;
+        // Capture comma.
+        if ([array count] > 0 && c == ',') {
+            if ([string length] > i + 1 && [string characterAtIndex:i+1] == ',') {
+                [JYError errors:errors raiseError:JYErrorInvalidFormat withFormat:@"Unexpected ',' at index '%i'.", i + 1];
+                return nil;
+            }
+            i++;
+            continue;
+        }
+        // Capture first value.
+        NSString *value = [self captureValue:string cursor:&i errors:errors];
+        if (value == nil)
+            return nil;
+        NSObject *obj = [self.jsonSerializer deserializeObject:value withClass:objectClass errors:errors];
+        if (obj == nil)
+            return nil;
+        [array addObject:obj];
     }
-    // In the end we are left with a string and no comma. We should add the deserialized string to the array.
-    if ([builder length] > 0)
-        [array addObject:[self.jsonSerializer deserializeObject:[NSString stringWithString:builder] withClass:objectClass]];
-    // Return the completed array.
-    return array;
+    [JYError errors:errors raiseError:JYErrorInvalidFormat withFormat:@"Unexpected end of array."];
+    return nil;
+}
+
+- (BOOL)expectAndSkip:(char)expected inString:(NSString *)string cursor:(int*)i errors:(NSArray **)errors {
+    BOOL result = [self expect:expected inString:string cursor:i errors:errors];
+    if (result)
+        (*i)++;
+    return result;
+}
+
+- (BOOL)expect:(char)expected inString:(NSString *)string cursor:(int*)i errors:(NSArray **)errors {
+    char c = [string characterAtIndex:*i];
+    if (c == expected)
+        return true;
+    [JYError errors:errors raiseError:JYErrorInvalidFormat withFormat:@"Expected ':' but found '%c' at index '%i'.", c, *i];
+    return false;
+}
+
+- (BOOL)isWhitespace:(char)c {
+    // These characters are whitespaces that we should ignore.
+    char const ignoredChars[] = {' ', '\r', '\n', '\t'};
+    for (int j=0; j<sizeof ignoredChars; j++)
+        if (ignoredChars[j] == c)
+            return true;
+    return false;
+}
+
+- (NSString *)captureValue:(NSString *)string cursor:(int*)i errors:(NSArray **)errors {
+    NSString *result = nil;
+    // Match strings.
+    if ([self matches:@"^(\"[^\"\\\\]*(?:\\.[^\"\\\\]*)*\")" result:&result string:string cursor:i errors:errors])
+        return result;
+    // Match numbers.
+    if ([self matches:@"^(-?(0|[1-9]\\d*)(\\.\\d+)?([eE][+-]?\\d+)?)" result:&result string:string cursor:i errors:errors])
+        return result;
+    // Match objects.
+    if ([self matchesBracesWithOpen:'{' close:'}' result:&result string:string cursor:i errors:errors])
+        return result;
+    // Match arrays.
+    if ([self matchesBracesWithOpen:'[' close:']' result:&result string:string cursor:i errors:errors])
+        return result;
+    // Match booleans and null.
+    if ([self matches:@"^(true|false|null)" result:&result string:string cursor:i errors:errors])
+        return result;
+    [JYError errors:errors raiseError:JYErrorInvalidFormat withFormat:@"Unexpected end of value."];
+    return nil;
+}
+
+- (BOOL)matchesBracesWithOpen:(char)open close:(char)close result:(NSString **)result string:(NSString *)string cursor:(int*)i errors:(NSArray **)errors {
+    if ([string characterAtIndex:*i] != open)
+        return false;
+    int start = *i;
+    int opened = 0;
+    BOOL escaped = NO;
+    BOOL inString = NO;
+    for (; *i<[string length]; (*i)++) {
+        char c = [string characterAtIndex:*i];
+        if (escaped)
+            escaped = NO;
+        if (c == open)
+            opened++;
+        else if (inString && !escaped && c == '\\')
+            escaped = true;
+        else if (c == '"' && !escaped)
+            inString = !inString;
+        else if (c == close) {
+            opened--;
+            if (opened < 0)
+                return false;
+            if (opened == 0) {
+                (*i)++;
+                *result = [string substringWithRange:NSMakeRange(start, *i - start)];
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+- (BOOL)matches:(NSString *)regexStr result:(NSString **)result string:(NSString *)string cursor:(int*)i errors:(NSArray **)errors {
+    NSError* error = nil;
+    NSRegularExpression* regex = [NSRegularExpression regularExpressionWithPattern:regexStr options:0 error:&error];
+    NSArray *matches = [regex matchesInString:string options:0 range:NSMakeRange(*i, [string length] - *i)];
+    if ([matches count] > 0) {
+        // Advance cursor and return number.
+        NSTextCheckingResult *check = matches[0];
+        (*i) += check.range.length;
+        *result = [string substringWithRange:check.range];
+        return true;
+    }
+    return false;
 }
 
 - (BOOL)canConvert:(Class)objectClass errors:(NSArray **)errors {

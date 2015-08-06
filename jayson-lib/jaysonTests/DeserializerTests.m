@@ -64,8 +64,8 @@
 
 - (void)testDictionary {
     XCTAssertEqualObjects((@{@"test":@1,@"test2":@"test"}), [JYJayson deserializeObject:@"{\"test2\":\"test\",\"test\":1}" withClass:[NSDictionary class]]);
-    XCTAssertEqualObjects((@{@"test":@1,@"test2":@{@"test":@1,@"test2":@"test"}}),
-                          [JYJayson deserializeObject:@"{\"test2\":{\"test2\":\"test\",\"test\":1},\"test\":1}" withClass:[NSDictionary class]]);
+    NSDictionary *recursive = [JYJayson deserializeObject:@"{\"test2\":{\"test2\":\"test\",\"test\":1},\"test\":1}" withClass:[NSDictionary class]];
+    XCTAssertEqualObjects((@{@"test":@1,@"test2":@{@"test":@1,@"test2":@"test"}}), recursive);
     XCTAssertEqualObjects(nil, [JYJayson deserializeObject:@"null" withClass:[NSDictionary class]]);
     XCTAssertEqualObjects([NSDictionary new], [JYJayson deserializeObject:@"{}" withClass:[NSDictionary class]]);
     // Test errors.
@@ -143,7 +143,7 @@
 }
 
 - (void)testIgnore {
-    IgnoreTestClass *testClass = [JYJayson deserializeObject:@"{\"test\":1}" withClass:[IgnoreTestClass class]];;
+    IgnoreTestClass *testClass = [JYJayson deserializeObject:@"{\"test\":1}" withClass:[IgnoreTestClass class]];
     XCTAssertEqualObjects([testClass test], nil);
 }
 
@@ -152,6 +152,24 @@
     testClass.numId = @1;
     PropertyMapTestClass *deserialized = [JYJayson deserializeObject:@"{\"id\":1}" withClass:[PropertyMapTestClass class]];
     XCTAssertEqualObjects(testClass.numId, deserialized.numId);
+}
+
+- (void)testErrors {
+    NSArray *errors = nil;
+    [JYJayson deserializeObject:@"{\"test\"1}" withClass:[NSDictionary class] errors:&errors];
+    XCTAssertTrue([errors count] > 0);
+    errors = nil;
+    [JYJayson deserializeObject:@"{\"test\"}" withClass:[NSDictionary class] errors:&errors];
+    XCTAssertTrue([errors count] > 0);
+    errors = nil;
+    [JYJayson deserializeObject:@"{:1}" withClass:[NSDictionary class] errors:&errors];
+    XCTAssertTrue([errors count] > 0);
+    errors = nil;
+    [JYJayson deserializeObject:@"{\"test\":1,}" withClass:[NSDictionary class] errors:&errors];
+    XCTAssertTrue([errors count] > 0);
+    errors = nil;
+    [JYJayson deserializeObject:@"{,\"test\":1}" withClass:[NSDictionary class] errors:&errors];
+    XCTAssertTrue([errors count] > 0);
 }
 
 @end
