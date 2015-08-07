@@ -146,7 +146,7 @@
 - (NSString *)captureValue:(NSString *)string cursor:(int*)i errors:(NSArray **)errors {
     NSString *result = nil;
     // Match strings.
-    if ([self matches:@"^(\"[^\"\\\\]*(?:\\.[^\"\\\\]*)*\")" result:&result string:string cursor:i errors:errors])
+    if ([self matches:@"^(\"[^\"\\\\]*(?:\\\\.[^\"\\\\]*)*\")" result:&result string:string cursor:i errors:errors])
         return result;
     // Match numbers.
     if ([self matches:@"^(-?(0|[1-9]\\d*)(\\.\\d+)?([eE][+-]?\\d+)?)" result:&result string:string cursor:i errors:errors])
