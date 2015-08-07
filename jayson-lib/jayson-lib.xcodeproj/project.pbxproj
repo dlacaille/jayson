@@ -26,6 +26,7 @@
 		F2597A2F1B1E2B9D004AAFB4 /* JYDashCaseConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = F2597A2E1B1E2B9D004AAFB4 /* JYDashCaseConverter.m */; };
 		F2597A321B1E2C18004AAFB4 /* JYAllCapsCaseConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = F2597A311B1E2C18004AAFB4 /* JYAllCapsCaseConverter.m */; };
 		F2597A341B1E2E28004AAFB4 /* CaseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F2597A331B1E2E28004AAFB4 /* CaseTests.m */; };
+		F2A110851B75271C00172715 /* JYUtf8Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = F2A110841B75271C00172715 /* JYUtf8Helper.m */; };
 		F2AAF9F71B18D2DC00AE38BD /* CircularRefTestClass.m in Sources */ = {isa = PBXBuildFile; fileRef = F2AAF9F61B18D2DC00AE38BD /* CircularRefTestClass.m */; };
 		F2BD27DA1B29F977001BDE18 /* JYFormatterState.m in Sources */ = {isa = PBXBuildFile; fileRef = F2BD27D91B29F977001BDE18 /* JYFormatterState.m */; };
 		F2BD27DD1B2F3B10001BDE18 /* JYSerializerSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = F2BD27DC1B2F3B10001BDE18 /* JYSerializerSettings.m */; };
@@ -104,6 +105,8 @@
 		F2597A301B1E2C18004AAFB4 /* JYAllCapsCaseConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYAllCapsCaseConverter.h; sourceTree = "<group>"; };
 		F2597A311B1E2C18004AAFB4 /* JYAllCapsCaseConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYAllCapsCaseConverter.m; sourceTree = "<group>"; };
 		F2597A331B1E2E28004AAFB4 /* CaseTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaseTests.m; sourceTree = "<group>"; };
+		F2A110831B75271C00172715 /* JYUtf8Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYUtf8Helper.h; sourceTree = "<group>"; };
+		F2A110841B75271C00172715 /* JYUtf8Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYUtf8Helper.m; sourceTree = "<group>"; };
 		F2AAF9F51B18D2DC00AE38BD /* CircularRefTestClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircularRefTestClass.h; sourceTree = "<group>"; };
 		F2AAF9F61B18D2DC00AE38BD /* CircularRefTestClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircularRefTestClass.m; sourceTree = "<group>"; };
 		F2BD27D81B29F977001BDE18 /* JYFormatterState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYFormatterState.h; sourceTree = "<group>"; };
@@ -191,9 +194,10 @@
 		F2105BE71AFA9A8D005EA2E9 /* Jayson */ = {
 			isa = PBXGroup;
 			children = (
-				F2BD27E71B308F58001BDE18 /* Errors */,
-				F2BD27DE1B2F4862001BDE18 /* Enums */,
 				A7AF26651AFBD8B300EF7F60 /* Categories */,
+				F2BD27DE1B2F4862001BDE18 /* Enums */,
+				F2BD27E71B308F58001BDE18 /* Errors */,
+				F2A110821B75271C00172715 /* Helpers */,
 				F23E8F201B0E4B0200C570BE /* Protocols */,
 				F2597A231B1E2249004AAFB4 /* Case Converters */,
 				F2D6298C1AFAA930008A7027 /* Json Converters */,
@@ -277,6 +281,16 @@
 			);
 			path = "Case Converters";
 			sourceTree = "<group>";
+		};
+		F2A110821B75271C00172715 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				F2A110831B75271C00172715 /* JYUtf8Helper.h */,
+				F2A110841B75271C00172715 /* JYUtf8Helper.m */,
+			);
+			name = Helpers;
+			path = jayson/Helpers;
+			sourceTree = SOURCE_ROOT;
 		};
 		F2BD27DE1B2F4862001BDE18 /* Enums */ = {
 			isa = PBXGroup;
@@ -448,6 +462,7 @@
 				F2D629A31AFABC14008A7027 /* SerializerTests.m in Sources */,
 				F2AAF9F71B18D2DC00AE38BD /* CircularRefTestClass.m in Sources */,
 				A7AF26691AFBD8B300EF7F60 /* NSData+Base64.m in Sources */,
+				F2A110851B75271C00172715 /* JYUtf8Helper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

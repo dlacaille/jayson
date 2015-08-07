@@ -175,16 +175,19 @@
         char c = [string characterAtIndex:*i];
         if (escaped)
             escaped = NO;
+        // Braces have been opened.
         if (c == open)
             opened++;
+        // Detect escaping backslash to escape future quotes.
         else if (inString && !escaped && c == '\\')
             escaped = true;
+        // Unescaped quotes.
         else if (c == '"' && !escaped)
             inString = !inString;
+        // Braces have been closed.
         else if (c == close) {
             opened--;
-            if (opened < 0)
-                return false;
+            // If braces have been closed, we return the whole braced substring.
             if (opened == 0) {
                 (*i)++;
                 *result = [string substringWithRange:NSMakeRange(start, *i - start)];
