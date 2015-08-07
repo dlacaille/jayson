@@ -19,7 +19,6 @@
 		F23E8F1E1B06995800C570BE /* TypedArrayTestClass.m in Sources */ = {isa = PBXBuildFile; fileRef = F23E8F1D1B06995800C570BE /* TypedArrayTestClass.m */; };
 		F23E8F231B0E4F0200C570BE /* JYClassDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = F23E8F221B0E4F0200C570BE /* JYClassDescriptor.m */; };
 		F23E8F261B0E4FA900C570BE /* JYPropertyDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = F23E8F251B0E4FA900C570BE /* JYPropertyDescriptor.m */; };
-		F23E8F291B0E5C4100C570BE /* JYUtf8Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = F23E8F281B0E5C4100C570BE /* JYUtf8Helper.m */; };
 		F23E8F2C1B0E7DA600C570BE /* IgnoreTestClass.m in Sources */ = {isa = PBXBuildFile; fileRef = F23E8F2B1B0E7DA600C570BE /* IgnoreTestClass.m */; };
 		F2597A261B1E22ED004AAFB4 /* JYCamelCaseConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = F2597A251B1E22ED004AAFB4 /* JYCamelCaseConverter.m */; };
 		F2597A291B1E26E3004AAFB4 /* JYPascalCaseConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = F2597A281B1E26E3004AAFB4 /* JYPascalCaseConverter.m */; };
@@ -91,8 +90,6 @@
 		F23E8F221B0E4F0200C570BE /* JYClassDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYClassDescriptor.m; sourceTree = "<group>"; };
 		F23E8F241B0E4FA900C570BE /* JYPropertyDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYPropertyDescriptor.h; sourceTree = "<group>"; };
 		F23E8F251B0E4FA900C570BE /* JYPropertyDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYPropertyDescriptor.m; sourceTree = "<group>"; };
-		F23E8F271B0E5C4100C570BE /* JYUtf8Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JYUtf8Helper.h; path = ../Categories/JYUtf8Helper.h; sourceTree = "<group>"; };
-		F23E8F281B0E5C4100C570BE /* JYUtf8Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JYUtf8Helper.m; path = ../Categories/JYUtf8Helper.m; sourceTree = "<group>"; };
 		F23E8F2A1B0E7DA600C570BE /* IgnoreTestClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IgnoreTestClass.h; sourceTree = "<group>"; };
 		F23E8F2B1B0E7DA600C570BE /* IgnoreTestClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IgnoreTestClass.m; sourceTree = "<group>"; };
 		F2597A221B1E2136004AAFB4 /* JYCaseConverter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYCaseConverter.h; sourceTree = "<group>"; };
@@ -196,7 +193,6 @@
 			children = (
 				F2BD27E71B308F58001BDE18 /* Errors */,
 				F2BD27DE1B2F4862001BDE18 /* Enums */,
-				F23E8F2D1B139ABF00C570BE /* Helpers */,
 				A7AF26651AFBD8B300EF7F60 /* Categories */,
 				F23E8F201B0E4B0200C570BE /* Protocols */,
 				F2597A231B1E2249004AAFB4 /* Case Converters */,
@@ -263,15 +259,6 @@
 				F2E4B92C1B67F0DE00FA0096 /* JYJsonMappable.h */,
 			);
 			path = Protocols;
-			sourceTree = "<group>";
-		};
-		F23E8F2D1B139ABF00C570BE /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				F23E8F271B0E5C4100C570BE /* JYUtf8Helper.h */,
-				F23E8F281B0E5C4100C570BE /* JYUtf8Helper.m */,
-			);
-			path = Helpers;
 			sourceTree = "<group>";
 		};
 		F2597A231B1E2249004AAFB4 /* Case Converters */ = {
@@ -430,7 +417,6 @@
 				F2597A2C1B1E2A79004AAFB4 /* JYSnakeCaseConverter.m in Sources */,
 				F2E4B9431B6AC29B00FA0096 /* JYKeyValuePair.m in Sources */,
 				F2EFCCF11AFBBAD0007A3205 /* JYArrayJsonConverter.m in Sources */,
-				F23E8F291B0E5C4100C570BE /* JYUtf8Helper.m in Sources */,
 				F2BD27EA1B308F83001BDE18 /* JYError.m in Sources */,
 				F2EFCCFD1B024CC5007A3205 /* JYObjectJsonConverter.m in Sources */,
 				F2105BEB1AFA9A8E005EA2E9 /* JYJayson.m in Sources */,
