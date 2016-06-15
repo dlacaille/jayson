@@ -32,3 +32,28 @@ NSString *json = @"{\"title\":\"The Hitchhiker's Guide to the Galaxy\",\
 
 Book *book = [JYJayson deserializeObject:json withClass:[Book class]];
 ```
+
+Any NSObject with properties can be used with Jayson.
+
+```objc
+@interface Book : NSObject
+@property NSString *title;
+@property NSDate *publishedDate;
+@property NSArray *genres;
+@end
+```
+
+Supported types
+---------------
+
+- Primitive types (int, long, short, float, double, etc)
+- NSString
+- NSNumber
+- NSDate
+- NSArray
+- NSData
+- NSArray
+- NSDictionary
+- NSObject
+
+Types which are not supported or need to be serialized/deserialized differently can be implemented with a JYJsonConverter 
