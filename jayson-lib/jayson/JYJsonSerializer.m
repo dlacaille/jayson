@@ -136,6 +136,21 @@
     return nil;
 }
 
+- (id)deserializeObjectDictionary:(NSString *)json withClass:(Class)objectClass {
+    NSArray *errors = nil;
+    return [self deserializeObjectDictionary:json withClass:objectClass errors:&errors];
+}
+
+- (id)deserializeObjectDictionary:(NSString *)json withClass:(Class)objectClass errors:(NSArray *__autoreleasing *)errors {
+    NSString *trimmed = [self trim:json];
+    for (NSObject<JYJsonConverter> *jsonConverter in self.jsonConverters)
+    {
+        if ([jsonConverter canConvert:[NSDictionary class] errors:errors])
+            return [jsonConverter deserializeDictionary:trimmed withClass:objectClass errors:errors];
+    }
+    return nil;
+}
+
 - (id)deserializeObject:(NSString *)json withClass:(Class)objectClass {
     NSArray *errors = nil;
     return [self deserializeObject:json withClass:objectClass errors:&errors];

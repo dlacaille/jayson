@@ -51,6 +51,15 @@
 - (id)deserializeArray:(NSString *)string withClass:(Class)objectClass errors:(NSArray **)errors;
 
 /**
+ * Converts a string back to a dictionary of strict types.
+ *
+ * @param string String to parse.
+ * @param Class of the objects in the array.
+ * @return Parsed object.
+ */
+- (id)deserializeDictionary:(NSString *)string withClass:(Class)objectClass errors:(NSArray **)errors;
+
+/**
  * Method to override which verifies if the class can be converted from and to a string.
  *
  * @param objectClass Class to verify.

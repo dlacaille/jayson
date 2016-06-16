@@ -63,6 +63,25 @@
 + (id)deserializeObjectArray:(NSString *)json withClass:(Class)objectClass errors:(NSArray **)errors;
 
 /**
+ * Deserializes a JSON dictionary into a dictionary with strict types.
+ *
+ * @param json JSON string to deserialize.
+ * @param objectClass Class of the dictionary value to return.
+ * @return The deserialized object of "objectClass" type.
+ */
++ (id)deserializeObjectDictionary:(NSString *)json withClass:(Class)objectClass;
+
+/**
+ * Deserializes a JSON dictionary into a dictionary with strict types.
+ *
+ * @param json JSON string to deserialize.
+ * @param objectClass Class of the dictionary value to return.
+ * @param errors Errors while deserializing.
+ * @return The deserialized object of "objectClass" type.
+ */
++ (id)deserializeObjectDictionary:(NSString *)json withClass:(Class)objectClass errors:(NSArray **)errors;
+
+/**
  * Deserializes a JSON string into an object.
  *
  * @param json JSON string to deserialize.

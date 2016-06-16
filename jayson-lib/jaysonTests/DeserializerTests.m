@@ -63,16 +63,21 @@
 }
 
 - (void)testDictionary {
-    //XCTAssertEqualObjects((@{@"test":@1,@"test2":@"test"}), [JYJayson deserializeObject:@"{\"test2\":\"test\",\"test\":1}" withClass:[NSDictionary class]]);
+    XCTAssertEqualObjects((@{@"test":@1,@"test2":@"test"}), [JYJayson deserializeObject:@"{\"test2\":\"test\",\"test\":1}" withClass:[NSDictionary class]]);
     XCTAssertEqualObjects((@{@"test":@1,@"test2":@"{\"test\"}"}), [JYJayson deserializeObject:@"{\"test2\":\"{\\\"test\\\"}\",\"test\":1}" withClass:[NSDictionary class]]);
-    /*NSDictionary *recursive = [JYJayson deserializeObject:@"{\"test2\":{\"test2\":\"test\",\"test\":1},\"test\":1}" withClass:[NSDictionary class]];
+    NSDictionary *recursive = [JYJayson deserializeObject:@"{\"test2\":{\"test2\":\"test\",\"test\":1},\"test\":1}" withClass:[NSDictionary class]];
     XCTAssertEqualObjects((@{@"test":@1,@"test2":@{@"test":@1,@"test2":@"test"}}), recursive);
     XCTAssertEqualObjects(nil, [JYJayson deserializeObject:@"null" withClass:[NSDictionary class]]);
     XCTAssertEqualObjects([NSDictionary new], [JYJayson deserializeObject:@"{}" withClass:[NSDictionary class]]);
     // Test errors.
     NSArray *errors = nil;
     [JYJayson deserializeObject:@"{\"test2\"a\"test\"}" withClass:[NSDictionary class] errors:&errors];
-    XCTAssertEqual(errors.count, 1);*/
+    XCTAssertEqual(errors.count, 1);
+    // Test complex dictionaries
+    ComplexTypeTestClass *testClass = [ComplexTypeTestClass new];
+    testClass.test = @1;
+    NSDictionary *dict = [JYJayson deserializeObjectDictionary:@"{\"test1\":{\"test\":1}}" withClass:[ComplexTypeTestClass class]];
+    XCTAssertEqualObjects(testClass.test, [(ComplexTypeTestClass *)[dict objectForKey:@"test1"] test]);
 }
 
 - (void)testData {

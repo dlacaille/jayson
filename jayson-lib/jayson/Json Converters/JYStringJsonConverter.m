@@ -39,7 +39,11 @@
     return [JYUtf8Helper stringByReplacingUTF8Escapes:trimmed];
 }
 
-- (id)deserializeArray:(NSString *)string withClass:(Class)objectClass errors:(NSArray *__autoreleasing *)errors {
+- (id)deserializeArray:(NSString *)string withClass:(Class)objectClass errors:(NSArray **)errors {
+    return nil;
+}
+
+- (id)deserializeDictionary:(NSString *)string withClass:(Class)objectClass errors:(NSArray **)errors {
     return nil;
 }
 

@@ -38,6 +38,10 @@
     return nil;
 }
 
+- (id)deserializeDictionary:(NSString *)string withClass:(Class)objectClass errors:(NSArray **)errors {
+    return nil;
+}
+
 - (BOOL)canConvert:(Class)objectClass errors:(NSArray **)errors {
     return [objectClass isSubclassOfClass:[NSData class]];
 }

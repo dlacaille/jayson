@@ -42,6 +42,14 @@
     return [self captureObject:string atIndex:&i withClass:objectClass errors:errors];
 }
 
+- (id)deserializeArray:(NSString *)string withClass:(Class)objectClass errors:(NSArray **)errors {
+    return nil;
+}
+
+- (id)deserializeDictionary:(NSString *)string withClass:(Class)objectClass errors:(NSArray **)errors {
+    return nil;
+}
+
 - (BOOL)isWhitespace:(char)c {
     // These characters are whitespaces that we should ignore.
     char const ignoredChars[] = {' ', '\r', '\n', '\t'};
@@ -238,10 +246,6 @@
             }
         }
     }
-}
-
-- (id)deserializeArray:(NSString *)string withClass:(Class)objectClass errors:(NSArray **)errors {
-    return nil;
 }
 
 - (BOOL)canConvert:(Class)objectClass errors:(NSArray **)errors {

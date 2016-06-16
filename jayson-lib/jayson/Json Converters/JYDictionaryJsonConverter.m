@@ -29,6 +29,14 @@
 }
 
 - (id)deserialize:(NSString *)string withClass:(Class)objectClass errors:(NSArray **)errors {
+    return [self deserializeDictionary:string withClass:nil errors:errors];
+}
+
+- (id)deserializeArray:(NSString *)string withClass:(Class)objectClass errors:(NSArray **)errors {
+    return nil;
+}
+
+- (id)deserializeDictionary:(NSString *)string withClass:(Class)objectClass errors:(NSArray **)errors {
     if ([string isEqual:@"null"])
         return nil;
     // Verify that we can convert the json string.
@@ -38,7 +46,7 @@
     }
     // Return the completed array.
     int i = 0;
-    return [self captureDictionary:string cursor:&i errors:errors];
+    return [self captureDictionary:string cursor:&i class:objectClass errors:errors];
 }
 
 - (BOOL)isWhitespace:(char)c {
@@ -54,7 +62,7 @@
     return c >= '0' && c <= '9';
 }
 
-- (NSDictionary *)captureDictionary:(NSString *)string cursor:(int*)i errors:(NSArray **)errors {
+- (NSDictionary *)captureDictionary:(NSString *)string cursor:(int*)i class:(Class)objectClass errors:(NSArray **)errors {
     if (![self expectAndSkip:'{' inString:string cursor:i errors:errors])
         return nil;
     // Iterate through characters.
@@ -64,7 +72,7 @@
         // Check if the dictionary ended.
         if ([string characterAtIndex:*i] == '}') {
             (*i)++;
-            return dict;
+                return dict;
         }
         // Dictionary must start with a quote.
         if ([dict count] == 0)
@@ -75,7 +83,7 @@
             if(![self expectAndSkip:',' inString:string cursor:i errors:errors])
                 return nil;
         // Parse key value pair.
-        JYKeyValuePair *kvp = [self captureKeyValuePair:string cursor:i errors:errors];
+        JYKeyValuePair *kvp = [self captureKeyValuePair:string cursor:i class:objectClass errors:errors];
         if (kvp == nil)
             return nil;
         [dict setObject:kvp.value forKey:kvp.key];
@@ -84,7 +92,7 @@
     return nil;
 }
 
-- (JYKeyValuePair *)captureKeyValuePair:(NSString *)string cursor:(int*)i errors:(NSArray **)errors {
+- (JYKeyValuePair *)captureKeyValuePair:(NSString *)string cursor:(int*)i class:(Class)objectClass errors:(NSArray **)errors {
     [self skipWhitespaces:string cursor:i];
     // Capture key.
     NSString *key = [self captureString:string cursor:i errors:errors];
@@ -94,7 +102,9 @@
         return nil;
     // Capture value.
     NSString *value = [self captureValue:string cursor:i errors:errors];
-    NSObject *obj = [self.jsonSerializer deserializeObject:value errors:errors];
+    NSObject *obj = objectClass == nil
+        ? [self.jsonSerializer deserializeObject:value errors:errors]
+        : [self.jsonSerializer deserializeObject:value withClass:objectClass errors:errors];
     if (obj == nil)
         return nil;
     return [[JYKeyValuePair alloc] initWithKey:key value:obj];
@@ -210,10 +220,6 @@
         return true;
     }
     return false;
-}
-
-- (id)deserializeArray:(NSString *)string withClass:(Class)objectClass errors:(NSArray **)errors {
-    return nil;
 }
 
 - (BOOL)canConvert:(Class)objectClass errors:(NSArray **)errors {

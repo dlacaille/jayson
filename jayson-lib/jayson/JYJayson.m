@@ -48,6 +48,14 @@ static JYJsonSerializer *_serializer;
     return [_serializer deserializeObjectArray:json withClass:objectClass errors:errors];
 }
 
++ (id)deserializeObjectDictionary:(NSString *)json withClass:(Class)objectClass {
+    return [_serializer deserializeObjectDictionary:json withClass:objectClass];
+}
+
++ (id)deserializeObjectDictionary:(NSString *)json withClass:(Class)objectClass errors:(NSArray **)errors {
+    return [_serializer deserializeObjectDictionary:json withClass:objectClass errors:errors];
+}
+
 + (id)deserializeObject:(NSString *)json withClass:(Class)objectClass {
     return [_serializer deserializeObject:json withClass:objectClass];
 }

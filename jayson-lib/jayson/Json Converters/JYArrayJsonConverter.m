@@ -72,6 +72,10 @@
     return nil;
 }
 
+- (id)deserializeDictionary:(NSString *)string withClass:(Class)objectClass errors:(NSArray **)errors {
+    return nil;
+}
+
 - (BOOL)expectAndSkip:(char)expected inString:(NSString *)string cursor:(int*)i errors:(NSArray **)errors {
     BOOL result = [self expect:expected inString:string cursor:i errors:errors];
     if (result)
