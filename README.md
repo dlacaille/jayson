@@ -34,7 +34,7 @@ Book *book = [JYJayson deserializeObject:json withClass:[Book class]];
 ```
 
 Alternatively, you can deserialize to an array of a specific type with `[JYJayson deserializeObjectArray:withClass:]`
-or a dictionary with a value of a specific type with `[JYJayson deserializeObjectDictionary:withClass:]`
+or a dictionary with a value of a specific type with `[JYJayson deserializeObjectDictionary:withClass:]`. The key of the dictionary returned will always be NSString as JSON objects can only have strings as keys.
 
 ```objc
 NSString *json = @"[{\"title\":\"The Hitchhiker's Guide to the Galaxy\",\
