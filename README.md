@@ -33,6 +33,20 @@ NSString *json = @"{\"title\":\"The Hitchhiker's Guide to the Galaxy\",\
 Book *book = [JYJayson deserializeObject:json withClass:[Book class]];
 ```
 
+Alternatively, you can deserialize to an array of a specific type with [JYJayson deserializeObjectArray:withClass:]
+or a dictionary with a value of a specific type with [JYJayson deserializeObjectDictionary:withClass:]
+
+```objc
+NSString *json = @"[{\"title\":\"The Hitchhiker's Guide to the Galaxy\",\
+                  \"publishedDate\":\"1979-10-12T00:00:00Z\",\
+                  \"genres\":[\"Comedy\",\"Science-Fiction\"]},\
+                  {\"title\":\"The Restaurant at the End of the Universe\",\
+                  \"publishedDate\":\"1980-10-01T00:00:00Z\",\
+                  \"genres\":[\"Comedy\",\"Science-Fiction\"]}]";
+
+NSArray<Book *> *book = [JYJayson deserializeObjectArray:json withClass:[Book class]];
+```
+
 Any NSObject with properties can be used with Jayson.
 
 ```objc
