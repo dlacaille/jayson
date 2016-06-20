@@ -4,7 +4,7 @@
 jayson is an Objective-C JSON Library with the aim to provide simple serialization/deserialization 
 for complex types, arrays and value types.
 
-To serialize an object, simply use [JYJayson serializeObject:]
+To serialize an object, simply use ```[JYJayson serializeObject:]```
 
 ```objc
 Book *book = [Book new];
