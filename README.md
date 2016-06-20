@@ -47,7 +47,7 @@ NSString *json = @"[{\"title\":\"The Hitchhiker's Guide to the Galaxy\",\
 NSArray<Book *> *book = [JYJayson deserializeObjectArray:json withClass:[Book class]];
 ```
 
-Any NSObject with properties can be used with Jayson.
+Any `NSObject` with properties can be used with Jayson.
 
 ```objc
 @interface Book : NSObject
@@ -70,4 +70,4 @@ Supported types
 - `NSDictionary`
 - `NSObject`
 
-Types which are not supported or need to be serialized/deserialized differently can be implemented with a JYJsonConverter 
+Types which are not supported or need to be serialized/deserialized differently can be implemented with a `JYJsonConverter` 
