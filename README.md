@@ -4,7 +4,7 @@
 jayson is an Objective-C JSON Library with the aim to provide simple serialization/deserialization 
 for complex types, arrays and value types.
 
-To serialize an object, simply use ```[JYJayson serializeObject:]```
+To serialize an object, simply use `[JYJayson serializeObject:]`
 
 ```objc
 Book *book = [Book new];
@@ -23,7 +23,7 @@ NSString *serialized = [JYJayson serializeObject:book];
 //}
 ```
 
-You can also deserialize a json string using [JYJayson deserializeObject:withClass:]
+You can also deserialize a json string using `[JYJayson deserializeObject:withClass:]`
 
 ```objc
 NSString *json = @"{\"title\":\"The Hitchhiker's Guide to the Galaxy\",\
@@ -33,8 +33,8 @@ NSString *json = @"{\"title\":\"The Hitchhiker's Guide to the Galaxy\",\
 Book *book = [JYJayson deserializeObject:json withClass:[Book class]];
 ```
 
-Alternatively, you can deserialize to an array of a specific type with [JYJayson deserializeObjectArray:withClass:]
-or a dictionary with a value of a specific type with [JYJayson deserializeObjectDictionary:withClass:]
+Alternatively, you can deserialize to an array of a specific type with `[JYJayson deserializeObjectArray:withClass:]`
+or a dictionary with a value of a specific type with `[JYJayson deserializeObjectDictionary:withClass:]`
 
 ```objc
 NSString *json = @"[{\"title\":\"The Hitchhiker's Guide to the Galaxy\",\
@@ -60,14 +60,14 @@ Any NSObject with properties can be used with Jayson.
 Supported types
 ---------------
 
-- Primitive types (int, long, short, float, double, etc)
-- NSString
-- NSNumber
-- NSDate
-- NSArray
-- NSData
-- NSArray
-- NSDictionary
-- NSObject
+- Primitive types (`int`, `long`, `short`, `float`, `double`, etc)
+- `NSString`
+- `NSNumber`
+- `NSDate`
+- `NSArray`
+- `NSData`
+- `NSArray`
+- `NSDictionary`
+- `NSObject`
 
 Types which are not supported or need to be serialized/deserialized differently can be implemented with a JYJsonConverter 
