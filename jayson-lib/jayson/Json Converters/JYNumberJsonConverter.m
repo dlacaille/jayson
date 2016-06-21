@@ -31,6 +31,10 @@ NSString *const regex = @"^-?(0|[1-9]\\d*)(\\.\\d+)?([eE][+-]?\\d+)?$";
 - (id)deserialize:(NSString *)string withClass:(Class)objectClass errors:(NSArray **)errors {
     if ([string isEqual:@"null"])
         return nil;
+    if ([string isEqualToString:@"true"])
+        return @YES;
+    if ([string isEqualToString:@"false"])
+        return @NO;
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
     formatter.numberStyle = NSNumberFormatterNoStyle;
     return [formatter numberFromString:string];
@@ -49,6 +53,8 @@ NSString *const regex = @"^-?(0|[1-9]\\d*)(\\.\\d+)?([eE][+-]?\\d+)?$";
 }
 
 - (BOOL)canConvertJson:(NSString *)string errors:(NSArray **)errors {
+    if ([string isEqualToString:@"true"] || [string isEqualToString:@"false"])
+        return YES;
     NSPredicate *match = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
     return [match evaluateWithObject:string];
 }

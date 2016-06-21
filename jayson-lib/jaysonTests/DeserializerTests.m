@@ -17,6 +17,7 @@
 #import "TestSubObjectClass.h"
 #import "JYError.h"
 #import "PropertyMapTestClass.h"
+#import "PrimitiveTypeTestClass.h"
 
 @interface DeserializerTests : XCTestCase
 
@@ -109,6 +110,13 @@
     RecursiveTestClass *recursiveDeserialized = [JYJayson deserializeObject:recursiveTestJson withClass:[RecursiveTestClass class]];
     XCTAssertTrue([recursiveTestClass.test.test isEqual:recursiveDeserialized.test.test]);
     XCTAssertEqualObjects(nil, [JYJayson deserializeObject:@"null" withClass:[RecursiveTestClass class]]);
+}
+
+- (void)testPrimitiveType {
+    NSString *testJson = @"{\"boolValue\": true,\"intValue\": 19}";
+    PrimitiveTypeTestClass *testClass = [JYJayson deserializeObject:testJson withClass:[PrimitiveTypeTestClass class]];
+    XCTAssertEqual(testClass.boolValue, true);
+    XCTAssertEqual(testClass.intValue, 19);
 }
 
 - (void)testTypedArray {

@@ -16,6 +16,7 @@
 #import "CircularRefTestClass.h"
 #import "TestSubObjectClass.h"
 #import "PropertyMapTestClass.h"
+#import "PrimitiveTypeTestClass.h"
 
 @interface SerializerTests : XCTestCase
 
@@ -39,7 +40,7 @@
 - (void)testNumber {
     XCTAssertEqualObjects(@"12.12", [JYJayson serializeObject:[NSNumber numberWithDouble:12.12]]);
     XCTAssertEqualObjects(@"0.45", [JYJayson serializeObject:[NSNumber numberWithFloat:0.45f]]);
-    XCTAssertEqualObjects(@"1", [JYJayson serializeObject:[NSNumber numberWithBool:true]]);
+    XCTAssertEqualObjects(@"true", [JYJayson serializeObject:[NSNumber numberWithBool:true]]);
     XCTAssertEqualObjects(@"12", [JYJayson serializeObject:[NSNumber numberWithInt:12]]);
     XCTAssertEqualObjects(@"0", [JYJayson serializeObject:[NSNumber numberWithInt:0x0]]);
     XCTAssertEqualObjects(@"500", [JYJayson serializeObject:[NSNumber numberWithLong:500]]);
@@ -71,6 +72,14 @@
     ComplexTypeTestClass *testClass = [ComplexTypeTestClass new];
     testClass.test = @1;
     NSString *testJson = @"{\n\t\"test\": 1\n}";
+    XCTAssertEqualObjects(testJson, [JYJayson serializeObject:testClass]);
+}
+
+- (void)testPrimitiveType {
+    PrimitiveTypeTestClass *testClass = [PrimitiveTypeTestClass new];
+    testClass.boolValue = NO;
+    testClass.intValue = 19;
+    NSString *testJson = @"{\n\t\"boolValue\": false,\n\t\"intValue\": 19\n}";
     XCTAssertEqualObjects(testJson, [JYJayson serializeObject:testClass]);
 }
 

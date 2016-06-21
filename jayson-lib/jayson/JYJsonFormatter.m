@@ -101,7 +101,7 @@
     if ([[obj class] isSubclassOfClass:[NSString class]])
         [self write:[NSString stringWithFormat:@"\"%@\"", obj] withState:state];
     else if ([[obj class] isSubclassOfClass:[NSNumber class]])
-        [self write:[(NSNumber *)obj stringValue] withState:state];
+        [self write:[self numberToString:obj] withState:state];
     else if (obj == nil || [[obj class] isSubclassOfClass:[NSNull class]])
         [self write:@"null" withState:state];
     else if ([[obj class] isSubclassOfClass:[NSArray class]])
@@ -110,6 +110,12 @@
         [self writeDictionary:obj withState:state errors:errors];
     else
         [self writeProperties:obj withState:state errors:errors];
+}
+
+- (NSString *)numberToString:(NSNumber *)number {
+    return [number isKindOfClass:objc_getClass("__NSCFBoolean")]
+        ? ([number boolValue] ? @"true" : @"false")
+        : [number stringValue];
 }
 
 - (void)writeProperties:(id)obj withState:(JYFormatterState *)state errors:(NSArray **)errors {
