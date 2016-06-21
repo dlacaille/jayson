@@ -102,6 +102,7 @@
         if (![self expectAndSkip:':' inString:string cursor:i errors:errors])
             return nil;
         // Capture value.
+        [self skipWhitespaces:string cursor:i];
         NSString *value = [self captureValue:string cursor:i errors:errors];
         [self setObjectProperty:result withProperty:key value:value];
         capturedProps++;

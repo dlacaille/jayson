@@ -101,6 +101,7 @@
     if (![self expectAndSkip:':' inString:string cursor:i errors:errors])
         return nil;
     // Capture value.
+    [self skipWhitespaces:string cursor:i];
     NSString *value = [self captureValue:string cursor:i errors:errors];
     NSObject *obj = objectClass == nil
         ? [self.jsonSerializer deserializeObject:value errors:errors]
