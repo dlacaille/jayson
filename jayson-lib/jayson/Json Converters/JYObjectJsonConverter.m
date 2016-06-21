@@ -234,16 +234,20 @@
         {
             Class propClass = desc.propertyClass;
             NSArray *protocols = desc.protocolNames;
+            id newValue;
             if ([propClass isSubclassOfClass:[NSArray class]] && [protocols count] > 0) {
                 Class arrayClass = desc.classFromProtocol;
-                id newValue = [self.jsonSerializer deserializeObjectArray:json withClass:arrayClass];
-                [object setValue:newValue forKey:propName];
-                
+                newValue = [self.jsonSerializer deserializeObjectArray:json withClass:arrayClass];
             } else {
                 // Deserialize with Class and set the property value.
-                id newValue = [self.jsonSerializer deserializeObject:json withClass:propClass];
-                [object setValue:newValue forKey:propName];
+                newValue = [self.jsonSerializer deserializeObject:json withClass:propClass];
             }
+            @try {
+                [object setValue:newValue forKey:propName];
+            } @catch (NSException *ex) {
+                NSLog(@"JYObjectJsonConverter: could not set property '%@', reason: %@", propName, ex.reason);
+            }
+            break;
         }
     }
 }
