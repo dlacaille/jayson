@@ -11,10 +11,15 @@
 
 @interface JYSerializerSettings : NSObject
 
-/**
+/*
  * Format used by the date converter. Default value is ISO8601 yyyy-MM-dd'T'HH:mm:ssZZZZZ
  */
 @property (nonatomic, strong) NSString *dateFormat;
+
+/*
+ * Forces a timezone to use in the date converter. Default value is nil.
+ */
+@property (nonatomic, strong) NSTimeZone *timeZone;
 
 /*
  * When true, the json is indented when serializing objects.

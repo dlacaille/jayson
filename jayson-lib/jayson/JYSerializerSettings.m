@@ -13,6 +13,7 @@
 + (JYSerializerSettings *)defaultSettings {
     JYSerializerSettings *settings = [JYSerializerSettings new];
     settings.dateFormat = @"yyyy-MM-dd'T'HH:mm:ssZZZZZ";
+    settings.timeZone = nil;
     settings.ignoreNull = NO;
     settings.indented = YES;
     settings.circularReferenceHandling = JYCircularReferenceIgnore;

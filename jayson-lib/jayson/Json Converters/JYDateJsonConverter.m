@@ -46,6 +46,8 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     NSLocale *enUSPOSIXLocale = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
     [dateFormatter setLocale:enUSPOSIXLocale];
+    if (self.jsonSerializer.serializerSettings.timeZone)
+        [dateFormatter setTimeZone:self.jsonSerializer.serializerSettings.timeZone];
     [dateFormatter setDateFormat:self.jsonSerializer.serializerSettings.dateFormat];
     return dateFormatter;
 }
