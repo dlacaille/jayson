@@ -10,11 +10,16 @@
 
 @implementation JYNumberJsonConverter
 
-NSString *const regex = @"^-?(0|[1-9]\\d*)(\\.\\d+)?([eE][+-]?\\d+)?$";
+NSPredicate *match;
+NSNumberFormatter *formatter;
 
 - (instancetype)initWithSerializer:(JYJsonSerializer *)serializer {
     if (self = [super init]) {
         self.jsonSerializer = serializer;
+        formatter = [[NSNumberFormatter alloc] init];
+        formatter.numberStyle = NSNumberFormatterNoStyle;
+        formatter.locale = [NSLocale localeWithLocaleIdentifier:@"en_US"];
+        match = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", @"^-?(0|[1-9]\\d*)(\\.\\d+)?([eE][+-]?\\d+)?$"];
         return self;
     }
     return nil;
@@ -35,8 +40,6 @@ NSString *const regex = @"^-?(0|[1-9]\\d*)(\\.\\d+)?([eE][+-]?\\d+)?$";
         return @YES;
     if ([string isEqualToString:@"false"])
         return @NO;
-    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
-    formatter.numberStyle = NSNumberFormatterNoStyle;
     return [formatter numberFromString:string];
 }
 
@@ -55,7 +58,6 @@ NSString *const regex = @"^-?(0|[1-9]\\d*)(\\.\\d+)?([eE][+-]?\\d+)?$";
 - (BOOL)canConvertJson:(NSString *)string errors:(NSArray **)errors {
     if ([string isEqualToString:@"true"] || [string isEqualToString:@"false"])
         return YES;
-    NSPredicate *match = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
     return [match evaluateWithObject:string];
 }
 
