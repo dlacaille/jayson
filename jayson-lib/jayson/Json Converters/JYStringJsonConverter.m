@@ -31,8 +31,10 @@
 - (id)deserialize:(NSString *)string withClass:(Class)objectClass errors:(NSArray **)errors {
     if ([string isEqualToString:@"null"])
         return nil;
-    if (![self canConvertJson:string errors:errors])
+    if (![self canConvertJson:string errors:errors]) {
         [JYError errors:errors raiseError:JYErrorInvalidFormat withFormat:@"Value '%@' is invalid for string", string];
+        return nil;
+    }
     if ([string isEqualToString:@""])
         return @"";
     NSString *trimmed = [string substringWithRange:NSMakeRange(1, [string length] - 2)];
