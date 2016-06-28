@@ -86,6 +86,7 @@
                 {
                     case JYCircularReferenceThrow:
                         [JYError errors:errors raiseError:JYErrorCircularReference withMessage:@"Serializer settings do not allow circular references"];
+                        return;
                     case JYCircularReferenceIgnore:
                         [self.jsonFormatter writeObject:nil withState:state errors:errors];
                         return;
