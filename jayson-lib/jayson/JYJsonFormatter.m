@@ -98,29 +98,29 @@
 }
 
 - (NSString *)jsonStringFromString:(NSString *)string {
-    const char *chars = [string UTF8String];
     NSMutableString *escapedString = [NSMutableString string];
-    while (*chars)
+    unichar c;
+    for (int i=0; i<string.length; i++)
     {
-        if (*chars == '"')
+        c = [string characterAtIndex:i];
+        if (c == '"')
             [escapedString appendString:@"\\\""];
-        else if (*chars == '\\')
+        else if (c == '\\')
             [escapedString appendString:@"\\\\"];
-        else if (*chars == '\b')
+        else if (c == '\b')
             [escapedString appendString:@"\\b"];
-        else if (*chars == '\f')
+        else if (c == '\f')
             [escapedString appendString:@"\\f"];
-        else if (*chars == '\n')
+        else if (c == '\n')
             [escapedString appendString:@"\\n"];
-        else if (*chars == '\r')
+        else if (c == '\r')
             [escapedString appendString:@"\\r"];
-        else if (*chars == '\t')
+        else if (c == '\t')
             [escapedString appendString:@"\\t"];
-        else if (*chars < 0x1F || *chars == 0x7F)
-            [escapedString appendFormat:@"\\u%04X", (int)*chars];
+        else if (c < 0x1F || c == 0x7F)
+            [escapedString appendFormat:@"\\u%04X", c];
         else
-            [escapedString appendFormat:@"%c", *chars];
-        ++chars;
+            [escapedString appendFormat:@"%C", c];
     }
     return [NSString stringWithFormat:@"\"%@\"", escapedString];
 }

@@ -36,6 +36,7 @@
     XCTAssertEqualObjects(@"\"test\"", [JYJayson serializeObject:@"test"]);
     XCTAssertEqualObjects(@"\"\"", [JYJayson serializeObject:@""]);
     XCTAssertEqualObjects(@"\"<div class=\\\"test\\\">test</div>\"", [JYJayson serializeObject:@"<div class=\"test\">test</div>"]);
+    XCTAssertEqualObjects(@"\"“test”\"", [JYJayson serializeObject:@"“test”"]);
 }
 
 - (void)testNumber {
