@@ -35,6 +35,7 @@
     XCTAssertEqualObjects(@"\"test\"", [JYJayson serializeObject:@"test"]);
     XCTAssertEqualObjects(@"\"test\"", [JYJayson serializeObject:@"test"]);
     XCTAssertEqualObjects(@"\"\"", [JYJayson serializeObject:@""]);
+    XCTAssertEqualObjects(@"\"<div class=\\\"test\\\">test</div>\"", [JYJayson serializeObject:@"<div class=\"test\">test</div>"]);
 }
 
 - (void)testNumber {
@@ -46,7 +47,7 @@
     XCTAssertEqualObjects(@"500", [JYJayson serializeObject:[NSNumber numberWithLong:500]]);
     XCTAssertEqualObjects(@"1", [JYJayson serializeObject:@(1)]);
 }
-    
+
 - (void)testDate {
     XCTAssertEqualObjects(@"\"1969-12-31T19:00:00-05:00\"", [JYJayson serializeObject:[NSDate dateWithTimeIntervalSince1970:0]]);
 }
@@ -64,7 +65,10 @@
 - (void)testData {
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:[UIColor greenColor]];
     NSString *encoded = [data base64EncodedString];
-    NSString *dataJson = [NSString stringWithFormat:@"\"%@\"", encoded];
+    NSString *dataJson = encoded;
+    dataJson = [dataJson stringByReplacingOccurrencesOfString:@"\r" withString:@"\\r"];
+    dataJson = [dataJson stringByReplacingOccurrencesOfString:@"\n" withString:@"\\n"];
+    dataJson = [NSString stringWithFormat:@"\"%@\"", dataJson];
     XCTAssertEqualObjects(dataJson, [JYJayson serializeObject:data]);
 }
 

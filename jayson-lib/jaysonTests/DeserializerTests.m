@@ -123,7 +123,7 @@
     ComplexTypeTestClass *testClass = [ComplexTypeTestClass new];
     testClass.test = @1;
     TypedArrayTestClass *typedArrayTestClass = [TypedArrayTestClass new];
-    typedArrayTestClass.testArray = (NSArray<ComplexTypeTestClass> *)@[testClass];
+    typedArrayTestClass.testArray = (NSArray<ComplexTypeTestClass *> *)@[testClass];
     TypedArrayTestClass *deserialized = [JYJayson deserializeObject:@"{\"testArray\":[{\"test\":1}]}" withClass:[TypedArrayTestClass class]];
     XCTAssertEqualObjects([[typedArrayTestClass.testArray objectAtIndex:0] test], [[deserialized.testArray objectAtIndex:0] test]);
     TypedArrayTestClass *deserializedNull = [JYJayson deserializeObject:@"{\"testArray\":null}" withClass:[TypedArrayTestClass class]];

@@ -97,9 +97,37 @@
         [self write:@"," withState:state];
 }
 
+- (NSString *)jsonStringFromString:(NSString *)string {
+    const char *chars = [string UTF8String];
+    NSMutableString *escapedString = [NSMutableString string];
+    while (*chars)
+    {
+        if (*chars == '"')
+            [escapedString appendString:@"\\\""];
+        else if (*chars == '\\')
+            [escapedString appendString:@"\\\\"];
+        else if (*chars == '\b')
+            [escapedString appendString:@"\\b"];
+        else if (*chars == '\f')
+            [escapedString appendString:@"\\f"];
+        else if (*chars == '\n')
+            [escapedString appendString:@"\\n"];
+        else if (*chars == '\r')
+            [escapedString appendString:@"\\r"];
+        else if (*chars == '\t')
+            [escapedString appendString:@"\\t"];
+        else if (*chars < 0x1F || *chars == 0x7F)
+            [escapedString appendFormat:@"\\u%04X", (int)*chars];
+        else
+            [escapedString appendFormat:@"%c", *chars];
+        ++chars;
+    }
+    return [NSString stringWithFormat:@"\"%@\"", escapedString];
+}
+
 - (void)writeObject:(id)obj withState:(JYFormatterState *)state errors:(NSArray **)errors {
     if ([[obj class] isSubclassOfClass:[NSString class]])
-        [self write:[NSString stringWithFormat:@"\"%@\"", obj] withState:state];
+        [self write:[self jsonStringFromString:obj] withState:state];
     else if ([[obj class] isSubclassOfClass:[NSNumber class]])
         [self write:[self numberToString:obj] withState:state];
     else if (obj == nil || [[obj class] isSubclassOfClass:[NSNull class]])
