@@ -186,13 +186,13 @@
     [self beginObjectWithState:state];
     for (int i = 0; i < [dict count]; i++)
     {
-        [self writeCommaIfNeededWithState:state];
-        [self writeIndentsWithState:state];
-        [self incrementItemCountWithState:state];
         NSString *key = [[dict allKeys] objectAtIndex:i];
         id value = [[dict allValues] objectAtIndex:i];
         if ([self serializerSettings].ignoreNull && (value == nil || value == [NSNull null]))
             continue; // Ignore null values.
+        [self writeCommaIfNeededWithState:state];
+        [self writeIndentsWithState:state];
+        [self incrementItemCountWithState:state];
         [self writeProperty:key withValue:value withState:state errors:errors];
     }
     [self endObjectWithState:state];
