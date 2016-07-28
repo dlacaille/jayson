@@ -191,6 +191,8 @@
         [self incrementItemCountWithState:state];
         NSString *key = [[dict allKeys] objectAtIndex:i];
         id value = [[dict allValues] objectAtIndex:i];
+        if ([self serializerSettings].ignoreNull && (value == nil || value == [NSNull null]))
+            continue; // Ignore null values.
         [self writeProperty:key withValue:value withState:state errors:errors];
     }
     [self endObjectWithState:state];
